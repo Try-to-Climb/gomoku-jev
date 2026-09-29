@@ -28,9 +28,10 @@ import pathlib
 import random
 import sys
 
+from . import backends
 from . import factsheet
 from .analysis import maximal_runs, open_four_moves, winning_moves
-from .battery import make_backend
+from .backends import battery_for
 from .board import Move, Stone
 from .candidates import candidate_points
 from .game import Game
@@ -168,7 +169,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Interrogate one recorded position.")
     ap.add_argument("--game", type=pathlib.Path, required=True, help="an audit/cli .json record")
     ap.add_argument("--ply", type=int, required=True)
-    ap.add_argument("--backend", choices=["jev", "openai"], default="jev")
+    ap.add_argument("--backend", choices=backends.names(models_only=True), default="jev")
     ap.add_argument("--model", default=None)
     ap.add_argument("--facts-levels", default="none,span,status,threats")
     ap.add_argument("--option-facts", default="none",
@@ -197,7 +198,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"\n引擎事实: 对手可造活四点 = {facts.get('opponent_open_fours')}  "
           f"我方一步杀 = {facts.get('own_wins') or '无'}")
 
-    client = make_backend(args.backend, args.model)
+    client = battery_for(args.backend, args.model)
     print(f"backend: {client.describe()}")
     state = rules_and_state(view, PromptStyle(), None, BACKEND)
     questions, truths, info = perception_battery(game, menu)

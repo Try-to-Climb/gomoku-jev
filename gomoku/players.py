@@ -169,6 +169,23 @@ class ScriptedPlayer(Player):
         return MoveResponse(error="scripted move list exhausted")
 
 
+class ConsolePlayer(Player):
+    """Human at the terminal -- mostly for eyeballing the engine."""
+
+    def __init__(self, name: str = "human") -> None:
+        super().__init__(name or "human")
+
+    def propose(self, view: GameView, feedback: str | None = None) -> MoveResponse:
+        from .notation import parse_move
+
+        if feedback:
+            print(f"  ! {feedback}")
+        print(view.board_text())
+        raw = input(f"{view.stone.label} ({view.stone.symbol}) move: ")
+        result = parse_move(raw, view.size)
+        return MoveResponse(move=result.move, raw=raw, error=result.error)
+
+
 class CallablePlayer(Player):
     """Wrap a ``fn(view) -> Move`` as a player."""
 

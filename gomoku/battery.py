@@ -126,12 +126,6 @@ class OpenAIBattery:
         self.chat.close()
 
 
-def make_backend(name: str, model: str | None = None, **kwargs):
-    if name == "jev":
-        return JevBattery(model, **kwargs)
-    if name == "openai":
-        return OpenAIBattery(model, **kwargs)
-    raise SystemExit(f"unknown backend {name!r} (jev | openai)")
-
-
-__all__ = ["BatteryResponse", "OpenAIBattery", "JevBattery", "JevError", "make_backend"]
+#: Backends are resolved through :mod:`gomoku.backends`; this module only holds the
+#: two clients. ``backends.battery_for("jev")`` is the entry point.
+__all__ = ["BatteryResponse", "OpenAIBattery", "JevBattery", "JevError"]

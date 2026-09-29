@@ -26,10 +26,12 @@ import json
 import pathlib
 import sys
 
+from . import backends
 from .analysis import maximal_runs
 from .board import Move, Stone
 from .game import Game
-from .battery import JevError, make_backend
+from .backends import battery_for
+from .battery import JevError
 from .llm_player import BACKEND, JevConfig
 from .notation import from_notation, to_notation
 from .prompts import PromptStyle, rules_and_state, rules_block
@@ -179,14 +181,14 @@ def show(scored: dict) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Isolate the inference step that fails.")
-    ap.add_argument("--backend", choices=["jev", "openai"], default="jev")
+    ap.add_argument("--backend", choices=backends.names(models_only=True), default="jev")
     ap.add_argument("--model", default=None)
     ap.add_argument("--repeats", type=int, default=2)
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", type=pathlib.Path, default=None)
     args = ap.parse_args(argv)
 
-    client = make_backend(args.backend, args.model)
+    client = battery_for(args.backend, args.model)
     print(f"backend: {client.describe()}")
 
     runs: list[dict] = []

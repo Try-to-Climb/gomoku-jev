@@ -25,11 +25,13 @@ import random
 import sys
 from dataclasses import dataclass
 
+from . import backends
 from .analysis import maximal_runs
 from .board import DIRECTIONS, Move, Stone
 from .candidates import candidate_points
 from .game import Game
-from .battery import JevError, make_backend
+from .backends import battery_for
+from .battery import JevError
 from .llm_player import BACKEND, JevConfig
 from .notation import from_notation, to_notation
 from .perceive import ORIENTATION, describe_run
@@ -268,7 +270,7 @@ ORDER = (
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Can the backend see that a line is blocked?")
-    ap.add_argument("--backend", choices=["jev", "openai"], default="jev")
+    ap.add_argument("--backend", choices=backends.names(models_only=True), default="jev")
     ap.add_argument("--model", default=None)
     ap.add_argument("--prompt-version", default=None)
     ap.add_argument("--repeats", type=int, default=2)
@@ -279,7 +281,7 @@ def main(argv: list[str] | None = None) -> int:
     config = JevConfig(model=args.model or JevConfig().model, seed=args.seed)
     if args.prompt_version:
         config.prompt_version = args.prompt_version
-    client = make_backend(args.backend, args.model)
+    client = battery_for(args.backend, args.model)
     print(f"backend: {client.describe()}\n")
 
     runs: list[dict] = []

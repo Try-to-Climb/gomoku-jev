@@ -404,18 +404,20 @@ class OpenAIPlayer(Player):
 
 
 def build_openai_player(spec: str = "", **overrides) -> Player:
-    """Factory for the CLI: ``openai[:<model>][@<prompt version>][|free]``.
+    """Factory used by the registry: ``openai[:<model>][@<version>][|free]``.
 
-    The ``@version`` suffix beats a global ``--prompt-version``, so the two seats of
-    a match can run different tactical wordings.
+    ``|free`` is peeled first, so ``model@version|free`` works. The ``@version``
+    suffix beats a global ``--prompt-version``, which is what lets the two seats of
+    one match run different tactical wordings.
     """
+    from .backends import split_version
+
     spec = spec.strip()
     mode = MODE_CHOICE
     if spec.endswith("|free"):
         spec, mode = spec[: -len("|free")], MODE_FREE
-    if "@" in spec:
-        spec, version = spec.rsplit("@", 1)
-        overrides["prompt_version"] = version.strip()
+    spec, from_spec = split_version(spec)
+    overrides.update(from_spec)
     model = spec or DEFAULT_MODEL
     if model in ("openai", "default"):
         model = DEFAULT_MODEL

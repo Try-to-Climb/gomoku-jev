@@ -23,7 +23,7 @@ import time
 import sys
 
 from .board import Stone
-from .cli import build_player
+from .backends import build_player
 from .game import Game
 from .metrics import format_summary, summarize
 from .notation import to_notation

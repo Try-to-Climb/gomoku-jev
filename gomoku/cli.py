@@ -16,57 +16,16 @@ import time
 import sys
 
 from .board import Stone
+from . import backends
+from .backends import build_player, describe as describe_backends, spec_help
 from .match import play_series
 from .metrics import format_summary, summarize
-from .notation import parse_move
-from .players import HeuristicPlayer, Player, RandomPlayer
+from .players import ConsolePlayer, Player
 from .render import render_board
 from .rules import IllegalMovePolicy, Opening, OverlineRule, RuleSet, describe
 
-
-class ConsolePlayer(Player):
-    """Human at the terminal -- mostly for eyeballing the engine."""
-
-    def __init__(self, name: str = "human") -> None:
-        super().__init__(name)
-
-    def propose(self, view, feedback=None):
-        from .players import MoveResponse
-
-        if feedback:
-            print(f"  ! {feedback}")
-        print(view.board_text())
-        raw = input(f"{view.stone.label} ({view.stone.symbol}) move: ")
-        result = parse_move(raw, view.size)
-        return MoveResponse(move=result.move, raw=raw, error=result.error)
-
-
-def build_player(spec: str, seed: int | None, candidate_overrides: dict | None = None) -> Player:
-    kind, _, arg = spec.partition(":")
-    # "jev@p2-defence-first" has no colon, so the version suffix rides on the kind
-    if "@" in kind:
-        kind, _, version = kind.partition("@")
-        arg = f"{arg}@{version}" if arg else f"@{version}"
-    kind = kind.lower()
-    overrides = dict(candidate_overrides or {})
-    if kind == "random":
-        return RandomPlayer(name=arg or "random", seed=seed)
-    if kind in ("heuristic", "bot"):
-        return HeuristicPlayer(name=arg or "heuristic", seed=seed)
-    if kind == "human":
-        return ConsolePlayer(name=arg or "human")
-    if kind in ("llm", "jev"):
-        from .llm_player import build_llm_player
-
-        return build_llm_player(arg, seed=seed, **overrides)
-    if kind == "openai":
-        from .openai_player import build_openai_player
-
-        return build_openai_player(arg, seed=seed, **overrides)
-    raise SystemExit(
-        f"unknown player spec {spec!r} (random | heuristic | human | "
-        "jev[:<model>][@<prompt version>] | openai[:<model>][@<prompt version>][|free])"
-    )
+#: re-exported so ``from gomoku.cli import build_player`` keeps working
+__all__ = ["ConsolePlayer", "build_player", "main"]
 
 
 def _per_seat(value: str) -> dict[str, str]:
@@ -149,11 +108,35 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--no-annotate", action="store_true", help="skip missed win/block analysis")
     ap.add_argument("--out", type=pathlib.Path, default=None, help="write match records as JSON")
     ap.add_argument("--show-rules", action="store_true", help="print the rule text and exit")
+    ap.add_argument("--list-backends", action="store_true",
+                    help="list the registered player backends and exit")
+    ap.add_argument("--list-prompts", action="store_true",
+                    help="list the available tactical wordings (prompt versions) and exit")
     args = ap.parse_args(argv)
     if args.templates:
         from .prompts import set_template_dir
 
         set_template_dir(args.templates)
+
+    if args.list_backends:
+        width = max(len(name) for name, _ in describe_backends())
+        for name, summary in describe_backends():
+            print(f"{name:{width}}  {summary}")
+        print(f"\nspec syntax: {spec_help()}")
+        return 0
+
+    if args.list_prompts:
+        from .prompts import PROMPT_VERSION, tactics_versions
+
+        for version in tactics_versions():
+            mark = " (default)" if version == PROMPT_VERSION else ""
+            print(f"{version}{mark}")
+        for backend in backends.names(models_only=True):
+            extra = [v for v in tactics_versions(backend) if v not in tactics_versions()]
+            for version in extra:
+                print(f"{version} ({backend} only)")
+        print("\nUse --prompt-version <name>, or pin one seat with e.g. --black jev@<name>.")
+        return 0
 
     rules = RuleSet(
         size=args.size,

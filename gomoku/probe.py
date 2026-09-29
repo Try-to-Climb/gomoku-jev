@@ -18,6 +18,7 @@ import pathlib
 import random
 import sys
 
+from . import backends
 from .analysis import analyse_position
 from .candidates import candidate_points
 from .game import Game
@@ -202,7 +203,7 @@ def build_backend(args) -> tuple[Player, dict]:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Probe a model backend for gomoku play.")
-    ap.add_argument("--backend", choices=["jev", "openai"], default="jev")
+    ap.add_argument("--backend", choices=backends.names(models_only=True), default="jev")
     ap.add_argument("--model", default=None)
     ap.add_argument("--mode", choices=["choice", "free"], default="choice",
                     help="openai only: same option menu as jev, or a free coordinate answer")

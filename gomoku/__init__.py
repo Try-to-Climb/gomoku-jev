@@ -12,7 +12,15 @@ from .game import Game, GameView, IllegalMove
 from .match import Attempt, MatchRecord, MoveRecord, play_match, play_series
 from .metrics import format_summary, summarize
 from .notation import from_notation, parse_move, to_notation
-from .players import CallablePlayer, HeuristicPlayer, MoveResponse, Player, RandomPlayer, ScriptedPlayer
+from .players import (
+    CallablePlayer,
+    ConsolePlayer,
+    HeuristicPlayer,
+    MoveResponse,
+    Player,
+    RandomPlayer,
+    ScriptedPlayer,
+)
 from .render import render_board
 from .rules import (
     IllegalMovePolicy,
@@ -28,6 +36,7 @@ __all__ = [
     "Attempt",
     "Board",
     "CallablePlayer",
+    "ConsolePlayer",
     "Game",
     "GameView",
     "HeuristicPlayer",

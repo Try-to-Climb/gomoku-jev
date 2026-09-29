@@ -18,6 +18,7 @@ import random
 import sys
 from collections import defaultdict
 
+from . import backends
 from .notation import to_notation
 from .probe import scenarios
 from .prompts import PROMPT_VERSION, tactics_versions
@@ -26,36 +27,27 @@ RESULTS = pathlib.Path(__file__).resolve().parent / "results"
 
 
 def build_player(backend: str, version: str, args, facts: str = "none"):
-    if backend == "jev":
-        from .llm_player import JevConfig, JevPlayer
+    """One arm of the ablation: a backend pinned to one tactical wording.
 
-        return JevPlayer(
-            config=JevConfig(
-                model=args.model or JevConfig().model,
-                candidates=args.candidates,
-                max_candidates=args.max_candidates,
-                prompt_version=version,
-                facts=facts,
-                seed=args.seed,
-            )
-        )
-    from .openai_player import DEFAULT_MODEL, OpenAIConfig, OpenAIPlayer
-
-    return OpenAIPlayer(
-        config=OpenAIConfig(
-            model=args.model or DEFAULT_MODEL,
-            candidates=args.candidates,
-            max_candidates=args.max_candidates,
-            prompt_version=version,
-            facts=facts,
-            seed=args.seed,
-        )
+    Goes through the registry, so a newly registered backend is ablatable with no
+    change here. ``args.model`` empty means "that backend's default model".
+    """
+    spec = f"{backend}:{args.model}" if args.model else backend
+    return backends.build_player(
+        spec,
+        seed=args.seed,
+        overrides={
+            "candidates": args.candidates,
+            "max_candidates": args.max_candidates,
+            "prompt_version": version,
+            "facts": facts,
+        },
     )
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Compare prompt versions on fixed positions.")
-    ap.add_argument("--backend", choices=["jev", "openai"], default="jev")
+    ap.add_argument("--backend", choices=backends.names(models_only=True), default="jev")
     ap.add_argument("--model", default=None)
     ap.add_argument("--versions", default=None,
                     help="comma-separated prompt versions to compare "

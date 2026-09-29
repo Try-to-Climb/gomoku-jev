@@ -1,171 +1,196 @@
-# jev 能力画像
+# jev: a capability profile
 
-以五子棋为探针，对 **jev-1.13.0**（TypeSafe System One）做的一次系统评估。对照组是
-**openai/gpt-oss-120b**（gpt-oss）。全部结论都有实验支撑，过程、原始数据与可复现命令见
-[EXPERIMENTS.md](EXPERIMENTS.md)（16 组实验 E1–E16）。
+A systematic assessment of **jev-1.13.0** (TypeSafe System One), using gomoku as the probe.
+The control is **openai/gpt-oss-120b** (via gpt-oss). Every claim below is backed by an
+experiment; the method, raw data and reproduction commands are in
+[EXPERIMENTS.md](EXPERIMENTS.md) (16 experiments, E1–E16).
 
-*English version: [FINDINGS.en.md](FINDINGS.en.md)*
-
----
-
-## 一句话
-
-**jev 是一台优秀的「事实 → 判断」引擎，不是一台「局面 → 推演」引擎。** 它能极准确地读出你给它的
-状态里有什么，能正确套用你用文字说明的规则，也能按给定的事实做决策；但它不会从状态里自行推导
-「接下来会怎样」。凡是需要「把规则套到局面上、往前看一步」的活儿，必须由调用方做完再喂给它。
+*(中文版: [FINDINGS.zh.md](FINDINGS.zh.md))*
 
 ---
 
-## 它能做什么
+## In one sentence
 
-| 能力 | 实测 | 置信度形态 | 来源 |
+**jev is an excellent "facts → decision" engine, not a "position → lookahead" engine.**
+It reads whatever you put in the state with near-perfect accuracy, applies rules correctly
+when you state them in words, and decides well when you hand it the relevant facts. What it
+does not do is derive "what happens next" from the state on its own. Any work that requires
+*applying a rule to a position and looking one move ahead* has to be done by the caller
+before the request is sent.
+
+---
+
+## What it can do
+
+| Capability | Measured | Confidence shape | Source |
 | --- | --- | --- | --- |
-| 读单个点（是黑/白/空） | **54/54** | 0.98–1.00 / 0.01，饱和 | E8 |
-| 读一条线的两端是否被堵 | **各 10/10** | 0.99 | E7 |
-| 数连子（有没有 4 连） | **10/10** | 0.99 | E7 |
-| 数跨度（一条线还有几个连续可用点） | **10/10** | — | E7 |
-| 事实的 AND / OR 组合 | **各 10/10** | — | E7 |
-| **纯文字前提下的规则推理** | **10/10** | 0.95 / 0.07，饱和 | E8 |
-| 按给定事实做决策（注入后） | 固定局面 10/10；实战 14/14 防守 | 0.7–0.8 | E10, E16 |
-| 跨选项比较给定的数字 | 3/3（需单句表述） | 0.35 | E14 |
+| Read a single point (black / white / empty) | **54/54** | 0.98–1.00 / 0.01, saturated | E8 |
+| Read whether each end of a line is blocked | **10/10 each** | 0.99 | E7 |
+| Count stones in a line (is there a four?) | **10/10** | 0.99 | E7 |
+| Measure a span (how many usable points a line still has) | **10/10** | — | E7 |
+| Combine facts with AND / OR | **10/10 each** | — | E7 |
+| **Rule reasoning from premises given in words** | **10/10** | 0.95 / 0.07, saturated | E8 |
+| Decide from injected facts | 10/10 fixed positions; 14/14 in a live game | 0.7–0.8 | E10, E16 |
+| Compare numbers across options | 3/3 (needs one plain sentence) | 0.35 | E14 |
 
-概括：**读、数、组合、按文字讲道理——全部接近满分，而且置信度饱和（它知道自己知道）。**
+In short: **reading, counting, combining, and reasoning from words are all near-perfect, and
+the confidence is saturated — it knows what it knows.**
 
 ---
 
-## 它不能做什么
+## What it cannot do
 
-| 缺失的能力 | 实测 | 置信度形态 |
+| Missing capability | Measured | Confidence shape |
 | --- | --- | --- |
-| 从棋盘推导「还能不能成五」 | 4–5/10 | 0.50–0.79，糊状 |
-| 从棋盘推导「对手下一手能否造出不可阻挡的四」 | 2/5，单局面 0.36 | 噪声区 |
-| 从棋盘推导「这一手之后对手还能加几个子」 | **1/10** | 0.24–0.66 |
-| 应用提示词里的规则去选点 | **0/9**（4 个措辞版本 × 2 个字段位置） | — |
+| Derive "can this line still reach five" from the board | 4–5/10 | 0.50–0.79, mushy |
+| Derive "can the opponent build an unstoppable four next turn" | 2/5; 0.36 on the decisive position | noise |
+| Derive "how many more stones can the opponent still add here" | **1/10** | 0.24–0.66 |
+| Apply a rule from the prompt when choosing a move | **0/9** (4 wordings × 2 fields) | — |
 
-最干净的一组对照（E8），同一个事实两种呈现，答案相反：
+The cleanest contrast (E8) — the same fact in two representations, opposite answers:
 
-| 呈现 | 问题 | 回答 |
+| Representation | Question | Answer |
 | --- | --- | --- |
-| **文字** | 「某方有 4 连、两端被对手占，还可能成五吗」 | **否，p=0.13** ✓ |
-| **棋盘** | 同一局面，「黑 E5 F5 G5 H5 这条线还能成五吗」 | **能，p=0.61** ✗ |
+| **Words** | "A player has four in a line, both ends taken by the opponent. Can they ever make five?" | **No, p=0.13** ✓ |
+| **Board** | Same position: "Can black's E5 F5 G5 H5 still reach five?" | **Yes, p=0.61** ✗ |
 
-分界线不是「会不会推理」，而是**前提来自文字还是来自局面**。
+The dividing line is not "can it reason" but **whether the premises arrive as words or as a
+position**.
 
 ---
 
-## 五条行为特征
+## Six behavioural traits
 
-**1. 选点时不做任何子推导。** 它能算对跨度（10/10），但选点时不会去算——同一个量，问它就答对，
-不问它就不用。凡是没写在文本里的东西，都不进入决策。（E7 vs E10）
+**1. It performs no sub-derivation while choosing a move.** It computes spans correctly
+(10/10) when asked, but does not compute them when picking a point. Whatever is not written
+in the text does not enter the decision. (E7 vs E10)
 
-**2. 打分跟着「离自己的子多近」走。** 在一个必须防守的局面里，它概率最高的三个点全部紧贴自己的
-棋子（距离 1），而两个正解点距自己的子 2–3 格，拿到 0.00 和 0.01。防守这个维度不是被排在后面，
-而是根本没参与打分。（E11）
+**2. Its probability mass follows "how close is this to my own stones".** In a position that
+had to be defended, its three highest-probability points were all adjacent to its own stones
+(distance 1), while the two correct answers sat 2–3 away and received 0.00 and 0.01. Defence
+was not ranked lower — it was not part of the scoring at all. (E11)
 
 ```
-概率 ≥0.13 的 3 个点：平均距最近自己的子 1.00
-概率 <0.02 的 18 个点：平均距最近自己的子 2.17
-两个正解点：距自己的子 2 和 3，概率 0.00 / 0.01
+3 points with probability ≥0.13: mean distance to own nearest stone 1.00
+18 points with probability <0.02: mean distance 2.17
+the two correct answers: distance 2 and 3, probability 0.00 / 0.01
 ```
 
-**3. 三个输入通道的影响力差异极大。**
+**3. The three input channels differ enormously in influence.**
 
-| 通道 | 放什么 | 实测影响 |
+| Channel | What goes there | Measured effect |
 | --- | --- | --- |
-| `instructions` | 规则、战术、优先级 | **≈ 无效**（0/9，占请求篇幅 43%） |
-| `criteria` | 每个选项的后果 | 有效（0.35–0.70） |
-| `state` | 关于当前局面的具体事实 | 最强（0.96） |
+| `instructions` | rules, tactics, priorities | **≈ no effect** (0/9, and it is 43% of the request) |
+| `criteria` | the consequence of each option | works (0.35–0.70) |
+| `state` | concrete facts about this position | strongest (0.96) |
 
-写规则没用，写**关于这个局面／这个选项的事实**才有用。（E12, E13）
+Writing rules is useless; writing **facts about this position / this option** works.
+(E12, E13)
 
-**4. 对句子结构极度敏感，敏感到能盖过内容。** 完全相同的信息：
+**4. It is sensitive to sentence structure — enough to override content.** The identical
+information:
 
 ```
-两个从句、两个数字 → 被完全忽略（0.02，与不注入的 0.01 无差别）
-一句话、一个数字   → 生效（0.35）
+two clauses, two numbers → ignored entirely (0.02, same as no annotation at 0.01)
+one sentence, one number → works (0.35)
 ```
 
-逐选项标注必须短。（E14）
+Per-option annotations must be short. (E14)
 
-**5. 置信度是有意义的信号。** 事实类问题给 0.99/0.01（饱和），推断类问题给 0.3–0.8（糊状）。
-它自己「知道自己不知道」——这个区分可以直接用来判断一个问题是否落在它的能力内。
+**5. Its confidence is a usable signal.** Factual questions come back at 0.99 / 0.01
+(saturated); inferential ones at 0.3–0.8 (mushy). It "knows what it does not know", and that
+gap can be used directly to decide whether a question falls inside its competence.
 
-**6. 高度可复现。** 同一请求重复 5 次给出同一个错手（B5 / C5），概率分布几乎逐位相同。
-不存在「多试几次就对了」。（E4）
+**6. It is highly reproducible.** Five repeats of the same request produced the same wrong
+move (B5 / C5) with near-identical distributions. There is no "try again and it will get it".
+(E4)
 
 ---
 
-## 怎么用它
+## How to use it
 
-**要做的**
+**Do**
 
-- 把「规则套到局面上」的活儿在调用方做完，只把**结论**喂给它
-- 注入的事实要满足四条：**单句**、**一个量**、**覆盖所有优先层级**、**在选项之间有区分度**
-- 用置信度做门控：落在 0.3–0.8 糊状区的回答不要直接采信
-- 用 `criteria` 承载逐选项的后果——这一栏很多人会浪费掉（默认往往只是坐标复述）
+- Do the "apply the rules to this position" work on the caller side; send only the
+  **conclusions**
+- Injected facts must be: **one sentence**, **one quantity**, **covering every priority
+  level**, and **discriminating between options**
+- Gate on confidence: do not trust answers that land in the 0.3–0.8 mush
+- Use `criteria` to carry per-option consequences — that field is easy to waste (it often
+  just restates the coordinate)
 
-**不要做的**
+**Don't**
 
-- 不要指望它执行 `instructions` 里的规则，哪怕写得再清楚、再紧急、换字段也一样
-- 不要给它需要多步前瞻或反事实推演的任务
-- 不要用同一个「判分函数」既做指标又做提示——判分时「已经赢了就不用看下一层」是对的，
-  做提示时这会让整层失声（我们因此输过一局，E15）
+- Don't expect it to execute rules from `instructions`, no matter how clearly, how
+  urgently, or in which field they are written
+- Don't give it tasks needing multi-step lookahead or counterfactual search
+- Don't reuse a scoring function as a prompt generator. "If we can already win, the level
+  below is moot" is correct for a metric and fatal for an annotation — it cost us a game (E15)
 
-**自检办法**
+**Self-check**
 
-> 统计注入文本的**去重数量**。如果某一手所有选项的标注文字都一样，这一手等于没注入——
-> 而这种退化恰好发生在威胁最高的时刻。（E15）
+> Count the **distinct** annotation strings. If every option carries the same text on some
+> move, that move effectively has no injection — and that degeneration tends to happen
+> exactly when the threat is highest. (E15)
 
 ---
 
-## 和 gpt-oss-120b 的对比（同题、同局面、各一次请求）
+## Against gpt-oss-120b (same questions, same positions, one request each)
 
-| 能力 | jev-1.13.0 | gpt-oss-120b |
+| Capability | jev-1.13.0 | gpt-oss-120b |
 | --- | --- | --- |
-| 读点 / 端点 / AND / OR / 跨度 / 计数 / 三色辨别 | **124/124** | **124/124** |
-| 纯文字规则推理 | **10/10** | **10/10** |
-| **从棋盘推反事实** | **19/40** | **40/40** |
-| 裸条件下的实战胜负 | 0 | **11** |
+| Read point / ends / AND / OR / span / count / three colours | **124/124** | **124/124** |
+| Rule reasoning from words | **10/10** | **10/10** |
+| **Deriving counterfactuals from the board** | **19/40** | **40/40** |
+| Games won, no injection | 0 | **11** |
 
-两端完全相同，差异 100% 集中在中间那一步。gpt-oss 的概率饱和在 0.00/1.00、零自相矛盾；
-jev 在同样这些问题上全部落在 0.24–0.79。
+The two ends are identical; 100% of the difference sits in the step between them. gpt-oss
+saturates at 0.00/1.00 with zero self-contradiction; jev lands in 0.24–0.79 on exactly those
+questions.
 
-**代价**（一局 48 手的实战）：
+**The price** (one 48-ply game):
 
 ```
-jev       24 次请求   out=  6,176 token   均  0.6 秒
-gpt-oss   27 次请求   out=291,938 token   均 82.7 秒
+jev       24 requests   out=  6,176 tokens   avg  0.6 s
+gpt-oss   27 requests   out=291,938 tokens   avg 82.7 s
 ```
 
-gpt-oss 用 **47 倍输出 token、138 倍时间**买到了那一项能力。而且它在这一项上有个独立的脆弱点：
-局面复杂到一定程度后，16k 的输出预算会被隐藏思考全部吃掉，连续三次返回**空内容**而判负（E16）。
+gpt-oss buys that one capability with **47× the output tokens and 138× the latency**. It also
+has an independent fragility there: past a certain complexity, its 16k output budget is
+consumed entirely by hidden reasoning and it returns **empty content** three times in a row
+and forfeits (E16).
 
 ---
 
-## 适用与不适用
+## Fit and misfit
 
-**适合 jev 的任务形态**
+**Task shapes that suit jev**
 
-- 候选项已枚举、每项的后果已由确定性代码算出，需要的是「在标注好的选项里挑一个并给出校准概率」
-- 状态可以完整文字化，判断只依赖状态中的显式内容
-- 需要概率分布和置信度（而不只是一个答案）
-- 对延迟和成本敏感（0.6 秒 / 250 output token 一次判断）
+- Candidates are already enumerated and each option's consequence has been computed by
+  deterministic code; what is needed is "pick one and give a calibrated distribution"
+- The state can be fully written out, and the judgement depends only on what is explicit in it
+- A probability distribution and a confidence are wanted, not just an answer
+- Latency and cost matter (0.6 s / ~250 output tokens per decision)
 
-**不适合的任务形态**
+**Task shapes that do not**
 
-- 需要前瞻、搜索、推演「如果我这样对方会怎样」
-- 规则复杂、且必须由模型自己把规则套到具体实例上
-- 状态必须由模型从原始表示（棋盘、图、长文）中自行提炼出隐含结论
+- Lookahead, search, "if I do this, what will they do"
+- Complex rules that the model itself must instantiate on a concrete case
+- A state where the model must distil implicit conclusions out of a raw representation
+  (a board, a graph, a long document)
 
-一句话：**把它当决策层，不要当推理层。** 推理层交给确定性代码，或者交给愿意烧 47 倍 token 的
-reasoning 模型。
+One line: **treat it as the decision layer, not the reasoning layer.** Put the reasoning in
+deterministic code, or in a model willing to burn 47× the tokens.
 
 ---
 
-## 一个必须声明的边界
+## One boundary that must be stated
 
-开启注入之后，被测的命题已经变了——不再是「jev 会不会下五子棋」，而是「jev 拿到威胁分析后能否
-做对决策」。E16 那局 jev 赢了，但它全程**没有一次进攻机会**，做的唯一一件事是不输，而「不输」
-是调用方的引擎逐点算出威胁换来的。**那不是棋力胜利，是分工胜利。**
+Once injection is switched on, the proposition under test changes: it is no longer "can jev
+play gomoku" but "can jev decide correctly once handed a threat analysis". jev won the E16
+game, but it **never had a single attacking chance** — the only thing it did was avoid losing,
+and that came from the caller's engine computing threats per option. **That is a win by
+division of labour, not by playing strength.**
 
-所有对局记录都带 `facts` / `option_facts` / `prompt_version` 字段，注入与未注入的数据不合并统计。
+Every match record carries `facts` / `option_facts` / `prompt_version`; injected and
+non-injected data are never pooled.

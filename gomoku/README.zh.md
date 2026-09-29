@@ -294,9 +294,9 @@ D5/I5 封死，根本不可能成五。也就是说 jev 的瓶颈不在指令措
 
 两份文档：
 
-- **[FINDINGS.md](FINDINGS.md)** —— jev 的能力画像（能做什么、不能做什么、怎么用它、与
+- **[FINDINGS.zh.md](FINDINGS.zh.md)** —— jev 的能力画像（能做什么、不能做什么、怎么用它、与
   gpt-oss 的对比）。想知道结论看这份。
-- **[EXPERIMENTS.md](EXPERIMENTS.md)** —— 实验过程报告（16 组实验、方法、关键原始回复、
+- **[EXPERIMENTS.zh.md](EXPERIMENTS.zh.md)** —— 实验过程报告（16 组实验、方法、关键原始回复、
   方法论教训）。想复现或质疑结论看这份。
 
 一句话结论：

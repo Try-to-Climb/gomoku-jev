@@ -175,15 +175,15 @@ class JevPlayer(Player):
 
 
 def build_llm_player(spec: str = "", **overrides) -> Player:
-    """Factory used by the CLI: ``jev``, ``jev:<model>``, or ``<model>@<prompt version>``.
+    """Factory used by the registry: ``jev``, ``jev:<model>``, or ``<model>@<version>``.
 
     The ``@version`` suffix beats a global ``--prompt-version``, so the two seats of
     a match can run different tactical wordings.
     """
-    spec = spec.strip()
-    if "@" in spec:
-        spec, version = spec.rsplit("@", 1)
-        overrides["prompt_version"] = version.strip()
+    from .backends import split_version
+
+    spec, from_spec = split_version(spec.strip())
+    overrides.update(from_spec)
     model = spec.strip() or DEFAULT_MODEL
     if model in ("jev", "default"):
         model = DEFAULT_MODEL
