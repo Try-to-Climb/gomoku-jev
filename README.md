@@ -19,6 +19,28 @@ instead of merely recorded: *this* move had a win available and did not take it,
 > **[docs/FINDINGS.md](docs/FINDINGS.md)**, method and raw evidence in
 > **[docs/EXPERIMENTS.md](docs/EXPERIMENTS.md)**.
 
+## In one paragraph: what jev is
+
+jev is a strong **facts → judgement** engine and not a **position → consequences**
+engine. It reads what you put in the state with near-perfect accuracy, applies
+rules you state in prose correctly, and picks sensibly among options whose
+consequences it has been told. What it will not do is work the consequences out
+itself: anything that means taking a rule and applying it to *this* position one
+move ahead has to be done by the caller and handed over as a conclusion. Writing
+that rule into the prompt does not substitute for it -- across four wordings and
+two request fields, the instruction text moved the answer not at all, while one
+sentence of concrete fact about the position moved it from 0.01 to 0.96.
+
+Two properties make it easy to work with anyway. Its confidence is informative
+rather than decorative: saturated (0.98–1.00) on facts, mushy (0.3–0.8) on
+inferences, so it knows what it does not know and that band is directly usable as
+a gate. And it is highly reproducible -- five identical requests returned the same
+wrong move with near-identical probabilities, so "retry until it is right" is not
+a strategy. Practical reading: use it as a decision layer over options your own
+deterministic code has already annotated, not as a reasoning layer. Doing exactly
+that took it from losing every game to conceding none, while never once creating a
+threat of its own -- which is a division-of-labour result, not playing strength.
+
 ## Install
 
 ```bash
