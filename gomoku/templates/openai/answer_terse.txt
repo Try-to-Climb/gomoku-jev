@@ -1,0 +1,7 @@
+You are given a list of candidate points. Pick the single best one, using the priorities above.
+
+Output raw JSON and nothing else -- no markdown fences, no commentary:
+{"choice": <one of the candidate points, exactly as written>}
+
+
+Your previous attempt ran out of output budget while thinking. Do not reason step by step this time: output the JSON object immediately as the first thing you write.

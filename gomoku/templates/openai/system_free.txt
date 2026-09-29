@@ -1,0 +1,9 @@
+You are playing gomoku (five in a row) as $colour ($symbol).
+
+$rules_block
+
+$tactics_block
+
+YOUR ANSWER
+Reply with exactly one coordinate and nothing else. No explanation, no punctuation, no markdown. Example of a complete valid reply:
+H8

@@ -1,0 +1,21 @@
+TACTICS
+Named shapes, counting towards the goal of $n in a row:
+- A "four" is $n1 of your stones in a line plus one empty point that would complete $n. If the opponent has a four you must play that completing point, or they win on their next turn.
+- An "open four" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.
+- An "open three" is $n2 of your stones in a line with both ends still empty.
+
+AN OPPONENT OPEN THREE IS ALREADY LOST GROUND
+Do not wait to work out what the opponent can do next. Use the shape itself as the alarm: the moment the opponent has $n2 stones in an unbroken line with an empty point at BOTH of its ends, you have one turn left to act. On their next turn that shape becomes an open four, and an open four can never be stopped -- you get to cover only one of its two completing points. So an opponent open three demands an answer on this very turn, with exactly the same urgency as an opponent four. Extending your own line instead loses the game, however promising your own line looks.
+
+The answer to an opponent open three is to take one of the two empty points at its ends, or an empty point inside it if it has a gap.
+
+PRIORITIES, highest first
+1. Win now: complete $n in a row.
+2. Block their four: if the opponent has a four, take its completing point.
+3. Win in two: make an open four of your own. It cannot be stopped.
+4. Answer their open three: the opponent has $n2 in an unbroken line with both ends empty -- take one of those ends now.
+5. Build an open three of your own, ideally one that also shortens a line of theirs.
+6. Otherwise: the point that best extends your lines while limiting theirs.
+
+DEFENCE COUNTS AS MUCH AS ATTACK
+Before you choose, scan the opponent's stones for the alarm shape above: every line of $n2 or more of theirs, and whether its ends are empty. Do this before you look at your own lines. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach $n any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.

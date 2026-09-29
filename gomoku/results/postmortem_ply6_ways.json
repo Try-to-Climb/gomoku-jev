@@ -1,0 +1,238 @@
+{
+  "game": "gomoku/results/audit-live-0929.json",
+  "ply": 6,
+  "played": "F5",
+  "backend": "jev",
+  "info": {
+    "line": "D6 E5 F4",
+    "ends": [
+      "C7",
+      "G3"
+    ],
+    "open_four_points": [
+      "C7",
+      "G3"
+    ]
+  },
+  "perception": [
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.62,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.65,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.64,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.38,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.49,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.09,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.39,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.34,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.6,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.61,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.61,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.37,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.48,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.1,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.41,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.31,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.58,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.64,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.39,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.5,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.09,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "C7",
+        "p": 0.36,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.32,
+        "correct": false
+      }
+    }
+  ],
+  "weighing": [
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "ways",
+      "tactics_in_state": false,
+      "repeat": 0,
+      "chose": "C7",
+      "correct": true,
+      "confidence": 0.14,
+      "critical_mass": 0.33,
+      "critical_ranks": {
+        "G3": 3,
+        "C7": 1
+      },
+      "top": {
+        "C7": 0.18000000000000002,
+        "E4": 0.18000000000000002,
+        "G3": 0.15,
+        "F5": 0.12,
+        "D4": 0.11
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "ways",
+      "tactics_in_state": false,
+      "repeat": 1,
+      "chose": "G3",
+      "correct": true,
+      "confidence": 0.16,
+      "critical_mass": 0.38,
+      "critical_ranks": {
+        "G3": 1,
+        "C7": 2
+      },
+      "top": {
+        "G3": 0.2,
+        "C7": 0.18000000000000002,
+        "E4": 0.15000000000000002,
+        "F5": 0.12,
+        "D4": 0.09
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "ways",
+      "tactics_in_state": false,
+      "repeat": 2,
+      "chose": "G3",
+      "correct": true,
+      "confidence": 0.14,
+      "critical_mass": 0.35,
+      "critical_ranks": {
+        "G3": 1,
+        "C7": 2
+      },
+      "top": {
+        "G3": 0.18000000000000002,
+        "C7": 0.17,
+        "E4": 0.16,
+        "F5": 0.14,
+        "D4": 0.09
+      }
+    }
+  ],
+  "started_at": "2026-09-29T03:09:58+00:00"
+}

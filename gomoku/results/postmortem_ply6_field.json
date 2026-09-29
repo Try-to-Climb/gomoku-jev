@@ -1,0 +1,298 @@
+{
+  "game": "gomoku/results/audit-live-0929.json",
+  "ply": 6,
+  "played": "F5",
+  "backend": "jev",
+  "info": {
+    "line": "D6 E5 F4",
+    "ends": [
+      "C7",
+      "G3"
+    ],
+    "open_four_points": [
+      "C7",
+      "G3"
+    ]
+  },
+  "perception": [
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.52,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.65,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.68,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.38,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "yes",
+        "p": 0.51,
+        "correct": false
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.08,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "C7",
+        "p": 0.38,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.3,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.57,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.71,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.35,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.48,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.09,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.51,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.34,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.68,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.65,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.39,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.48,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.09,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.35,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.29,
+        "correct": false
+      }
+    }
+  ],
+  "weighing": [
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "tactics_in_state": false,
+      "repeat": 0,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.22,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 19,
+        "C7": 21
+      },
+      "top": {
+        "F5": 0.26,
+        "E4": 0.21,
+        "D4": 0.14,
+        "F3": 0.06,
+        "C4": 0.04
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "tactics_in_state": false,
+      "repeat": 1,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.23,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 21,
+        "C7": 17
+      },
+      "top": {
+        "F5": 0.27,
+        "E4": 0.22,
+        "D4": 0.16,
+        "F3": 0.05,
+        "F6": 0.04
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "tactics_in_state": false,
+      "repeat": 2,
+      "chose": "E4",
+      "correct": false,
+      "confidence": 0.21,
+      "critical_mass": 0.03,
+      "critical_ranks": {
+        "G3": 12,
+        "C7": 19
+      },
+      "top": {
+        "F5": 0.24000000000000002,
+        "E4": 0.24000000000000002,
+        "D4": 0.14,
+        "C4": 0.05,
+        "F3": 0.05
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "tactics_in_state": true,
+      "repeat": 0,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.25,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 16,
+        "C7": 15
+      },
+      "top": {
+        "F5": 0.29000000000000004,
+        "E4": 0.22,
+        "D4": 0.14,
+        "F6": 0.04,
+        "E7": 0.04
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "tactics_in_state": true,
+      "repeat": 1,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.23,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 20,
+        "C7": 19
+      },
+      "top": {
+        "F5": 0.26,
+        "E4": 0.21,
+        "D4": 0.15,
+        "F3": 0.04,
+        "E7": 0.04
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "tactics_in_state": true,
+      "repeat": 2,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.23,
+      "critical_mass": 0.01,
+      "critical_ranks": {
+        "G3": 15,
+        "C7": 25
+      },
+      "top": {
+        "F5": 0.27,
+        "E4": 0.26,
+        "D4": 0.14,
+        "E7": 0.04,
+        "F6": 0.04
+      }
+    }
+  ],
+  "started_at": "2026-09-29T02:55:49+00:00"
+}

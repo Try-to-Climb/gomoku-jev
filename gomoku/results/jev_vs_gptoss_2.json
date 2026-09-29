@@ -1,0 +1,1297 @@
+{
+  "summary": {
+    "games": 2,
+    "status_counts": {
+      "black_win": 1,
+      "white_win": 1
+    },
+    "end_reasons": {
+      "5_in_a_row": 2
+    },
+    "players": {
+      "openai/gpt-oss-120b": {
+        "name": "openai/gpt-oss-120b",
+        "games": 2,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "win_rate": 1.0,
+        "score": 1.0,
+        "as_black": 1,
+        "as_white": 1,
+        "moves": 13,
+        "attempts_per_move": 1.0,
+        "avg_latency_s": 16.955,
+        "parse_failure_rate": 0.0,
+        "illegal_move_rate": 0.0,
+        "forfeits": 0,
+        "referee_fallbacks": 0,
+        "win_chances": 2,
+        "win_conversion": 1.0,
+        "block_chances": 1,
+        "block_rate": 1.0,
+        "unavoidable_losses": 0,
+        "avg_game_plies": 12.5
+      },
+      "jev:jev-latest": {
+        "name": "jev:jev-latest",
+        "games": 2,
+        "wins": 0,
+        "losses": 2,
+        "draws": 0,
+        "win_rate": 0.0,
+        "score": 0.0,
+        "as_black": 1,
+        "as_white": 1,
+        "moves": 12,
+        "attempts_per_move": 1.0,
+        "avg_latency_s": 0.671,
+        "parse_failure_rate": 0.0,
+        "illegal_move_rate": 0.0,
+        "forfeits": 0,
+        "referee_fallbacks": 0,
+        "win_chances": 0,
+        "win_conversion": null,
+        "block_chances": 0,
+        "block_rate": null,
+        "unavoidable_losses": 2,
+        "avg_game_plies": 12.5
+      }
+    }
+  },
+  "games": [
+    {
+      "game_id": "05bebfa9f210",
+      "started_at": "2026-09-28T05:08:05+00:00",
+      "duration_s": 151.519,
+      "rules": {
+        "size": 9,
+        "win_length": 5,
+        "overline": "win",
+        "overline_forbidden_for": [
+          "black"
+        ],
+        "opening": "free",
+        "max_retries": 2,
+        "illegal_move": "forfeit",
+        "max_plies": 60,
+        "move_timeout_s": 120.0
+      },
+      "players": {
+        "black": {
+          "name": "openai/gpt-oss-120b",
+          "kind": "OpenAIPlayer",
+          "model": "openai/gpt-oss-120b",
+          "mode": "choice",
+          "temperature": 0.0,
+          "max_tokens": 16384,
+          "require_distribution": true,
+          "candidates": "near",
+          "max_candidates": 30,
+          "radius": 2,
+          "include_tactical": true,
+          "shuffle": true,
+          "seed": 34
+        },
+        "white": {
+          "name": "jev:jev-latest",
+          "kind": "JevPlayer",
+          "model": "jev-latest",
+          "candidates": "near",
+          "max_candidates": 30,
+          "radius": 2,
+          "include_tactical": true,
+          "shuffle": true,
+          "seed": 35
+        }
+      },
+      "status": "black_win",
+      "winner": "black",
+      "winner_name": "openai/gpt-oss-120b",
+      "reason": "5_in_a_row",
+      "plies": 13,
+      "moves": [
+        {
+          "ply": 1,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "E5",
+          "latency_s": 44.872,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 44.872,
+              "move": "E5",
+              "raw": "{\"choice\":\"E5\",\"probabilities\":{\"F5\":0.11,\"D5\":0.11,\"E6\":0.06,\"H6\":0.02,\"C5\":0.04,\"H5\":0.01,\"H8\":0.01,\"B6\":0.02,\"C7\":0.02,\"B5\":0.01,\"E5\":0.16,\"G6\":0.03,\"G8\":0.01,\"C6\":0.03,\"C8\":0.01,\"F8\":0.01,\"C4\":0.01,\"E8\":0.01,\"E7\":0.03,\"D7\":0.03,\"H7\":0.01,\"D8\":0.01,\"B4\":0.01,\"G7\":0.02,\"G5\":0.04,\"B7\":0.01,\"B8\":0.01,\"F6\":0.06,\"F7\":0.03,\"D6\":0.06},\"confidence\":0.13}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 907,
+                  "output_tokens": 4127
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "E5": 0.16,
+                  "F5": 0.11,
+                  "D5": 0.11,
+                  "E6": 0.06,
+                  "F6": 0.06
+                },
+                "confidence": 0.13,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 2,
+          "stone": "white",
+          "player": "jev:jev-latest",
+          "move": "D5",
+          "latency_s": 2.231,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 2.231,
+              "move": "D5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"D5\", \"confidence\": 0.3, \"probabilities\": {\"G5\": 0.01, \"C3\": 0.0, \"F4\": 0.0, \"D5\": 0.34, \"C5\": 0.01, \"D3\": 0.0, \"G6\": 0.0, \"F6\": 0.01, \"D6\": 0.04, \"F5\": 0.14, \"C6\": 0.0, \"E7\": 0.01, \"F3\": 0.0, \"F7\": 0.0, \"C7\": 0.0, \"G3\": 0.0, \"G7\": 0.01, \"D4\": 0.03, \"E3\": 0.0, \"C4\": 0.01, \"E6\": 0.24000000000000002, \"E4\": 0.15, \"G4\": 0.0, \"D7\": 0.0}}",
+              "meta": {
+                "candidates": 24,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1223,
+                  "output_tokens": 210
+                },
+                "api_latency_s": 1.193,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "D5": 0.34,
+                  "E6": 0.24000000000000002,
+                  "E4": 0.15,
+                  "F5": 0.14,
+                  "D6": 0.04
+                },
+                "confidence": 0.3
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 3,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "F5",
+          "latency_s": 9.339,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 9.339,
+              "move": "F5",
+              "raw": "{\"choice\":\"F5\",\"probabilities\":{\"C6\":0.00,\"C5\":0.00,\"C3\":0.00,\"F7\":0.00,\"B7\":0.00,\"G5\":0.06,\"C7\":0.00,\"E7\":0.00,\"E4\":0.10,\"D6\":0.08,\"C4\":0.00,\"G6\":0.02,\"B4\":0.00,\"D7\":0.00,\"G4\":0.00,\"G3\":0.00,\"F5\":0.35,\"D3\":0.00,\"B6\":0.00,\"F6\":0.15,\"F3\":0.00,\"B3\":0.00,\"E6\":0.20,\"F4\":0.00,\"D4\":0.04,\"G7\":0.00,\"B5\":0.00,\"E3\":0.00},\"confidence\":0.33}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 28,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 909,
+                  "output_tokens": 2551
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 331,
+                "top_probabilities": {
+                  "F5": 0.35,
+                  "E6": 0.2,
+                  "F6": 0.15,
+                  "E4": 0.1,
+                  "D6": 0.08
+                },
+                "confidence": 0.33,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 4,
+          "stone": "white",
+          "player": "jev:jev-latest",
+          "move": "G5",
+          "latency_s": 0.524,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.524,
+              "move": "G5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"G5\", \"confidence\": 0.65, \"probabilities\": {\"C5\": 0.09999999999999999, \"D7\": 0.0, \"F7\": 0.0, \"B5\": 0.01, \"C3\": 0.0, \"F3\": 0.0, \"B3\": 0.0, \"H7\": 0.0, \"B4\": 0.0, \"D3\": 0.0, \"D4\": 0.0, \"B6\": 0.0, \"F4\": 0.02, \"C7\": 0.0, \"C6\": 0.0, \"C4\": 0.0, \"H6\": 0.0, \"G7\": 0.0, \"H4\": 0.0, \"G5\": 0.67, \"E3\": 0.0, \"B7\": 0.0, \"F6\": 0.03, \"H5\": 0.02, \"E7\": 0.0, \"E4\": 0.04, \"G6\": 0.01, \"G4\": 0.0, \"D6\": 0.0, \"E6\": 0.09999999999999999}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1363,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.511,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "G5": 0.67,
+                  "C5": 0.09999999999999999,
+                  "E6": 0.09999999999999999,
+                  "E4": 0.04,
+                  "F6": 0.03
+                },
+                "confidence": 0.65
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 5,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "D6",
+          "latency_s": 20.896,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 20.896,
+              "move": "D6",
+              "raw": "{\"choice\":\"D6\",\"probabilities\":{\"B5\":0.02,\"F6\":0.10,\"B3\":0.00,\"C3\":0.00,\"E7\":0.03,\"D3\":0.00,\"E6\":0.10,\"C6\":0.02,\"B4\":0.00,\"E3\":0.01,\"F3\":0.01,\"G7\":0.01,\"D6\":0.28,\"G4\":0.02,\"H7\":0.00,\"H4\":0.02,\"B6\":0.02,\"G3\":0.00,\"C7\":0.02,\"D7\":0.04,\"E4\":0.01,\"B7\":0.00,\"C4\":0.00,\"C5\":0.00,\"G6\":0.22,\"D4\":0.00,\"H6\":0.02,\"F7\":0.02,\"F4\":0.01,\"H5\":0.02},\"confidence\":0.25}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 931,
+                  "output_tokens": 3698
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "D6": 0.28,
+                  "G6": 0.22,
+                  "F6": 0.1,
+                  "E6": 0.1,
+                  "D7": 0.04
+                },
+                "confidence": 0.25,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 6,
+          "stone": "white",
+          "player": "jev:jev-latest",
+          "move": "E6",
+          "latency_s": 0.512,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.512,
+              "move": "E6",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E6\", \"confidence\": 0.45, \"probabilities\": {\"H6\": 0.0, \"D8\": 0.0, \"C4\": 0.0, \"G6\": 0.02, \"F4\": 0.01, \"C7\": 0.0, \"F8\": 0.0, \"B6\": 0.01, \"D4\": 0.01, \"B4\": 0.0, \"G4\": 0.0, \"E6\": 0.48, \"H7\": 0.0, \"B7\": 0.0, \"C8\": 0.0, \"C6\": 0.04, \"D7\": 0.01, \"H5\": 0.06, \"C3\": 0.0, \"C5\": 0.07, \"G7\": 0.0, \"B8\": 0.0, \"E8\": 0.0, \"B3\": 0.0, \"F6\": 0.24000000000000002, \"E7\": 0.02, \"B5\": 0.01, \"F7\": 0.01, \"E4\": 0.01, \"H4\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1379,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.507,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E6": 0.48,
+                  "F6": 0.24000000000000002,
+                  "C5": 0.07,
+                  "H5": 0.06,
+                  "C6": 0.04
+                },
+                "confidence": 0.45
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 7,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "F6",
+          "latency_s": 24.259,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 24.259,
+              "move": "F6",
+              "raw": "{\"choice\":\"F6\",\"probabilities\":{\"B6\":0.03,\"F6\":0.28,\"C4\":0.06,\"B8\":0.02,\"F4\":0.16,\"B7\":0.02,\"C6\":0.03,\"B5\":0.02,\"B3\":0.00,\"F8\":0.00,\"G6\":0.04,\"H5\":0.01,\"H6\":0.00,\"D8\":0.04,\"E4\":0.00,\"B4\":0.00,\"D4\":0.00,\"C7\":0.02,\"G8\":0.01,\"F7\":0.07,\"D7\":0.02,\"E8\":0.01,\"G4\":0.00,\"G7\":0.01,\"C8\":0.00,\"H7\":0.00,\"C5\":0.10,\"C3\":0.00,\"E7\":0.05,\"H4\":0.00},\"confidence\":0.26}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 947,
+                  "output_tokens": 6056
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "F6": 0.28,
+                  "F4": 0.16,
+                  "C5": 0.1,
+                  "F7": 0.07,
+                  "C4": 0.06
+                },
+                "confidence": 0.26,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 8,
+          "stone": "white",
+          "player": "jev:jev-latest",
+          "move": "G6",
+          "latency_s": 0.503,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.503,
+              "move": "G6",
+              "raw": "{\"type\": \"choice\", \"choice\": \"G6\", \"confidence\": 0.45, \"probabilities\": {\"E7\": 0.06, \"D7\": 0.03, \"B4\": 0.0, \"D8\": 0.0, \"H7\": 0.0, \"C4\": 0.0, \"C8\": 0.0, \"G8\": 0.0, \"F7\": 0.09999999999999999, \"C7\": 0.0, \"B6\": 0.0, \"F8\": 0.0, \"E4\": 0.04, \"B8\": 0.0, \"H5\": 0.05, \"B3\": 0.0, \"E8\": 0.0, \"B7\": 0.0, \"H8\": 0.0, \"F4\": 0.04, \"H6\": 0.01, \"G7\": 0.01, \"G6\": 0.48, \"B5\": 0.01, \"D4\": 0.0, \"C3\": 0.0, \"H4\": 0.0, \"G4\": 0.01, \"C6\": 0.08, \"C5\": 0.08}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1395,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.498,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "G6": 0.48,
+                  "F7": 0.09999999999999999,
+                  "C6": 0.08,
+                  "C5": 0.08,
+                  "E7": 0.06
+                },
+                "confidence": 0.45
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 9,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "F4",
+          "latency_s": 22.533,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 22.533,
+              "move": "F4",
+              "raw": "{\"choice\":\"F4\",\"probabilities\":{\"F7\":0.15,\"E8\":0.00,\"D8\":0.00,\"B3\":0.00,\"C6\":0.04,\"H6\":0.01,\"H5\":0.01,\"H8\":0.01,\"B4\":0.01,\"E7\":0.07,\"F4\":0.30,\"B6\":0.01,\"C4\":0.05,\"D7\":0.04,\"H4\":0.00,\"C5\":0.01,\"D3\":0.01,\"B7\":0.00,\"F8\":0.08,\"B5\":0.00,\"G4\":0.00,\"H7\":0.00,\"C8\":0.00,\"G8\":0.07,\"G7\":0.03,\"C3\":0.00,\"B8\":0.00,\"D4\":0.10,\"E4\":0.00,\"C7\":0.00},\"confidence\":0.28}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 963,
+                  "output_tokens": 5655
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "F4": 0.3,
+                  "F7": 0.15,
+                  "D4": 0.1,
+                  "F8": 0.08,
+                  "E7": 0.07
+                },
+                "confidence": 0.28,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 10,
+          "stone": "white",
+          "player": "jev:jev-latest",
+          "move": "E4",
+          "latency_s": 0.627,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.627,
+              "move": "E4",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E4\", \"confidence\": 0.51, \"probabilities\": {\"E7\": 0.02, \"D7\": 0.01, \"B4\": 0.0, \"D8\": 0.0, \"H7\": 0.0, \"C4\": 0.0, \"C8\": 0.0, \"G8\": 0.0, \"F3\": 0.09999999999999999, \"F7\": 0.09, \"B6\": 0.0, \"C7\": 0.0, \"F8\": 0.01, \"G3\": 0.0, \"E4\": 0.53, \"B8\": 0.0, \"H5\": 0.05, \"B3\": 0.0, \"E8\": 0.0, \"B7\": 0.0, \"H8\": 0.0, \"E3\": 0.01, \"H6\": 0.03, \"G7\": 0.01, \"G4\": 0.09, \"D4\": 0.01, \"B5\": 0.0, \"H4\": 0.0, \"C6\": 0.01, \"C5\": 0.02}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1412,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.622,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E4": 0.53,
+                  "F3": 0.09999999999999999,
+                  "F7": 0.09,
+                  "G4": 0.09,
+                  "H5": 0.05
+                },
+                "confidence": 0.51
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 11,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "F7",
+          "latency_s": 17.156,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 17.156,
+              "move": "F7",
+              "raw": "{\"choice\":\"F7\",\"probabilities\":{\"F3\":0.08,\"D3\":0.02,\"C5\":0.02,\"B3\":0.02,\"B4\":0.02,\"E8\":0.02,\"H8\":0.02,\"G8\":0.02,\"G4\":0.08,\"G3\":0.02,\"H5\":0.02,\"C6\":0.02,\"C4\":0.02,\"B7\":0.02,\"B5\":0.02,\"E7\":0.02,\"H4\":0.02,\"B8\":0.02,\"F8\":0.10,\"C7\":0.02,\"G7\":0.02,\"D4\":0.01,\"D7\":0.01,\"D8\":0.01,\"H7\":0.01,\"C8\":0.01,\"E3\":0.01,\"B6\":0.01,\"H6\":0.01,\"F7\":0.30},\"confidence\":0.28}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 979,
+                  "output_tokens": 4633
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "F7": 0.3,
+                  "F8": 0.1,
+                  "F3": 0.08,
+                  "G4": 0.08,
+                  "D3": 0.02
+                },
+                "confidence": 0.28,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 12,
+          "stone": "white",
+          "player": "jev:jev-latest",
+          "move": "F3",
+          "latency_s": 0.549,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.549,
+              "move": "F3",
+              "raw": "{\"type\": \"choice\", \"choice\": \"F3\", \"confidence\": 0.23, \"probabilities\": {\"D3\": 0.0, \"B4\": 0.0, \"H4\": 0.0, \"H5\": 0.04, \"C6\": 0.02, \"E8\": 0.0, \"F3\": 0.26, \"E7\": 0.24000000000000002, \"G3\": 0.01, \"G4\": 0.05, \"G8\": 0.0, \"C8\": 0.0, \"D8\": 0.0, \"C5\": 0.02, \"D4\": 0.03, \"G7\": 0.09, \"B3\": 0.0, \"B6\": 0.0, \"B5\": 0.0, \"F8\": 0.16, \"D7\": 0.03, \"C7\": 0.0, \"C3\": 0.0, \"C4\": 0.0, \"H8\": 0.0, \"H7\": 0.02, \"H6\": 0.02, \"B8\": 0.0, \"B7\": 0.0, \"E3\": 0.01}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1430,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.544,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "F3": 0.26,
+                  "E7": 0.24000000000000002,
+                  "F8": 0.16,
+                  "G7": 0.09,
+                  "G4": 0.05
+                },
+                "confidence": 0.23
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [
+              "F8",
+              "F3"
+            ],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": true
+          }
+        },
+        {
+          "ply": 13,
+          "stone": "black",
+          "player": "openai/gpt-oss-120b",
+          "move": "F8",
+          "latency_s": 7.471,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 7.471,
+              "move": "F8",
+              "raw": "{\"choice\":\"F8\",\"probabilities\":{\"B7\":0.01,\"D7\":0.01,\"C5\":0.01,\"C6\":0.01,\"D8\":0.01,\"G4\":0.01,\"G8\":0.01,\"B6\":0.01,\"B4\":0.01,\"E3\":0.01,\"E2\":0.01,\"G3\":0.01,\"G7\":0.01,\"H4\":0.01,\"B8\":0.01,\"D4\":0.01,\"H8\":0.01,\"H7\":0.01,\"H5\":0.01,\"H6\":0.01,\"B5\":0.01,\"F8\":0.71,\"E7\":0.01,\"C7\":0.01,\"F2\":0.01,\"C4\":0.01,\"D3\":0.01,\"E8\":0.01,\"C8\":0.01,\"G2\":0.01},\"confidence\":0.70}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 995,
+                  "output_tokens": 1572
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "F8": 0.71,
+                  "B7": 0.01,
+                  "D7": 0.01,
+                  "C5": 0.01,
+                  "C6": 0.01
+                },
+                "confidence": 0.7,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [
+              "F8"
+            ],
+            "opponent_wins": [],
+            "took_win": true,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        }
+      ]
+    },
+    {
+      "game_id": "97d3426fbd60",
+      "started_at": "2026-09-28T05:10:36+00:00",
+      "duration_s": 77.013,
+      "rules": {
+        "size": 9,
+        "win_length": 5,
+        "overline": "win",
+        "overline_forbidden_for": [
+          "black"
+        ],
+        "opening": "free",
+        "max_retries": 2,
+        "illegal_move": "forfeit",
+        "max_plies": 60,
+        "move_timeout_s": 120.0
+      },
+      "players": {
+        "black": {
+          "name": "jev:jev-latest",
+          "kind": "JevPlayer",
+          "model": "jev-latest",
+          "candidates": "near",
+          "max_candidates": 30,
+          "radius": 2,
+          "include_tactical": true,
+          "shuffle": true,
+          "seed": 35
+        },
+        "white": {
+          "name": "openai/gpt-oss-120b",
+          "kind": "OpenAIPlayer",
+          "model": "openai/gpt-oss-120b",
+          "mode": "choice",
+          "temperature": 0.0,
+          "max_tokens": 16384,
+          "require_distribution": true,
+          "candidates": "near",
+          "max_candidates": 30,
+          "radius": 2,
+          "include_tactical": true,
+          "shuffle": true,
+          "seed": 34
+        }
+      },
+      "status": "white_win",
+      "winner": "white",
+      "winner_name": "openai/gpt-oss-120b",
+      "reason": "5_in_a_row",
+      "plies": 12,
+      "moves": [
+        {
+          "ply": 1,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "E5",
+          "latency_s": 0.513,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.513,
+              "move": "E5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E5\", \"confidence\": 0.99, \"probabilities\": {\"G7\": 0.0, \"C4\": 0.0, \"G6\": 0.0, \"D7\": 0.0, \"E6\": 0.0, \"C8\": 0.0, \"C6\": 0.0, \"D6\": 0.0, \"B8\": 0.0, \"D8\": 0.0, \"E5\": 1.0, \"E8\": 0.0, \"C5\": 0.0, \"F8\": 0.0, \"G8\": 0.0, \"F6\": 0.0, \"C7\": 0.0, \"G5\": 0.0, \"B4\": 0.0, \"D5\": 0.0, \"F7\": 0.0, \"B6\": 0.0, \"H8\": 0.0, \"F5\": 0.0, \"B5\": 0.0, \"H6\": 0.0, \"E7\": 0.0, \"H7\": 0.0, \"B7\": 0.0, \"H5\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1347,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.509,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E5": 1.0,
+                  "G7": 0.0,
+                  "C4": 0.0,
+                  "G6": 0.0,
+                  "D7": 0.0
+                },
+                "confidence": 0.99
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 2,
+          "stone": "white",
+          "player": "openai/gpt-oss-120b",
+          "move": "D5",
+          "latency_s": 11.864,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 11.864,
+              "move": "D5",
+              "raw": "{\"choice\":\"D5\",\"probabilities\":{\"C3\":0.02,\"F4\":0.06,\"F7\":0.02,\"E3\":0.02,\"G5\":0.02,\"C4\":0.01,\"C5\":0.02,\"G3\":0.02,\"D4\":0.07,\"F6\":0.03,\"G6\":0.01,\"D7\":0.02,\"C6\":0.02,\"G7\":0.02,\"D6\":0.04,\"E7\":0.01,\"F3\":0.01,\"F5\":0.16,\"D3\":0.01,\"E6\":0.08,\"C7\":0.01,\"G4\":0.01,\"D5\":0.21,\"E4\":0.10},\"confidence\":0.18}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 24,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 891,
+                  "output_tokens": 3151
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 291,
+                "top_probabilities": {
+                  "D5": 0.21,
+                  "F5": 0.16,
+                  "E4": 0.1,
+                  "E6": 0.08,
+                  "D4": 0.07
+                },
+                "confidence": 0.18,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 3,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "F5",
+          "latency_s": 0.516,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.516,
+              "move": "F5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"F5\", \"confidence\": 0.46, \"probabilities\": {\"D7\": 0.0, \"E6\": 0.13, \"B3\": 0.0, \"F3\": 0.0, \"G4\": 0.0, \"G7\": 0.0, \"C7\": 0.0, \"D3\": 0.0, \"B4\": 0.0, \"B7\": 0.0, \"E3\": 0.0, \"G3\": 0.0, \"C6\": 0.0, \"E7\": 0.01, \"C5\": 0.2, \"E4\": 0.11, \"F7\": 0.0, \"G6\": 0.0, \"G5\": 0.01, \"B6\": 0.0, \"C3\": 0.0, \"D6\": 0.02, \"F6\": 0.0, \"D4\": 0.01, \"C4\": 0.0, \"B5\": 0.02, \"F5\": 0.49, \"F4\": 0.0}}",
+              "meta": {
+                "candidates": 28,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1313,
+                  "output_tokens": 242
+                },
+                "api_latency_s": 0.513,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "F5": 0.49,
+                  "C5": 0.2,
+                  "E6": 0.13,
+                  "E4": 0.11,
+                  "D6": 0.02
+                },
+                "confidence": 0.46
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 4,
+          "stone": "white",
+          "player": "openai/gpt-oss-120b",
+          "move": "D4",
+          "latency_s": 10.488,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 10.488,
+              "move": "D4",
+              "raw": "{\"choice\":\"D4\",\"probabilities\":{\"H6\":0.00,\"E6\":0.08,\"D3\":0.04,\"F7\":0.01,\"F3\":0.01,\"C7\":0.01,\"D4\":0.30,\"G5\":0.07,\"E7\":0.01,\"H4\":0.01,\"D6\":0.12,\"C3\":0.01,\"C6\":0.01,\"D7\":0.01,\"F6\":0.01,\"G4\":0.01,\"B5\":0.04,\"B6\":0.00,\"C4\":0.10,\"H7\":0.00,\"F4\":0.04,\"B7\":0.00,\"E3\":0.00,\"H5\":0.00,\"G7\":0.00,\"B4\":0.00,\"G6\":0.00,\"C5\":0.05,\"E4\":0.06,\"B3\":0.00},\"confidence\":0.28}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 923,
+                  "output_tokens": 2651
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "D4": 0.3,
+                  "D6": 0.12,
+                  "C4": 0.1,
+                  "E6": 0.08,
+                  "G5": 0.07
+                },
+                "confidence": 0.28,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 5,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "G5",
+          "latency_s": 0.534,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.534,
+              "move": "G5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"G5\", \"confidence\": 0.67, \"probabilities\": {\"D6\": 0.02, \"E4\": 0.08, \"G7\": 0.0, \"H6\": 0.0, \"H5\": 0.01, \"F7\": 0.0, \"E7\": 0.0, \"C7\": 0.0, \"C4\": 0.02, \"F6\": 0.01, \"H4\": 0.0, \"H7\": 0.0, \"B5\": 0.01, \"B4\": 0.01, \"G5\": 0.6900000000000001, \"D3\": 0.0, \"G3\": 0.0, \"B3\": 0.0, \"C6\": 0.0, \"D7\": 0.01, \"B6\": 0.0, \"E6\": 0.01, \"B7\": 0.0, \"C5\": 0.08, \"E3\": 0.0, \"G6\": 0.0, \"F4\": 0.04, \"C3\": 0.0, \"G4\": 0.0, \"F3\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1371,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.53,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "G5": 0.6900000000000001,
+                  "E4": 0.08,
+                  "C5": 0.08,
+                  "F4": 0.04,
+                  "D6": 0.02
+                },
+                "confidence": 0.67
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 6,
+          "stone": "white",
+          "player": "openai/gpt-oss-120b",
+          "move": "D6",
+          "latency_s": 18.938,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 18.938,
+              "move": "D6",
+              "raw": "{\"choice\":\"D6\",\"probabilities\":{\"C6\":0.05,\"E6\":0.06,\"H5\":0.07,\"E7\":0.04,\"B3\":0.0,\"G3\":0.0,\"B7\":0.0,\"C7\":0.07,\"C3\":0.0,\"F7\":0.0,\"B5\":0.03,\"F3\":0.0,\"D6\":0.24,\"H7\":0.0,\"G6\":0.05,\"C5\":0.03,\"H6\":0.03,\"F4\":0.03,\"F6\":0.04,\"G4\":0.03,\"H3\":0.0,\"E4\":0.01,\"H4\":0.01,\"C4\":0.01,\"E3\":0.0,\"B4\":0.0,\"D3\":0.04,\"B6\":0.04,\"G7\":0.0,\"D7\":0.12},\"confidence\":0.21}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 939,
+                  "output_tokens": 4731
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 340,
+                "top_probabilities": {
+                  "D6": 0.24,
+                  "D7": 0.12,
+                  "H5": 0.07,
+                  "C7": 0.07,
+                  "E6": 0.06
+                },
+                "confidence": 0.21,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 7,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "H5",
+          "latency_s": 0.525,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.525,
+              "move": "H5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"H5\", \"confidence\": 0.71, \"probabilities\": {\"H7\": 0.0, \"D7\": 0.05, \"F6\": 0.01, \"B4\": 0.0, \"C4\": 0.0, \"B6\": 0.0, \"F4\": 0.0, \"F8\": 0.0, \"D8\": 0.0, \"E6\": 0.03, \"B8\": 0.0, \"B5\": 0.01, \"G6\": 0.01, \"B7\": 0.0, \"E4\": 0.01, \"G4\": 0.01, \"F7\": 0.0, \"C3\": 0.0, \"C6\": 0.01, \"H6\": 0.0, \"C5\": 0.11, \"D3\": 0.02, \"E3\": 0.0, \"G7\": 0.0, \"H4\": 0.0, \"C7\": 0.0, \"C8\": 0.0, \"H5\": 0.73, \"E8\": 0.0, \"E7\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1387,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.52,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "H5": 0.73,
+                  "C5": 0.11,
+                  "D7": 0.05,
+                  "E6": 0.03,
+                  "D3": 0.02
+                },
+                "confidence": 0.71
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 8,
+          "stone": "white",
+          "player": "openai/gpt-oss-120b",
+          "move": "I5",
+          "latency_s": 5.364,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 5.364,
+              "move": "I5",
+              "raw": "{\"choice\":\"I5\",\"probabilities\":{\"C4\":0.01,\"E4\":0.01,\"C5\":0.01,\"C8\":0.01,\"F7\":0.01,\"B7\":0.01,\"C3\":0.01,\"B6\":0.01,\"C6\":0.01,\"G4\":0.01,\"G6\":0.01,\"I5\":0.71,\"F8\":0.01,\"E3\":0.01,\"D7\":0.01,\"E7\":0.01,\"H6\":0.01,\"E8\":0.01,\"D8\":0.01,\"F6\":0.01,\"H4\":0.01,\"H7\":0.01,\"G7\":0.01,\"B8\":0.01,\"E6\":0.01,\"C7\":0.01,\"B5\":0.01,\"D3\":0.01,\"B4\":0.01,\"F4\":0.01},\"confidence\":0.70}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 955,
+                  "output_tokens": 1417
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "I5": 0.71,
+                  "C4": 0.01,
+                  "E4": 0.01,
+                  "C5": 0.01,
+                  "C8": 0.01
+                },
+                "confidence": 0.7,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [
+              "I5"
+            ],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": true,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 9,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "C5",
+          "latency_s": 0.514,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.514,
+              "move": "C5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"C5\", \"confidence\": 0.47, \"probabilities\": {\"B8\": 0.0, \"H6\": 0.02, \"G4\": 0.01, \"B6\": 0.0, \"E4\": 0.02, \"E3\": 0.0, \"C5\": 0.49, \"C7\": 0.0, \"F7\": 0.01, \"E6\": 0.06, \"E7\": 0.01, \"F8\": 0.0, \"D7\": 0.06, \"G7\": 0.0, \"H7\": 0.01, \"G6\": 0.03, \"C4\": 0.01, \"B7\": 0.0, \"C6\": 0.03, \"D8\": 0.01, \"I4\": 0.03, \"H4\": 0.01, \"F6\": 0.03, \"B5\": 0.1, \"E8\": 0.0, \"C3\": 0.0, \"C8\": 0.0, \"I6\": 0.05, \"F4\": 0.0, \"D3\": 0.01}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1403,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.501,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "C5": 0.49,
+                  "B5": 0.1,
+                  "E6": 0.06,
+                  "D7": 0.06,
+                  "I6": 0.05
+                },
+                "confidence": 0.47
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 10,
+          "stone": "white",
+          "player": "openai/gpt-oss-120b",
+          "move": "D7",
+          "latency_s": 18.902,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 18.902,
+              "move": "D7",
+              "raw": "{\"choice\":\"D7\",\"probabilities\":{\"F8\":0.02,\"H4\":0.07,\"F7\":0.03,\"C4\":0.04,\"I6\":0.03,\"C7\":0.02,\"H7\":0.02,\"H6\":0.02,\"C6\":0.02,\"E6\":0.06,\"G4\":0.06,\"E7\":0.01,\"F4\":0.01,\"I4\":0.01,\"E8\":0.01,\"B4\":0.01,\"B7\":0.01,\"E4\":0.01,\"D8\":0.01,\"G6\":0.02,\"D3\":0.18,\"B5\":0.01,\"B6\":0.01,\"G7\":0.01,\"E3\":0.01,\"C3\":0.01,\"C8\":0.01,\"D7\":0.25,\"F6\":0.01,\"B8\":0.01},\"confidence\":0.22}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 971,
+                  "output_tokens": 4471
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 351,
+                "top_probabilities": {
+                  "D7": 0.25,
+                  "D3": 0.18,
+                  "H4": 0.07,
+                  "E6": 0.06,
+                  "G4": 0.06
+                },
+                "confidence": 0.22,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 11,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "B5",
+          "latency_s": 0.502,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.502,
+              "move": "B5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"B5\", \"confidence\": 0.77, \"probabilities\": {\"C8\": 0.0, \"H7\": 0.0, \"G7\": 0.0, \"G6\": 0.01, \"E3\": 0.0, \"C4\": 0.0, \"F7\": 0.0, \"H4\": 0.0, \"B6\": 0.0, \"D8\": 0.05, \"F6\": 0.01, \"B3\": 0.0, \"C6\": 0.01, \"E8\": 0.0, \"I4\": 0.0, \"B8\": 0.0, \"E6\": 0.06999999999999999, \"F4\": 0.0, \"D3\": 0.01, \"H6\": 0.01, \"I6\": 0.0, \"C7\": 0.01, \"E4\": 0.01, \"C3\": 0.0, \"B5\": 0.79, \"B4\": 0.0, \"G4\": 0.0, \"B7\": 0.01, \"E7\": 0.01, \"F8\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1421,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.498,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "B5": 0.79,
+                  "E6": 0.06999999999999999,
+                  "D8": 0.05,
+                  "G6": 0.01,
+                  "F6": 0.01
+                },
+                "confidence": 0.77
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [
+              "D8",
+              "D3"
+            ],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": true
+          }
+        },
+        {
+          "ply": 12,
+          "stone": "white",
+          "player": "openai/gpt-oss-120b",
+          "move": "D8",
+          "latency_s": 8.326,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 8.326,
+              "move": "D8",
+              "raw": "{\"choice\":\"D8\",\"probabilities\":{\"B7\":0.01,\"D3\":0.20,\"C7\":0.01,\"H4\":0.0,\"G7\":0.01,\"E4\":0.01,\"C8\":0.01,\"F8\":0.0,\"C4\":0.0,\"G6\":0.01,\"B3\":0.0,\"C3\":0.0,\"H6\":0.01,\"G4\":0.0,\"B4\":0.0,\"E7\":0.01,\"D8\":0.70,\"B8\":0.0,\"E3\":0.0,\"I6\":0.01,\"H7\":0.0,\"E8\":0.0,\"F3\":0.0,\"F6\":0.01,\"C6\":0.0,\"F7\":0.0,\"E6\":0.0,\"I4\":0.0,\"F4\":0.0,\"B6\":0.0},\"confidence\":0.69}",
+              "meta": {
+                "model": "openai/gpt-oss-120b",
+                "mode": "choice",
+                "candidates": 30,
+                "api_model": "openai/gpt-oss-120b",
+                "usage": {
+                  "input_tokens": 987,
+                  "output_tokens": 2227
+                },
+                "finish_reason": "stop",
+                "merged_system": false,
+                "raw_len": 333,
+                "top_probabilities": {
+                  "D8": 0.7,
+                  "D3": 0.2,
+                  "B7": 0.01,
+                  "C7": 0.01,
+                  "G7": 0.01
+                },
+                "confidence": 0.69,
+                "parsed_from": "json"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [
+              "D8",
+              "D3"
+            ],
+            "opponent_wins": [],
+            "took_win": true,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        }
+      ]
+    }
+  ]
+}

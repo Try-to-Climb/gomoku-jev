@@ -1,0 +1,476 @@
+{
+  "started_at": "2026-09-28T08:39:40+00:00",
+  "model": "jev-latest",
+  "prompt_version": "p2-defence-first",
+  "runs": [
+    {
+      "id": "must_block",
+      "why": "black has a four; white must take I8",
+      "stone": "white",
+      "history": [
+        "E8",
+        "D8",
+        "F8",
+        "A1",
+        "G8",
+        "A3",
+        "H8"
+      ],
+      "best_moves": [
+        "I8"
+      ],
+      "chose": "I8",
+      "move_correct": true,
+      "move_confidence": 0.89,
+      "perception": [
+        {
+          "question": "win_now",
+          "truth": false,
+          "note": "",
+          "probability": 0.08,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_four",
+          "truth": true,
+          "note": "I8",
+          "probability": 0.88,
+          "said": true,
+          "correct": true
+        },
+        {
+          "question": "own_open_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.34,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_live_line_alive",
+          "truth": true,
+          "note": "live run of 4",
+          "probability": 0.88,
+          "said": true,
+          "correct": true
+        }
+      ],
+      "perception_score": "4/4",
+      "usage": {
+        "input_tokens": 2155,
+        "output_tokens": 343
+      },
+      "latency_s": 0.945,
+      "repeat": 0
+    },
+    {
+      "id": "must_win",
+      "why": "white can complete five at C9 or H9",
+      "stone": "white",
+      "history": [
+        "A1",
+        "D9",
+        "A3",
+        "E9",
+        "A5",
+        "F9",
+        "A7",
+        "G9",
+        "B1"
+      ],
+      "best_moves": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "move_correct": true,
+      "move_confidence": 0.14,
+      "perception": [
+        {
+          "question": "win_now",
+          "truth": true,
+          "note": "C9, H9",
+          "probability": 0.7,
+          "said": true,
+          "correct": true
+        },
+        {
+          "question": "opponent_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.44,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_open_four",
+          "truth": true,
+          "note": "A4",
+          "probability": 0.35,
+          "said": false,
+          "correct": false
+        },
+        {
+          "question": "own_live_line_alive",
+          "truth": true,
+          "note": "live run of 4",
+          "probability": 0.91,
+          "said": true,
+          "correct": true
+        },
+        {
+          "question": "opponent_live_line_alive",
+          "truth": true,
+          "note": "live run of 2",
+          "probability": 0.61,
+          "said": true,
+          "correct": true
+        }
+      ],
+      "perception_score": "4/5",
+      "usage": {
+        "input_tokens": 2246,
+        "output_tokens": 364
+      },
+      "latency_s": 0.489,
+      "repeat": 0
+    },
+    {
+      "id": "make_open_four",
+      "why": "white has D4-D6 open at both ends: D7 or D3 wins",
+      "stone": "white",
+      "history": [
+        "E5",
+        "D5",
+        "F5",
+        "D6",
+        "G5",
+        "D4",
+        "H5",
+        "I5",
+        "C5"
+      ],
+      "best_moves": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "move_correct": false,
+      "move_confidence": 0.87,
+      "perception": [
+        {
+          "question": "win_now",
+          "truth": false,
+          "note": "",
+          "probability": 0.28,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.85,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "opponent_open_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.49,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "own_open_four",
+          "truth": true,
+          "note": "D7, D3",
+          "probability": 0.42,
+          "said": false,
+          "correct": false
+        },
+        {
+          "question": "own_live_line_alive",
+          "truth": true,
+          "note": "live run of 3",
+          "probability": 0.77,
+          "said": true,
+          "correct": true
+        },
+        {
+          "question": "opponent_dead_line_alive",
+          "truth": false,
+          "note": "dead run of 4",
+          "probability": 0.63,
+          "said": true,
+          "correct": false
+        }
+      ],
+      "perception_score": "3/6",
+      "usage": {
+        "input_tokens": 2055,
+        "output_tokens": 373
+      },
+      "latency_s": 0.498,
+      "repeat": 0
+    },
+    {
+      "id": "stop_open_four",
+      "why": "black must break white's open three D4-D6",
+      "stone": "black",
+      "history": [
+        "E5",
+        "D5",
+        "F5",
+        "D6",
+        "G5",
+        "D4",
+        "H5",
+        "I5"
+      ],
+      "best_moves": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "move_correct": false,
+      "move_confidence": 0.45,
+      "perception": [
+        {
+          "question": "win_now",
+          "truth": false,
+          "note": "",
+          "probability": 0.82,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "opponent_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.23,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_open_four",
+          "truth": true,
+          "note": "D7, D3",
+          "probability": 0.32,
+          "said": false,
+          "correct": false
+        },
+        {
+          "question": "own_open_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.43,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "own_dead_line_alive",
+          "truth": false,
+          "note": "dead run of 4",
+          "probability": 0.78,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "opponent_live_line_alive",
+          "truth": true,
+          "note": "live run of 3",
+          "probability": 0.79,
+          "said": true,
+          "correct": true
+        }
+      ],
+      "perception_score": "3/6",
+      "usage": {
+        "input_tokens": 2046,
+        "output_tokens": 373
+      },
+      "latency_s": 0.491,
+      "repeat": 0
+    },
+    {
+      "id": "game1_ply9",
+      "why": "from the p2 audit: white has G5-G7 open; jev (black) played F7 and lost",
+      "stone": "black",
+      "history": [
+        "E5",
+        "D5",
+        "F5",
+        "G5",
+        "H5",
+        "G6",
+        "F6",
+        "G7"
+      ],
+      "best_moves": [
+        "G8",
+        "G4"
+      ],
+      "chose": "F7",
+      "move_correct": false,
+      "move_confidence": 0.31,
+      "perception": [
+        {
+          "question": "win_now",
+          "truth": false,
+          "note": "",
+          "probability": 0.41,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.2,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_open_four",
+          "truth": true,
+          "note": "G8, G4",
+          "probability": 0.39,
+          "said": false,
+          "correct": false
+        },
+        {
+          "question": "own_open_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.6,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "own_dead_line_alive",
+          "truth": false,
+          "note": "dead run of 2",
+          "probability": 0.7,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "own_live_line_alive",
+          "truth": true,
+          "note": "live run of 2",
+          "probability": 0.76,
+          "said": true,
+          "correct": true
+        },
+        {
+          "question": "opponent_live_line_alive",
+          "truth": true,
+          "note": "live run of 3",
+          "probability": 0.82,
+          "said": true,
+          "correct": true
+        }
+      ],
+      "perception_score": "4/7",
+      "usage": {
+        "input_tokens": 2105,
+        "output_tokens": 392
+      },
+      "latency_s": 0.491,
+      "repeat": 0
+    },
+    {
+      "id": "game2_ply12",
+      "why": "from the p2 audit: jev (white) played D6 instead of G7/C3",
+      "stone": "white",
+      "history": [
+        "E5",
+        "D5",
+        "E4",
+        "E3",
+        "E6",
+        "E7",
+        "F4",
+        "F5",
+        "D4",
+        "C4",
+        "F6"
+      ],
+      "best_moves": [
+        "G7",
+        "C3"
+      ],
+      "chose": "D6",
+      "move_correct": false,
+      "move_confidence": 0.22,
+      "perception": [
+        {
+          "question": "win_now",
+          "truth": false,
+          "note": "",
+          "probability": 0.24,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.49,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "opponent_open_four",
+          "truth": true,
+          "note": "G7, C3",
+          "probability": 0.53,
+          "said": true,
+          "correct": true
+        },
+        {
+          "question": "own_open_four",
+          "truth": false,
+          "note": "",
+          "probability": 0.41,
+          "said": false,
+          "correct": true
+        },
+        {
+          "question": "own_dead_line_alive",
+          "truth": false,
+          "note": "dead run of 2",
+          "probability": 0.66,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "opponent_dead_line_alive",
+          "truth": false,
+          "note": "dead run of 3",
+          "probability": 0.85,
+          "said": true,
+          "correct": false
+        },
+        {
+          "question": "opponent_live_line_alive",
+          "truth": true,
+          "note": "live run of 3",
+          "probability": 0.77,
+          "said": true,
+          "correct": true
+        }
+      ],
+      "perception_score": "5/7",
+      "usage": {
+        "input_tokens": 2129,
+        "output_tokens": 394
+      },
+      "latency_s": 0.49,
+      "repeat": 0
+    }
+  ]
+}

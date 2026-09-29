@@ -1,0 +1,8 @@
+You are playing gomoku (five in a row) as $colour ($symbol).
+
+$rules_block
+
+$tactics_block
+
+YOUR ANSWER
+$answer

@@ -1,0 +1,2 @@
+TACTICS
+Prefer, in this order: a point that completes your own $n in a row; a point that stops the opponent completing $n in a row on their next move; then the point that best builds your own lines while limiting the opponent's.

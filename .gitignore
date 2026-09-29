@@ -1,0 +1,38 @@
+# --- secrets: never commit ---------------------------------------------------
+# The jev API key is read from the TYPESAFE_API_KEY environment variable only.
+# These patterns exist so that a stray local key file can never be staged.
+apikei.txt
+*api*key*.txt
+.env
+.env.*
+*.pem
+*.key
+# Credentials for a chat endpoint are read from OPENAI_API_KEY / OPENAI_BASE_URL.
+# Any local account or token cache must stay out of the tree.
+.authrecord
+*authrecord*
+credentials.json
+
+# --- python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- generated artefacts -----------------------------------------------------
+# `--live-file` writes a self-contained HTML snapshot plus a .tmp during the swap
+*.tmp
+gomoku/results/live.html
+
+# --- editors / OS ------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

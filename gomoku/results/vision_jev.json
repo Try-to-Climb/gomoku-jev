@@ -1,0 +1,567 @@
+{
+  "started_at": "2026-09-28T09:00:58+00:00",
+  "model": "jev-latest",
+  "prompt_version": "p1-threat-ladder",
+  "runs": [
+    {
+      "case": "blocked_both_ends_4",
+      "repeat": 0,
+      "live": false,
+      "answers": {
+        "cell_occupied": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.2,
+          "said": false,
+          "correct": true
+        },
+        "window": {
+          "truth": "4",
+          "p": 0.95,
+          "said": "4",
+          "correct": true
+        },
+        "count4": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": false,
+          "p": 0.62,
+          "said": true,
+          "correct": false
+        },
+        "cannot_reach": {
+          "truth": true,
+          "p": 0.66,
+          "said": true,
+          "correct": true
+        }
+      },
+      "contradiction": true
+    },
+    {
+      "case": "blocked_both_ends_4",
+      "repeat": 1,
+      "live": false,
+      "answers": {
+        "cell_occupied": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 1.0,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.19,
+          "said": false,
+          "correct": true
+        },
+        "window": {
+          "truth": "4",
+          "p": 0.96,
+          "said": "4",
+          "correct": true
+        },
+        "count4": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": false,
+          "p": 0.56,
+          "said": true,
+          "correct": false
+        },
+        "cannot_reach": {
+          "truth": true,
+          "p": 0.63,
+          "said": true,
+          "correct": true
+        }
+      },
+      "contradiction": true
+    },
+    {
+      "case": "blocked_one_end_4",
+      "repeat": 0,
+      "live": true,
+      "answers": {
+        "cell_occupied": {
+          "truth": false,
+          "p": 0.02,
+          "said": false,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": false,
+          "p": 0.02,
+          "said": false,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.73,
+          "said": true,
+          "correct": false
+        },
+        "window": {
+          "truth": "5_or_more",
+          "p": 0.4,
+          "said": "5_or_more",
+          "correct": true
+        },
+        "count4": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": true,
+          "p": 0.92,
+          "said": true,
+          "correct": true
+        },
+        "cannot_reach": {
+          "truth": false,
+          "p": 0.17,
+          "said": false,
+          "correct": true
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "blocked_one_end_4",
+      "repeat": 1,
+      "live": true,
+      "answers": {
+        "cell_occupied": {
+          "truth": false,
+          "p": 0.02,
+          "said": false,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": false,
+          "p": 0.02,
+          "said": false,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.66,
+          "said": true,
+          "correct": false
+        },
+        "window": {
+          "truth": "5_or_more",
+          "p": 0.4,
+          "said": "5_or_more",
+          "correct": true
+        },
+        "count4": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": true,
+          "p": 0.92,
+          "said": true,
+          "correct": true
+        },
+        "cannot_reach": {
+          "truth": false,
+          "p": 0.14,
+          "said": false,
+          "correct": true
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "open_both_ends_3",
+      "repeat": 0,
+      "live": true,
+      "answers": {
+        "cell_occupied": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": false,
+          "p": 0.02,
+          "said": false,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": true,
+          "p": 0.91,
+          "said": true,
+          "correct": true
+        },
+        "window": {
+          "truth": "5_or_more",
+          "p": 0.84,
+          "said": "5_or_more",
+          "correct": true
+        },
+        "count4": {
+          "truth": false,
+          "p": 0.04,
+          "said": false,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": true,
+          "p": 0.92,
+          "said": true,
+          "correct": true
+        },
+        "cannot_reach": {
+          "truth": false,
+          "p": 0.12,
+          "said": false,
+          "correct": true
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "open_both_ends_3",
+      "repeat": 1,
+      "live": true,
+      "answers": {
+        "cell_occupied": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": true,
+          "p": 0.9,
+          "said": true,
+          "correct": true
+        },
+        "window": {
+          "truth": "5_or_more",
+          "p": 0.77,
+          "said": "5_or_more",
+          "correct": true
+        },
+        "count4": {
+          "truth": false,
+          "p": 0.04,
+          "said": false,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": true,
+          "p": 0.91,
+          "said": true,
+          "correct": true
+        },
+        "cannot_reach": {
+          "truth": false,
+          "p": 0.12,
+          "said": false,
+          "correct": true
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "blocked_both_ends_2",
+      "repeat": 0,
+      "live": false,
+      "answers": {
+        "cell_occupied": {
+          "truth": true,
+          "p": 0.98,
+          "said": true,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": true,
+          "p": 0.98,
+          "said": true,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.56,
+          "said": true,
+          "correct": false
+        },
+        "window": {
+          "truth": "2_or_fewer",
+          "p": 0.25,
+          "said": "2_or_fewer",
+          "correct": true
+        },
+        "count4": {
+          "truth": false,
+          "p": 0.03,
+          "said": false,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": false,
+          "p": 0.78,
+          "said": true,
+          "correct": false
+        },
+        "cannot_reach": {
+          "truth": true,
+          "p": 0.33,
+          "said": false,
+          "correct": false
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "blocked_both_ends_2",
+      "repeat": 1,
+      "live": false,
+      "answers": {
+        "cell_occupied": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": true,
+          "p": 0.98,
+          "said": true,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.55,
+          "said": true,
+          "correct": false
+        },
+        "window": {
+          "truth": "2_or_fewer",
+          "p": 0.29,
+          "said": "2_or_fewer",
+          "correct": true
+        },
+        "count4": {
+          "truth": false,
+          "p": 0.04,
+          "said": false,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": false,
+          "p": 0.79,
+          "said": true,
+          "correct": false
+        },
+        "cannot_reach": {
+          "truth": true,
+          "p": 0.33,
+          "said": false,
+          "correct": false
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "edge_and_stone_4",
+      "repeat": 0,
+      "live": false,
+      "answers": {
+        "cell_occupied": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.38,
+          "said": false,
+          "correct": true
+        },
+        "window": {
+          "truth": "4",
+          "p": 0.73,
+          "said": "4",
+          "correct": true
+        },
+        "count4": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": false,
+          "p": 0.5,
+          "said": false,
+          "correct": true
+        },
+        "cannot_reach": {
+          "truth": true,
+          "p": 0.48,
+          "said": false,
+          "correct": false
+        }
+      },
+      "contradiction": false
+    },
+    {
+      "case": "edge_and_stone_4",
+      "repeat": 1,
+      "live": false,
+      "answers": {
+        "cell_occupied": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "left_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "right_end_blocked": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "ends_empty": {
+          "truth": false,
+          "p": 0.43,
+          "said": false,
+          "correct": true
+        },
+        "window": {
+          "truth": "4",
+          "p": 0.71,
+          "said": "4",
+          "correct": true
+        },
+        "count4": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "can_reach": {
+          "truth": false,
+          "p": 0.53,
+          "said": true,
+          "correct": false
+        },
+        "cannot_reach": {
+          "truth": true,
+          "p": 0.38,
+          "said": false,
+          "correct": false
+        }
+      },
+      "contradiction": false
+    }
+  ]
+}

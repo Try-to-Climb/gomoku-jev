@@ -1,0 +1,808 @@
+{
+  "started_at": "2026-09-28T09:52:20+00:00",
+  "backend": "jev",
+  "default_version": "p1-threat-ladder",
+  "repeats": 5,
+  "runs": [
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.8,
+      "latency_s": 0.967,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.79,
+      "latency_s": 0.557,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.81,
+      "latency_s": 0.509,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "make_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.87,
+      "latency_s": 0.508,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "make_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.72,
+      "latency_s": 0.528,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.51,
+      "latency_s": 0.52,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.52,
+      "latency_s": 0.541,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.51,
+      "latency_s": 0.499,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "stop_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.61,
+      "latency_s": 0.497,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "none",
+      "case": "stop_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.55,
+      "latency_s": 0.521,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.63,
+      "latency_s": 0.965,
+      "usage": {
+        "input_tokens": 1794,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.6,
+      "latency_s": 0.532,
+      "usage": {
+        "input_tokens": 1794,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.58,
+      "latency_s": 0.563,
+      "usage": {
+        "input_tokens": 1794,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "make_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.66,
+      "latency_s": 0.526,
+      "usage": {
+        "input_tokens": 1794,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "make_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.57,
+      "latency_s": 0.58,
+      "usage": {
+        "input_tokens": 1794,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.49,
+      "latency_s": 0.516,
+      "usage": {
+        "input_tokens": 1785,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.4,
+      "latency_s": 0.614,
+      "usage": {
+        "input_tokens": 1785,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.52,
+      "latency_s": 0.555,
+      "usage": {
+        "input_tokens": 1785,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "stop_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.43,
+      "latency_s": 0.517,
+      "usage": {
+        "input_tokens": 1785,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "span",
+      "case": "stop_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.45,
+      "latency_s": 0.509,
+      "usage": {
+        "input_tokens": 1785,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.49,
+      "latency_s": 0.944,
+      "usage": {
+        "input_tokens": 1813,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.49,
+      "latency_s": 0.519,
+      "usage": {
+        "input_tokens": 1813,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.43,
+      "latency_s": 0.556,
+      "usage": {
+        "input_tokens": 1813,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "make_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.48,
+      "latency_s": 0.529,
+      "usage": {
+        "input_tokens": 1813,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "make_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.51,
+      "latency_s": 0.556,
+      "usage": {
+        "input_tokens": 1813,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.54,
+      "latency_s": 0.536,
+      "usage": {
+        "input_tokens": 1804,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.37,
+      "latency_s": 0.539,
+      "usage": {
+        "input_tokens": 1804,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.49,
+      "latency_s": 0.553,
+      "usage": {
+        "input_tokens": 1804,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "stop_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.35,
+      "latency_s": 0.532,
+      "usage": {
+        "input_tokens": 1804,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "status",
+      "case": "stop_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.56,
+      "latency_s": 0.494,
+      "usage": {
+        "input_tokens": 1804,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.47,
+      "latency_s": 0.962,
+      "usage": {
+        "input_tokens": 1796,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.45,
+      "latency_s": 0.506,
+      "usage": {
+        "input_tokens": 1796,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.34,
+      "latency_s": 0.511,
+      "usage": {
+        "input_tokens": 1796,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "make_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.42,
+      "latency_s": 0.525,
+      "usage": {
+        "input_tokens": 1796,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "make_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.42,
+      "latency_s": 0.613,
+      "usage": {
+        "input_tokens": 1796,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.5,
+      "latency_s": 0.564,
+      "usage": {
+        "input_tokens": 1787,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.6,
+      "latency_s": 0.555,
+      "usage": {
+        "input_tokens": 1787,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.53,
+      "latency_s": 0.621,
+      "usage": {
+        "input_tokens": 1787,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "stop_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.69,
+      "latency_s": 0.51,
+      "usage": {
+        "input_tokens": 1787,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "facts": "geometry",
+      "case": "stop_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.52,
+      "latency_s": 0.545,
+      "usage": {
+        "input_tokens": 1787,
+        "output_tokens": 258
+      }
+    }
+  ]
+}

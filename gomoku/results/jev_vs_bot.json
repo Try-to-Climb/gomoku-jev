@@ -1,0 +1,533 @@
+{
+  "summary": {
+    "games": 1,
+    "status_counts": {
+      "white_win": 1
+    },
+    "end_reasons": {
+      "5_in_a_row": 1
+    },
+    "players": {
+      "jev:jev-latest": {
+        "name": "jev:jev-latest",
+        "games": 1,
+        "wins": 0,
+        "losses": 1,
+        "draws": 0,
+        "win_rate": 0.0,
+        "score": 0.0,
+        "as_black": 1,
+        "as_white": 0,
+        "moves": 6,
+        "attempts_per_move": 1.0,
+        "avg_latency_s": 0.811,
+        "parse_failure_rate": 0.0,
+        "illegal_move_rate": 0.0,
+        "forfeits": 0,
+        "referee_fallbacks": 0,
+        "win_chances": 0,
+        "win_conversion": null,
+        "block_chances": 0,
+        "block_rate": null,
+        "unavoidable_losses": 1,
+        "avg_game_plies": 12.0
+      },
+      "heuristic": {
+        "name": "heuristic",
+        "games": 1,
+        "wins": 1,
+        "losses": 0,
+        "draws": 0,
+        "win_rate": 1.0,
+        "score": 1.0,
+        "as_black": 0,
+        "as_white": 1,
+        "moves": 6,
+        "attempts_per_move": 1.0,
+        "avg_latency_s": 0.003,
+        "parse_failure_rate": 0.0,
+        "illegal_move_rate": 0.0,
+        "forfeits": 0,
+        "referee_fallbacks": 0,
+        "win_chances": 1,
+        "win_conversion": 1.0,
+        "block_chances": 0,
+        "block_rate": null,
+        "unavoidable_losses": 0,
+        "avg_game_plies": 12.0
+      }
+    }
+  },
+  "games": [
+    {
+      "game_id": "02c93d9bf380",
+      "started_at": "2026-09-28T03:25:10+00:00",
+      "duration_s": 4.93,
+      "rules": {
+        "size": 9,
+        "win_length": 5,
+        "overline": "win",
+        "overline_forbidden_for": [
+          "black"
+        ],
+        "opening": "free",
+        "max_retries": 2,
+        "illegal_move": "forfeit",
+        "max_plies": 30,
+        "move_timeout_s": 120.0
+      },
+      "players": {
+        "black": {
+          "name": "jev:jev-latest",
+          "kind": "JevPlayer",
+          "model": "jev-latest",
+          "candidates": "near",
+          "max_candidates": 30,
+          "radius": 2,
+          "include_tactical": true,
+          "shuffle": true,
+          "seed": null
+        },
+        "white": {
+          "name": "heuristic",
+          "kind": "HeuristicPlayer",
+          "seed": 12,
+          "defence_weight": 0.9,
+          "radius": 2
+        }
+      },
+      "status": "white_win",
+      "winner": "white",
+      "winner_name": "heuristic",
+      "reason": "5_in_a_row",
+      "plies": 12,
+      "moves": [
+        {
+          "ply": 1,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "E5",
+          "latency_s": 2.208,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 2.208,
+              "move": "E5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E5\", \"confidence\": 1.0, \"probabilities\": {\"G5\": 0.0, \"E5\": 1.0, \"E6\": 0.0, \"B5\": 0.0, \"F8\": 0.0, \"D8\": 0.0, \"H8\": 0.0, \"C4\": 0.0, \"C7\": 0.0, \"E8\": 0.0, \"E7\": 0.0, \"C8\": 0.0, \"D5\": 0.0, \"G7\": 0.0, \"D6\": 0.0, \"B4\": 0.0, \"H6\": 0.0, \"C5\": 0.0, \"H5\": 0.0, \"B6\": 0.0, \"F5\": 0.0, \"G6\": 0.0, \"H7\": 0.0, \"D7\": 0.0, \"B8\": 0.0, \"G8\": 0.0, \"F6\": 0.0, \"F7\": 0.0, \"B7\": 0.0, \"C6\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1347,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 1.349,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E5": 1.0,
+                  "G5": 0.0,
+                  "E6": 0.0,
+                  "B5": 0.0,
+                  "F8": 0.0
+                },
+                "confidence": 1.0
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 2,
+          "stone": "white",
+          "player": "heuristic",
+          "move": "E6",
+          "latency_s": 0.003,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.003,
+              "move": "E6",
+              "meta": {
+                "policy": "pattern",
+                "score": 388.9
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 3,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "E4",
+          "latency_s": 0.558,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.558,
+              "move": "E4",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E4\", \"confidence\": 0.28, \"probabilities\": {\"E7\": 0.17, \"F3\": 0.0, \"D4\": 0.0, \"C5\": 0.02, \"G5\": 0.0, \"E4\": 0.31, \"F4\": 0.0, \"D3\": 0.0, \"G3\": 0.0, \"F8\": 0.0, \"D8\": 0.0, \"C7\": 0.0, \"C4\": 0.0, \"F5\": 0.12, \"G6\": 0.0, \"E8\": 0.01, \"D7\": 0.01, \"G4\": 0.0, \"C8\": 0.0, \"G8\": 0.0, \"E3\": 0.0, \"F6\": 0.06, \"G7\": 0.0, \"F7\": 0.01, \"D6\": 0.04, \"D5\": 0.24000000000000002, \"C6\": 0.01, \"C3\": 0.0}}",
+              "meta": {
+                "candidates": 28,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1313,
+                  "output_tokens": 242
+                },
+                "api_latency_s": 0.545,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E4": 0.31,
+                  "D5": 0.24000000000000002,
+                  "E7": 0.17,
+                  "F5": 0.12,
+                  "F6": 0.06
+                },
+                "confidence": 0.28
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 4,
+          "stone": "white",
+          "player": "heuristic",
+          "move": "D5",
+          "latency_s": 0.004,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.004,
+              "move": "D5",
+              "meta": {
+                "policy": "pattern",
+                "score": 892.4
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 5,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "E3",
+          "latency_s": 0.556,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.556,
+              "move": "E3",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E3\", \"confidence\": 0.27, \"probabilities\": {\"F4\": 0.01, \"C7\": 0.0, \"F8\": 0.0, \"B6\": 0.0, \"D6\": 0.24, \"B7\": 0.0, \"C8\": 0.0, \"C6\": 0.01, \"C5\": 0.02, \"F3\": 0.0, \"D3\": 0.0, \"G5\": 0.01, \"E8\": 0.01, \"C4\": 0.0, \"G6\": 0.0, \"G8\": 0.0, \"B4\": 0.0, \"E7\": 0.09, \"D4\": 0.08, \"C3\": 0.0, \"E3\": 0.31, \"F5\": 0.19, \"B5\": 0.01, \"D7\": 0.01, \"B3\": 0.0, \"D8\": 0.0, \"F6\": 0.01, \"G4\": 0.0, \"F7\": 0.0, \"G7\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1371,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.543,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E3": 0.31,
+                  "D6": 0.24,
+                  "F5": 0.19,
+                  "E7": 0.09,
+                  "D4": 0.08
+                },
+                "confidence": 0.27
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 6,
+          "stone": "white",
+          "player": "heuristic",
+          "move": "E2",
+          "latency_s": 0.004,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.004,
+              "move": "E2",
+              "meta": {
+                "policy": "pattern",
+                "score": 9118.7
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 7,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "E7",
+          "latency_s": 0.509,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.509,
+              "move": "E7",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E7\", \"confidence\": 0.35, \"probabilities\": {\"C5\": 0.02, \"G8\": 0.0, \"D3\": 0.04, \"G5\": 0.0, \"B3\": 0.0, \"E7\": 0.38, \"B5\": 0.0, \"C6\": 0.01, \"C7\": 0.0, \"F4\": 0.01, \"B6\": 0.0, \"D6\": 0.06, \"F2\": 0.02, \"F8\": 0.0, \"F5\": 0.15000000000000002, \"G7\": 0.0, \"D7\": 0.0, \"B4\": 0.0, \"D4\": 0.15000000000000002, \"G6\": 0.0, \"C8\": 0.0, \"D2\": 0.05, \"G4\": 0.0, \"D8\": 0.0, \"E8\": 0.06999999999999999, \"C4\": 0.0, \"B7\": 0.0, \"F3\": 0.02, \"F6\": 0.01, \"F7\": 0.0}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1387,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.494,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E7": 0.38,
+                  "F5": 0.15000000000000002,
+                  "D4": 0.15000000000000002,
+                  "E8": 0.06999999999999999,
+                  "D6": 0.06
+                },
+                "confidence": 0.35
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 8,
+          "stone": "white",
+          "player": "heuristic",
+          "move": "F7",
+          "latency_s": 0.004,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.004,
+              "move": "F7",
+              "meta": {
+                "policy": "pattern",
+                "score": 5355.2
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 9,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "E8",
+          "latency_s": 0.505,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.505,
+              "move": "E8",
+              "raw": "{\"type\": \"choice\", \"choice\": \"E8\", \"confidence\": 0.72, \"probabilities\": {\"C8\": 0.0, \"G7\": 0.01, \"H7\": 0.0, \"G6\": 0.0, \"D7\": 0.01, \"C4\": 0.0, \"D8\": 0.0, \"G8\": 0.0, \"F3\": 0.01, \"F6\": 0.05, \"B6\": 0.0, \"H8\": 0.0, \"D2\": 0.0, \"C6\": 0.0, \"E8\": 0.74, \"C5\": 0.0, \"H5\": 0.0, \"D4\": 0.03, \"F4\": 0.01, \"F2\": 0.0, \"D3\": 0.0, \"F5\": 0.12, \"G5\": 0.0, \"H6\": 0.0, \"C7\": 0.0, \"D6\": 0.01, \"B5\": 0.0, \"B4\": 0.0, \"B7\": 0.0, \"F8\": 0.01}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1403,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.501,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "E8": 0.74,
+                  "F5": 0.12,
+                  "F6": 0.05,
+                  "D4": 0.03,
+                  "G7": 0.01
+                },
+                "confidence": 0.72
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 10,
+          "stone": "white",
+          "player": "heuristic",
+          "move": "C4",
+          "latency_s": 0.004,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.004,
+              "move": "C4",
+              "meta": {
+                "policy": "pattern",
+                "score": 100118.2
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        },
+        {
+          "ply": 11,
+          "stone": "black",
+          "player": "jev:jev-latest",
+          "move": "F5",
+          "latency_s": 0.531,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.531,
+              "move": "F5",
+              "raw": "{\"type\": \"choice\", \"choice\": \"F5\", \"confidence\": 0.3, \"probabilities\": {\"H6\": 0.0, \"D4\": 0.15, \"B6\": 0.0, \"B3\": 0.0, \"C5\": 0.04, \"C7\": 0.0, \"F8\": 0.05, \"G8\": 0.01, \"D7\": 0.03, \"G7\": 0.0, \"H7\": 0.0, \"G6\": 0.01, \"C6\": 0.02, \"F6\": 0.14, \"D2\": 0.01, \"D8\": 0.02, \"G5\": 0.01, \"B7\": 0.0, \"H5\": 0.0, \"B5\": 0.01, \"F3\": 0.01, \"H8\": 0.0, \"F2\": 0.01, \"C8\": 0.0, \"C3\": 0.01, \"B4\": 0.0, \"F4\": 0.02, \"F5\": 0.33, \"D3\": 0.01, \"D6\": 0.11}}",
+              "meta": {
+                "candidates": 30,
+                "model": "jev-latest",
+                "jev_model": "jev-1.13.0",
+                "usage": {
+                  "input_tokens": 1421,
+                  "output_tokens": 258
+                },
+                "api_latency_s": 0.518,
+                "api_attempts": 1,
+                "top_probabilities": {
+                  "F5": 0.33,
+                  "D4": 0.15,
+                  "F6": 0.14,
+                  "D6": 0.11,
+                  "F8": 0.05
+                },
+                "confidence": 0.3
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [],
+            "opponent_wins": [
+              "G8",
+              "B3"
+            ],
+            "took_win": false,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": true
+          }
+        },
+        {
+          "ply": 12,
+          "stone": "white",
+          "player": "heuristic",
+          "move": "G8",
+          "latency_s": 0.001,
+          "attempts": [
+            {
+              "verdict": "accepted",
+              "latency_s": 0.001,
+              "move": "G8",
+              "meta": {
+                "policy": "win"
+              }
+            }
+          ],
+          "analysis": {
+            "own_wins": [
+              "G8",
+              "B3"
+            ],
+            "opponent_wins": [],
+            "took_win": true,
+            "missed_win": false,
+            "blocked_threat": false,
+            "missed_block": false,
+            "unavoidable_loss": false
+          }
+        }
+      ]
+    }
+  ]
+}

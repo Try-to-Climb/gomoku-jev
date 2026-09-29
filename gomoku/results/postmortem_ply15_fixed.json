@@ -1,0 +1,163 @@
+{
+  "game": "gomoku/results/audit-optionfacts-openfour.json",
+  "ply": 15,
+  "played": "G6",
+  "backend": "jev",
+  "info": {
+    "line": "C4 D5 E6 F7",
+    "ends": [
+      "B3"
+    ],
+    "open_four_points": [],
+    "opponent_wins": [
+      "B3"
+    ]
+  },
+  "perception": [
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.7,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.12,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.44,
+        "correct": true
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.38,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "yes",
+        "p": 0.58,
+        "correct": false
+      },
+      "which_end": {
+        "truth": "B3",
+        "said": "B3",
+        "p": 0.25,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "(none)",
+        "said": "G6",
+        "p": 0.27,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.72,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.6,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.12,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.41,
+        "correct": true
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "yes",
+        "p": 0.52,
+        "correct": false
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "yes",
+        "p": 0.56,
+        "correct": false
+      },
+      "which_end": {
+        "truth": "B3",
+        "said": "B3",
+        "p": 0.24,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "(none)",
+        "said": "G6",
+        "p": 0.22,
+        "correct": false
+      }
+    }
+  ],
+  "weighing": [
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "none",
+      "tactics_in_state": false,
+      "repeat": 0,
+      "chose": "G6",
+      "correct": false,
+      "confidence": 0.3,
+      "critical_mass": 0.0,
+      "critical_ranks": {
+        "B3": 30
+      },
+      "top": {
+        "G6": 0.33,
+        "F8": 0.12,
+        "D7": 0.11,
+        "H5": 0.05,
+        "E8": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "none",
+      "tactics_in_state": false,
+      "repeat": 1,
+      "chose": "G6",
+      "correct": false,
+      "confidence": 0.3,
+      "critical_mass": 0.0,
+      "critical_ranks": {
+        "B3": 30
+      },
+      "top": {
+        "G6": 0.33,
+        "D7": 0.12,
+        "F8": 0.11,
+        "H5": 0.05,
+        "H7": 0.04
+      }
+    }
+  ],
+  "started_at": "2026-09-29T03:36:38+00:00"
+}

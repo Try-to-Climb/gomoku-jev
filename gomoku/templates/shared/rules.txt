@@ -1,0 +1,8 @@
+RULES
+$rules
+
+COORDINATES
+Columns are letters $first_col-$last_col from left to right. Rows are numbers 1-$size from bottom to top. A point is written as column letter followed by row number, for example $example. The centre point is $centre.
+
+BOARD FORMAT
+"." is an empty point, "X" is a black stone, "O" is a white stone. The stone played on the previous turn is shown in lowercase.

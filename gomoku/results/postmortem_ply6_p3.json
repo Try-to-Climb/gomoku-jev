@@ -1,0 +1,292 @@
+{
+  "game": "gomoku/results/audit-live-0929.json",
+  "ply": 6,
+  "played": "F5",
+  "backend": "jev",
+  "info": {
+    "line": "D6 E5 F4",
+    "ends": [
+      "C7",
+      "G3"
+    ],
+    "open_four_points": [
+      "C7",
+      "G3"
+    ]
+  },
+  "perception": [
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.57,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.64,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.37,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.45,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.08,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.43,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.32,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.54,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.68,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.65,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.38,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.48,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.1,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.38,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.29,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.55,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.62,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.38,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.47,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.11,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "C7",
+        "p": 0.41,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.26,
+        "correct": false
+      }
+    }
+  ],
+  "weighing": [
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "repeat": 0,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.25,
+      "critical_mass": 0.01,
+      "critical_ranks": {
+        "C7": 26,
+        "G3": 19
+      },
+      "top": {
+        "F5": 0.28,
+        "E4": 0.26,
+        "D4": 0.12,
+        "F6": 0.04,
+        "E7": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "repeat": 1,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.25,
+      "critical_mass": 0.0,
+      "critical_ranks": {
+        "C7": 27,
+        "G3": 22
+      },
+      "top": {
+        "F5": 0.29000000000000004,
+        "E4": 0.26,
+        "D4": 0.12,
+        "F6": 0.04,
+        "E7": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "repeat": 2,
+      "chose": "E4",
+      "correct": false,
+      "confidence": 0.24,
+      "critical_mass": 0.01,
+      "critical_ranks": {
+        "C7": 25,
+        "G3": 20
+      },
+      "top": {
+        "E4": 0.27,
+        "F5": 0.27,
+        "D4": 0.13,
+        "F6": 0.04,
+        "E7": 0.04
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "repeat": 0,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.22,
+      "critical_mass": 0.03,
+      "critical_ranks": {
+        "C7": 19,
+        "G3": 9
+      },
+      "top": {
+        "F5": 0.25,
+        "E4": 0.23,
+        "D4": 0.14,
+        "F3": 0.07,
+        "C4": 0.04
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "repeat": 1,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.2,
+      "critical_mass": 0.03,
+      "critical_ranks": {
+        "C7": 19,
+        "G3": 12
+      },
+      "top": {
+        "F5": 0.23,
+        "E4": 0.19,
+        "D4": 0.15,
+        "F3": 0.07,
+        "C4": 0.05
+      }
+    },
+    {
+      "prompt_version": "p3-open-three-alarm",
+      "facts": "none",
+      "repeat": 2,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.24,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "C7": 14,
+        "G3": 21
+      },
+      "top": {
+        "F5": 0.27,
+        "E4": 0.2,
+        "D4": 0.15,
+        "F3": 0.05,
+        "C4": 0.04
+      }
+    }
+  ],
+  "started_at": "2026-09-29T02:54:39+00:00"
+}

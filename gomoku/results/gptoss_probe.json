@@ -1,0 +1,257 @@
+{
+  "started_at": "2026-09-28T04:48:42+00:00",
+  "backend": "openai",
+  "auth": "redacted",
+  "ping": {
+    "ok": true
+  },
+  "config": {
+    "name": "openai/gpt-oss-120b",
+    "kind": "OpenAIPlayer",
+    "model": "openai/gpt-oss-120b",
+    "mode": "choice",
+    "temperature": 0.0,
+    "max_tokens": 4096,
+    "require_distribution": true,
+    "candidates": "near",
+    "max_candidates": 30,
+    "radius": 2,
+    "include_tactical": true,
+    "shuffle": true,
+    "seed": 7
+  },
+  "scenarios": [
+    {
+      "id": "empty_board",
+      "why": "first move on an empty 15x15 board -- no wrong answer, checks the request shape",
+      "stone": "black",
+      "history": [],
+      "candidates": [
+        "J13",
+        "G14",
+        "D13",
+        "E12",
+        "I14",
+        "D12",
+        "K14",
+        "B14",
+        "B13",
+        "J14",
+        "C12",
+        "K13",
+        "B12",
+        "C13",
+        "L13",
+        "M13",
+        "H13",
+        "H14",
+        "E13",
+        "N13",
+        "G13",
+        "M14",
+        "E14",
+        "F13",
+        "D14",
+        "C14",
+        "I13",
+        "N14",
+        "F14",
+        "L14"
+      ],
+      "own_wins": [],
+      "opponent_wins": [],
+      "expect": null,
+      "chose": "H13",
+      "error": null,
+      "raw": "{\"choice\":\"H13\",\"probabilities\":{\"J13\":0.02,\"G14\":0.02,\"D13\":0.02,\"E12\":0.03,\"I14\":0.02,\"D12\":0.02,\"K14\":0.02,\"B14\":0.02,\"B13\":0.02,\"J14\":0.02,\"C12\":0.02,\"K13\":0.02,\"B12\":0.02,\"C13\":0.02,\"L13\":0.02,\"M13\":0.02,\"H13\":0.38,\"H14\":0.03,\"E13\":0.02,\"N13\":0.02,\"G13\":0.03,\"M14\":0.02,\"E14\":0.02,\"F13\":0.02,\"D14\":0.02,\"C14\":0.02,\"I13\":0.03,\"N14\":0.02,\"F14\":0.02,\"L14\":0.02},\"confidence\":0.36}",
+      "latency_s": 24.246,
+      "meta": {
+        "model": "openai/gpt-oss-120b",
+        "mode": "choice",
+        "candidates": 30,
+        "api_model": "openai/gpt-oss-120b",
+        "usage": {
+          "input_tokens": 1105,
+          "output_tokens": 2906
+        },
+        "finish_reason": "stop",
+        "merged_system": false,
+        "raw_len": 382,
+        "top_probabilities": {
+          "H13": 0.38,
+          "E12": 0.03,
+          "H14": 0.03,
+          "G13": 0.03,
+          "I13": 0.03
+        },
+        "confidence": 0.36,
+        "parsed_from": "json"
+      },
+      "status": "ok"
+    },
+    {
+      "id": "must_block",
+      "why": "black has four in a row with one open end; the model (white) must play I8",
+      "stone": "white",
+      "history": [
+        "E8",
+        "D8",
+        "F8",
+        "A1",
+        "G8",
+        "A3",
+        "H8"
+      ],
+      "candidates": [
+        "B10",
+        "F7",
+        "I7",
+        "J10",
+        "D9",
+        "I10",
+        "D7",
+        "I8",
+        "I9",
+        "H9",
+        "H10",
+        "C10",
+        "G10",
+        "C7",
+        "D10",
+        "E10",
+        "B4",
+        "G7",
+        "A4",
+        "F10",
+        "C8",
+        "A2",
+        "G9",
+        "B2",
+        "F9",
+        "E9",
+        "B3",
+        "C9",
+        "E7",
+        "H7"
+      ],
+      "own_wins": [],
+      "opponent_wins": [
+        "I8"
+      ],
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "error": null,
+      "raw": "{\"choice\":\"I8\",\"probabilities\":{\"H10\":0.01,\"F9\":0.01,\"A2\":0.01,\"F10\":0.01,\"G7\":0.01,\"I8\":0.50,\"B4\":0.02,\"H9\":0.02,\"C7\":0.02,\"I7\":0.02,\"I10\":0.02,\"H7\":0.02,\"B3\":0.02,\"A4\":0.02,\"E10\":0.02,\"F7\":0.02,\"B10\":0.02,\"G9\":0.02,\"D10\":0.02,\"C10\":0.02,\"I9\":0.02,\"D7\":0.02,\"E7\":0.02,\"B2\":0.02,\"G10\":0.02,\"D9\":0.02,\"E9\":0.02,\"C9\":0.01,\"J10\":0.01,\"C8\":0.01},\"confidence\":0.48}",
+      "latency_s": 8.07,
+      "meta": {
+        "model": "openai/gpt-oss-120b",
+        "mode": "choice",
+        "candidates": 30,
+        "api_model": "openai/gpt-oss-120b",
+        "usage": {
+          "input_tokens": 1153,
+          "output_tokens": 2123
+        },
+        "finish_reason": "stop",
+        "merged_system": false,
+        "raw_len": 360,
+        "top_probabilities": {
+          "I8": 0.5,
+          "B4": 0.02,
+          "H9": 0.02,
+          "C7": 0.02,
+          "I7": 0.02
+        },
+        "confidence": 0.48,
+        "parsed_from": "json"
+      },
+      "status": "correct"
+    },
+    {
+      "id": "must_win",
+      "why": "the model (white) has four in a row and can complete five at C9 or H9",
+      "stone": "white",
+      "history": [
+        "A1",
+        "D9",
+        "A3",
+        "E9",
+        "A5",
+        "F9",
+        "A7",
+        "G9",
+        "B1"
+      ],
+      "candidates": [
+        "B4",
+        "F10",
+        "H10",
+        "D11",
+        "F8",
+        "C11",
+        "G10",
+        "C9",
+        "A2",
+        "D10",
+        "B11",
+        "B8",
+        "C2",
+        "C10",
+        "B7",
+        "B5",
+        "B2",
+        "E8",
+        "C8",
+        "B3",
+        "A8",
+        "G8",
+        "A4",
+        "H8",
+        "A6",
+        "H9",
+        "B6",
+        "C1",
+        "E10",
+        "D8"
+      ],
+      "own_wins": [
+        "C9",
+        "H9"
+      ],
+      "opponent_wins": [],
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "C9",
+      "error": null,
+      "raw": "{\"choice\":\"C9\",\"probabilities\":{\"A2\":0.01,\"E8\":0.01,\"C9\":0.45,\"B2\":0.01,\"C1\":0.01,\"A4\":0.01,\"C11\":0.01,\"D10\":0.01,\"H9\":0.45,\"H8\":0.01,\"E10\":0.01,\"B6\":0.01,\"D11\":0.00,\"B4\":0.00,\"B3\":0.00,\"H10\":0.00,\"C8\":0.00,\"B7\":0.00,\"C2\":0.00,\"A6\":0.00,\"B8\":0.00,\"F10\":0.00,\"F8\":0.00,\"G10\":0.00,\"G8\":0.00,\"B11\":0.00,\"A8\":0.00,\"C10\":0.00,\"D8\":0.00,\"B5\":0.00},\"confidence\":0.43}",
+      "latency_s": 6.324,
+      "meta": {
+        "model": "openai/gpt-oss-120b",
+        "mode": "choice",
+        "candidates": 30,
+        "api_model": "openai/gpt-oss-120b",
+        "usage": {
+          "input_tokens": 1169,
+          "output_tokens": 1547
+        },
+        "finish_reason": "stop",
+        "merged_system": false,
+        "raw_len": 360,
+        "top_probabilities": {
+          "C9": 0.45,
+          "H9": 0.45,
+          "A2": 0.01,
+          "E8": 0.01,
+          "B2": 0.01
+        },
+        "confidence": 0.43,
+        "parsed_from": "json"
+      },
+      "status": "correct"
+    }
+  ]
+}

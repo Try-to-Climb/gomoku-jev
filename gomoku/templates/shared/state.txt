@@ -1,0 +1,9 @@
+POSITION
+It is move $move_no. You are $colour ($symbol); your opponent is $opponent ($opponent_symbol).
+
+$board
+
+$stones
+
+Moves so far: $history
+$facts$extra

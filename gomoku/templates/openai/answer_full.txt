@@ -1,0 +1,5 @@
+You are given a list of candidate points. Pick the single best one, using the priorities above.
+
+Output raw JSON and nothing else -- no markdown fences, no commentary:
+{"choice": <one of the candidate points, exactly as written>, "probabilities": {<every candidate point>: <probability>}, "confidence": <0.0-1.0>}
+"probabilities" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. "choice" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.

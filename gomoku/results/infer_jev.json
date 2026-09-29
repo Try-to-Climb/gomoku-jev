@@ -1,0 +1,522 @@
+{
+  "started_at": "2026-09-28T09:17:47+00:00",
+  "model": "jev-latest",
+  "runs": [
+    {
+      "group": "abstract",
+      "repeat": 0,
+      "answers": {
+        "needs_five_points": {
+          "truth": true,
+          "p": 0.96,
+          "said": true,
+          "correct": true
+        },
+        "four_points_enough": {
+          "truth": false,
+          "p": 0.07,
+          "said": false,
+          "correct": true
+        },
+        "six_points_enough": {
+          "truth": true,
+          "p": 0.96,
+          "said": true,
+          "correct": true
+        },
+        "four_stones_one_gap": {
+          "truth": true,
+          "p": 0.95,
+          "said": true,
+          "correct": true
+        },
+        "four_stones_no_gap": {
+          "truth": false,
+          "p": 0.14,
+          "said": false,
+          "correct": true
+        }
+      }
+    },
+    {
+      "group": "abstract",
+      "repeat": 1,
+      "answers": {
+        "needs_five_points": {
+          "truth": true,
+          "p": 0.96,
+          "said": true,
+          "correct": true
+        },
+        "four_points_enough": {
+          "truth": false,
+          "p": 0.07,
+          "said": false,
+          "correct": true
+        },
+        "six_points_enough": {
+          "truth": true,
+          "p": 0.97,
+          "said": true,
+          "correct": true
+        },
+        "four_stones_one_gap": {
+          "truth": true,
+          "p": 0.95,
+          "said": true,
+          "correct": true
+        },
+        "four_stones_no_gap": {
+          "truth": false,
+          "p": 0.13,
+          "said": false,
+          "correct": true
+        }
+      }
+    },
+    {
+      "group": "blocked_both_ends_4",
+      "repeat": 0,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 1.0,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.98,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "0",
+          "p": 0.24,
+          "said": "1",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "blocked_both_ends_4",
+      "repeat": 1,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "0",
+          "p": 0.24,
+          "said": "2",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "blocked_one_end_4",
+      "repeat": 0,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.96,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.04,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "1",
+          "p": 0.53,
+          "said": "2",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "blocked_one_end_4",
+      "repeat": 1,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.97,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.04,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "1",
+          "p": 0.58,
+          "said": "2",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "open_both_ends_3",
+      "repeat": 0,
+      "answers": {
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.95,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.03,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "3_or_more",
+          "p": 0.33,
+          "said": "3_or_more",
+          "correct": true
+        }
+      }
+    },
+    {
+      "group": "open_both_ends_3",
+      "repeat": 1,
+      "answers": {
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.95,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.05,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "3_or_more",
+          "p": 0.52,
+          "said": "2",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "blocked_both_ends_2",
+      "repeat": 0,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "0",
+          "p": 0.59,
+          "said": "3_or_more",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "blocked_both_ends_2",
+      "repeat": 1,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "0",
+          "p": 0.66,
+          "said": "3_or_more",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "edge_and_stone_4",
+      "repeat": 0,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.98,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.04,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "0",
+          "p": 0.32,
+          "said": "1",
+          "correct": false
+        }
+      }
+    },
+    {
+      "group": "edge_and_stone_4",
+      "repeat": 1,
+      "answers": {
+        "white_is_white": {
+          "truth": true,
+          "p": 0.99,
+          "said": true,
+          "correct": true
+        },
+        "white_is_empty": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "white_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_empty": {
+          "truth": true,
+          "p": 0.97,
+          "said": true,
+          "correct": true
+        },
+        "empty_is_white": {
+          "truth": false,
+          "p": 0.03,
+          "said": false,
+          "correct": true
+        },
+        "empty_is_black": {
+          "truth": false,
+          "p": 0.01,
+          "said": false,
+          "correct": true
+        },
+        "room_left": {
+          "truth": "0",
+          "p": 0.26,
+          "said": "1",
+          "correct": false
+        }
+      }
+    }
+  ]
+}

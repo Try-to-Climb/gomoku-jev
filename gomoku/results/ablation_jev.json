@@ -1,0 +1,758 @@
+{
+  "started_at": "2026-09-28T07:40:08+00:00",
+  "backend": "jev",
+  "default_version": "p1-threat-ladder",
+  "repeats": 5,
+  "runs": [
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_block",
+      "repeat": 0,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.84,
+      "latency_s": 1.068,
+      "usage": {
+        "input_tokens": 1638,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_block",
+      "repeat": 1,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.79,
+      "latency_s": 0.543,
+      "usage": {
+        "input_tokens": 1638,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_block",
+      "repeat": 2,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.79,
+      "latency_s": 0.54,
+      "usage": {
+        "input_tokens": 1638,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_block",
+      "repeat": 3,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.76,
+      "latency_s": 0.519,
+      "usage": {
+        "input_tokens": 1638,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_block",
+      "repeat": 4,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.77,
+      "latency_s": 0.533,
+      "usage": {
+        "input_tokens": 1638,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_win",
+      "repeat": 0,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.4,
+      "latency_s": 0.509,
+      "usage": {
+        "input_tokens": 1655,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_win",
+      "repeat": 1,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.59,
+      "latency_s": 0.494,
+      "usage": {
+        "input_tokens": 1655,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_win",
+      "repeat": 2,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "C9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.48,
+      "latency_s": 0.526,
+      "usage": {
+        "input_tokens": 1655,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_win",
+      "repeat": 3,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.42,
+      "latency_s": 0.49,
+      "usage": {
+        "input_tokens": 1655,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "must_win",
+      "repeat": 4,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "C9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.56,
+      "latency_s": 0.502,
+      "usage": {
+        "input_tokens": 1655,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.66,
+      "latency_s": 0.501,
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.63,
+      "latency_s": 0.518,
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.57,
+      "latency_s": 0.525,
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.59,
+      "latency_s": 0.548,
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.68,
+      "latency_s": 0.499,
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.56,
+      "latency_s": 0.493,
+      "usage": {
+        "input_tokens": 1415,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.53,
+      "latency_s": 0.517,
+      "usage": {
+        "input_tokens": 1415,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.6,
+      "latency_s": 0.529,
+      "usage": {
+        "input_tokens": 1415,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.49,
+      "latency_s": 0.463,
+      "usage": {
+        "input_tokens": 1415,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.48,
+      "latency_s": 0.47,
+      "usage": {
+        "input_tokens": 1415,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_block",
+      "repeat": 0,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.86,
+      "latency_s": 0.909,
+      "usage": {
+        "input_tokens": 1949,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_block",
+      "repeat": 1,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.87,
+      "latency_s": 0.475,
+      "usage": {
+        "input_tokens": 1949,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_block",
+      "repeat": 2,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.82,
+      "latency_s": 0.48,
+      "usage": {
+        "input_tokens": 1949,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_block",
+      "repeat": 3,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.85,
+      "latency_s": 0.503,
+      "usage": {
+        "input_tokens": 1949,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_block",
+      "repeat": 4,
+      "expect": [
+        "I8"
+      ],
+      "chose": "I8",
+      "ok": true,
+      "error": null,
+      "confidence": 0.81,
+      "latency_s": 0.493,
+      "usage": {
+        "input_tokens": 1949,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_win",
+      "repeat": 0,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.58,
+      "latency_s": 0.526,
+      "usage": {
+        "input_tokens": 1966,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_win",
+      "repeat": 1,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.69,
+      "latency_s": 0.618,
+      "usage": {
+        "input_tokens": 1966,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_win",
+      "repeat": 2,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.68,
+      "latency_s": 0.52,
+      "usage": {
+        "input_tokens": 1966,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_win",
+      "repeat": 3,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.69,
+      "latency_s": 0.511,
+      "usage": {
+        "input_tokens": 1966,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "must_win",
+      "repeat": 4,
+      "expect": [
+        "C9",
+        "H9"
+      ],
+      "chose": "H9",
+      "ok": true,
+      "error": null,
+      "confidence": 0.48,
+      "latency_s": 0.528,
+      "usage": {
+        "input_tokens": 1966,
+        "output_tokens": 267
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.74,
+      "latency_s": 0.496,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.77,
+      "latency_s": 0.533,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.62,
+      "latency_s": 0.489,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.69,
+      "latency_s": 0.57,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "B5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.76,
+      "latency_s": 0.519,
+      "usage": {
+        "input_tokens": 1735,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.63,
+      "latency_s": 0.49,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.54,
+      "latency_s": 0.531,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.63,
+      "latency_s": 0.489,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 3,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.54,
+      "latency_s": 0.498,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    },
+    {
+      "backend": "jev",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 4,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "C5",
+      "ok": false,
+      "error": null,
+      "confidence": 0.45,
+      "latency_s": 0.536,
+      "usage": {
+        "input_tokens": 1726,
+        "output_tokens": 258
+      }
+    }
+  ]
+}

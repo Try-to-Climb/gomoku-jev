@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>gomoku live</title>
+<style>
+  :root {
+    --bg: #14161a; --panel: #1c1f25; --line: #2b3038; --ink: #d8dee9;
+    --dim: #8b95a5; --black: #101216; --white: #e8ecf1;
+    --ok: #7fb069; --bad: #d16666; --warn: #d7a55b; --accent: #6aa3d5;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  header { padding: 10px 16px; border-bottom: 1px solid var(--line);
+           display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap; }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  .muted { color: var(--dim); }
+  .wrap { display: grid; grid-template-columns: auto 1fr; gap: 16px; padding: 16px;
+          align-items: start; }
+  /* board */
+  .board { display: inline-grid; gap: 1px; background: var(--line);
+           border: 1px solid var(--line); }
+  .cell { width: 30px; height: 30px; background: #232830; display: grid;
+          place-items: center; font-size: 15px; position: relative; }
+  .cell.black::after, .cell.white::after {
+    content: ""; width: 22px; height: 22px; border-radius: 50%; }
+  .cell.black::after { background: var(--black); box-shadow: inset 0 0 0 1px #3a3f48; }
+  .cell.white::after { background: var(--white); }
+  .cell.last { outline: 2px solid var(--accent); outline-offset: -2px; z-index: 1; }
+  .coords { color: var(--dim); font-size: 11px; display: grid; place-items: center; }
+  /* right panel */
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+           overflow: hidden; }
+  .panel h2 { font-size: 12px; margin: 0; padding: 8px 12px; color: var(--dim);
+              border-bottom: 1px solid var(--line); text-transform: uppercase;
+              letter-spacing: .08em; }
+  .moves { max-height: 46vh; overflow-y: auto; }
+  .move { padding: 7px 12px; border-bottom: 1px solid var(--line); cursor: pointer;
+          display: flex; gap: 10px; align-items: baseline; }
+  .move:hover { background: #22262e; }
+  .move.sel { background: #262c36; }
+  .move .no { color: var(--dim); min-width: 28px; text-align: right; }
+  .move .who { min-width: 130px; overflow: hidden; text-overflow: ellipsis;
+               white-space: nowrap; }
+  .move .pt { font-weight: 600; min-width: 42px; }
+  .tag { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+  .tag.ok { background: #263524; color: var(--ok); }
+  .tag.bad { background: #3a2626; color: var(--bad); }
+  .tag.warn { background: #3a3324; color: var(--warn); }
+  .detail { padding: 10px 12px; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin-bottom: 8px; }
+  .kv div:nth-child(odd) { color: var(--dim); }
+  pre { margin: 0; padding: 10px; background: #12141a; border: 1px solid var(--line);
+        border-radius: 4px; max-height: 26vh; overflow: auto; white-space: pre-wrap;
+        word-break: break-word; font-size: 12.5px; }
+  .stack { display: grid; gap: 12px; }
+  .think { color: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  th, td { text-align: right; padding: 4px 8px; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--dim); font-weight: 500; }
+</style>
+</head>
+<body>
+<header>
+  <h1>gomoku live</h1>
+  <span id="players" class="muted"></span>
+  <span id="status"></span>
+  <span id="conn" class="muted"></span>
+</header>
+
+<div class="wrap">
+  <div>
+    <div id="board" class="board"></div>
+    <p class="muted" id="boardnote" style="margin:8px 0 0"></p>
+  </div>
+
+  <div class="stack">
+    <div class="panel">
+      <h2>着法 · 点一行看原始回复</h2>
+      <div id="moves" class="moves"></div>
+    </div>
+    <div class="panel">
+      <h2 id="detailhead">原始回复</h2>
+      <div id="detail" class="detail muted">等待第一手…</div>
+    </div>
+    <div class="panel">
+      <h2>指标</h2>
+      <div id="summary" class="detail muted">对局结束后统计</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const LABEL = {
+  took_win: ["ok", "成五获胜"],
+  missed_win: ["bad", "有一步杀没走"],
+  blocked_five: ["ok", "堵住冲四"],
+  missed_five_block: ["bad", "该堵没堵"],
+  took_open_four: ["ok", "造出活四"],
+  missed_open_four: ["bad", "错过活四"],
+  prevented_open_four: ["ok", "拦住活四"],
+  allowed_open_four: ["bad", "放过活四"],
+  unavoidable_loss: ["warn", "已无解"],
+};
+const EMBEDDED = null; // __EMBEDDED__
+let version = -1, selected = null, state = null;
+
+function cell(sym, isLast) {
+  const d = document.createElement("div");
+  d.className = "cell" + (sym === "X" ? " black" : sym === "O" ? " white" : "") +
+                (isLast ? " last" : "");
+  return d;
+}
+
+function drawBoard(s) {
+  const n = s.board.length, host = document.getElementById("board");
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  host.style.gridTemplateColumns = `repeat(${n + 1}, auto)`;
+  host.innerHTML = "";
+  const corner = document.createElement("div"); corner.className = "coords";
+  host.appendChild(corner);
+  for (let c = 0; c < n; c++) {
+    const d = document.createElement("div"); d.className = "coords";
+    d.textContent = letters[c]; host.appendChild(d);
+  }
+  for (let r = 0; r < n; r++) {
+    const lab = document.createElement("div"); lab.className = "coords";
+    lab.textContent = n - r; host.appendChild(lab);
+    for (let c = 0; c < n; c++) {
+      const coord = letters[c] + (n - r);
+      host.appendChild(cell(s.board[r][c], coord === s.last_move));
+    }
+  }
+  document.getElementById("boardnote").textContent =
+    s.last_move ? `上一手 ${s.last_move}` : "";
+}
+
+function drawMoves(s) {
+  const host = document.getElementById("moves");
+  host.innerHTML = "";
+  s.moves.forEach((m, i) => {
+    const row = document.createElement("div");
+    row.className = "move" + (i === selected ? " sel" : "");
+    const rejected = m.attempts.filter(a => a.verdict !== "accepted").length;
+    const tag = LABEL[m.verdict];
+    row.innerHTML =
+      `<span class="no">${m.ply}.</span>` +
+      `<span class="pt">${m.symbol} ${m.move ?? "—"}</span>` +
+      `<span class="who muted">${m.player}</span>` +
+      `<span class="muted">${m.latency_s}s</span>` +
+      (rejected ? `<span class="tag bad">${rejected} 次被拒</span>` : "") +
+      (tag ? `<span class="tag ${tag[0]}">${tag[1]}</span>` : "");
+    row.onclick = () => { selected = i; drawDetail(s); drawMoves(s); };
+    host.appendChild(row);
+  });
+  if (s.thinking) {
+    const row = document.createElement("div");
+    row.className = "move think";
+    row.innerHTML = `<span class="no">…</span><span>${s.thinking.player} 正在思考</span>`;
+    host.appendChild(row);
+  }
+  host.scrollTop = host.scrollHeight;
+}
+
+function drawDetail(s) {
+  const host = document.getElementById("detail");
+  const i = selected ?? s.moves.length - 1;
+  const m = s.moves[i];
+  if (!m) { host.textContent = "等待第一手…"; return; }
+  document.getElementById("detailhead").textContent =
+    `第 ${m.ply} 手 · ${m.player} · ${m.move ?? "未落子"}`;
+  const parts = [];
+  m.attempts.forEach((a, k) => {
+    const meta = a.meta || {};
+    const kv = [];
+    const push = (label, value) => {
+      if (value !== undefined && value !== null && value !== "")
+        kv.push(`<div>${label}</div><div>${value}</div>`);
+    };
+    push("结果", a.verdict === "accepted" ? "采纳" : `拒绝 (${a.error})`);
+    push("落子", a.move);
+    push("耗时", a.latency_s + " s");
+    if (meta.usage) push("tokens", `in ${meta.usage.input_tokens} / out ${meta.usage.output_tokens}`);
+    push("confidence", meta.confidence);
+    push("候选数", meta.candidates);
+    push("模型", meta.jev_model || meta.api_model);
+    push("finish_reason", meta.finish_reason);
+    if (meta.truncated) push("截断", "是");
+    if (meta.top_probabilities)
+      push("概率最高", Object.entries(meta.top_probabilities)
+        .map(([k2, v]) => `${k2} ${v}`).join("，"));
+    if (meta.menu) push("菜单", meta.menu.join(" "));
+    parts.push(
+      `<div class="kv">${kv.join("")}</div>` +
+      (a.raw ? `<pre>${escapeHtml(a.raw)}</pre>` : `<p class="muted">（无原始文本）</p>`)
+    );
+  });
+  if (m.analysis) {
+    const a = m.analysis;
+    const facts = [
+      ["我方一步杀", a.own_wins], ["对手一步杀", a.opponent_wins],
+      ["我方可造活四", a.own_open_fours], ["对手可造活四", a.opponent_open_fours],
+    ].filter(([, v]) => v && v.length)
+     .map(([k, v]) => `<div>${k}</div><div>${v.join(" ")}</div>`).join("");
+    if (facts) parts.push(`<h2 style="padding:0;border:0">引擎事实（提问前算好）</h2>
+                           <div class="kv">${facts}</div>`);
+  }
+  host.className = "detail";
+  host.innerHTML = parts.join("<hr style='border:0;border-top:1px solid var(--line);margin:10px 0'>");
+}
+
+function drawSummary(s) {
+  const host = document.getElementById("summary");
+  if (!s.summary) { host.className = "detail muted"; host.textContent = "对局结束后统计"; return; }
+  const cols = [
+    ["player", p => p.name], ["W", p => p.wins], ["L", p => p.losses],
+    ["moves", p => p.moves], ["winconv", p => pct(p.win_conversion)],
+    ["block%", p => pct(p.block_rate)], ["of.make", p => pct(p.open_four_conversion)],
+    ["of.stop", p => pct(p.open_four_prevention)], ["lat s", p => p.avg_latency_s ?? "—"],
+  ];
+  const rows = Object.values(s.summary.players).map(p =>
+    `<tr>${cols.map(([, f]) => `<td>${f(p)}</td>`).join("")}</tr>`).join("");
+  host.className = "detail";
+  host.innerHTML = `<table><thead><tr>${cols.map(([h]) => `<th>${h}</th>`).join("")}</tr></thead>
+                    <tbody>${rows}</tbody></table>`;
+}
+
+const pct = v => (v === null || v === undefined) ? "—" : (100 * v).toFixed(0) + "%";
+const escapeHtml = t => t.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+function render(s) {
+  state = s;
+  const p = s.players || {};
+  document.getElementById("players").textContent = p.black
+    ? `第 ${s.game_no} 局 · 黑 ✕ ${p.black.name}  vs  白 ○ ${p.white.name}` : "";
+  const st = document.getElementById("status");
+  const done = s.status !== "in_progress" && s.status !== "waiting";
+  st.textContent = done
+    ? `${s.status}${s.reason ? " (" + s.reason + ")" : ""}${s.winner ? " · 胜者 " + s.winner : ""}`
+    : (s.thinking ? `${s.thinking.player} 思考中…` : "进行中");
+  st.className = done ? "tag ok" : "think";
+  drawBoard(s); drawMoves(s); drawDetail(s); drawSummary(s);
+}
+
+async function poll() {
+  try {
+    const r = await fetch("state.json", { cache: "no-store" });
+    const s = await r.json();
+    document.getElementById("conn").textContent = "";
+    if (s.version !== version) { version = s.version; render(s); }
+  } catch (e) {
+    document.getElementById("conn").textContent = "· 已断开（对局可能已结束）";
+  }
+}
+if (EMBEDDED) {
+  render(EMBEDDED);
+  document.getElementById("conn").textContent = "· 文件快照模式（自动刷新）";
+} else {
+  poll();
+  setInterval(poll, 600);
+}
+</script>
+</body>
+</html>

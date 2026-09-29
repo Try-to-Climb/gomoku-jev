@@ -1,0 +1,236 @@
+{
+  "started_at": "2026-09-28T07:43:47+00:00",
+  "backend": "openai",
+  "default_version": "p1-threat-ladder",
+  "repeats": 3,
+  "runs": [
+    {
+      "backend": "openai",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "E7",
+      "ok": false,
+      "error": null,
+      "confidence": 0.28,
+      "latency_s": 27.99,
+      "usage": {
+        "input_tokens": 979,
+        "output_tokens": 5897
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.28,
+      "latency_s": 21.231,
+      "usage": {
+        "input_tokens": 979,
+        "output_tokens": 5578
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p0-one-move",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.28,
+      "latency_s": 10.628,
+      "usage": {
+        "input_tokens": 979,
+        "output_tokens": 2645
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "F6",
+      "ok": false,
+      "error": null,
+      "confidence": 0.21,
+      "latency_s": 19.699,
+      "usage": {
+        "input_tokens": 971,
+        "output_tokens": 5371
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.28,
+      "latency_s": 20.691,
+      "usage": {
+        "input_tokens": 971,
+        "output_tokens": 5219
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p0-one-move",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.28,
+      "latency_s": 14.87,
+      "usage": {
+        "input_tokens": 971,
+        "output_tokens": 3840
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.48,
+      "latency_s": 27.047,
+      "usage": {
+        "input_tokens": 1285,
+        "output_tokens": 6040
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.31,
+      "latency_s": 12.476,
+      "usage": {
+        "input_tokens": 1285,
+        "output_tokens": 3126
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p1-threat-ladder",
+      "case": "make_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D7",
+      "ok": true,
+      "error": null,
+      "confidence": 0.43,
+      "latency_s": 14.954,
+      "usage": {
+        "input_tokens": 1285,
+        "output_tokens": 3747
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 0,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.48,
+      "latency_s": 16.849,
+      "usage": {
+        "input_tokens": 1277,
+        "output_tokens": 4221
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 1,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.28,
+      "latency_s": 15.248,
+      "usage": {
+        "input_tokens": 1277,
+        "output_tokens": 4061
+      }
+    },
+    {
+      "backend": "openai",
+      "version": "p1-threat-ladder",
+      "case": "stop_open_four",
+      "repeat": 2,
+      "expect": [
+        "D7",
+        "D3"
+      ],
+      "chose": "D3",
+      "ok": true,
+      "error": null,
+      "confidence": 0.44,
+      "latency_s": 12.834,
+      "usage": {
+        "input_tokens": 1277,
+        "output_tokens": 3197
+      }
+    }
+  ]
+}

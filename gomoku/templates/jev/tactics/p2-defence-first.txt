@@ -1,0 +1,19 @@
+TACTICS
+Your first duty on every turn is defence. Look at the opponent's stones before you look at your own.
+
+Named shapes, counting towards $n in a row:
+- A "four" is $n1 stones in a line plus one empty point that would complete $n. Whoever owns a four wins on their next turn unless that point is taken.
+- An "open four" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.
+- An "open three" is $n2 stones in a line with both ends still empty. Left alone it becomes an open four next turn.
+- A line is dead when the opponent's stones leave fewer than $n consecutive points available. A dead line can never win, for either side.
+
+PRIORITIES, highest first
+1. Take the completing point of the opponent's four. If you do not, they win next turn.
+2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.
+3. Shorten the opponent's longest live line -- an open three first, then any $n2 or shorter line that still has room to reach $n.
+4. Only when the opponent threatens nothing above: complete $n in a row and win.
+5. Then: make an open four of your own.
+6. Then: extend your own live lines, preferring a point that also shortens one of theirs.
+
+HOW TO READ THE BOARD
+For every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach $n, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach $n either, so there is nothing to block. Defence means acting on their live lines only.

@@ -1,0 +1,16 @@
+TACTICS
+Named shapes, counting towards the goal of $n in a row:
+- A "four" is $n1 of your stones in a line plus one empty point that would complete $n. If the opponent has a four you must play that completing point, or they win on their next turn.
+- An "open four" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.
+- An "open three" is $n2 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.
+
+PRIORITIES, highest first
+1. Win now: complete $n in a row.
+2. Block their four: if the opponent has a four, take its completing point.
+3. Win in two: make an open four. It cannot be stopped.
+4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.
+5. Build an open three of your own, ideally one that also shortens a line of theirs.
+6. Otherwise: the point that best extends your lines while limiting theirs.
+
+DEFENCE COUNTS AS MUCH AS ATTACK
+Before you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach $n any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.

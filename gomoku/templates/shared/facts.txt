@@ -1,0 +1,28 @@
+[block]
+LINE STATUS (already computed from the board above; do not work it out again)
+$lines
+[threats]
+THREATS
+$threats
+[row_span]
+  $colour $coords ($orientation): span $span, $n_ends open ends
+[row_geometry]
+  $colour $coords ($orientation): span $span, open points $ends
+[row_status]
+  $colour $coords ($orientation): $status - $reason
+[status_live]
+LIVE
+[status_dead]
+DEAD
+[reason_live]
+span $span is long enough for $n, $n_ends open ends
+[reason_dead]
+span $span is shorter than $n, so this line can never become $n
+[threat_open_four]
+  $colour can create an unstoppable open four on their next turn by playing $points
+[threat_five]
+  $colour completes $n by playing $points
+[threat_none]
+  neither side can force a win within the next two moves
+[no_lines]
+  no line of two or more stones yet

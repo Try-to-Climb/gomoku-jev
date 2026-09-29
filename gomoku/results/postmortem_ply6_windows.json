@@ -1,0 +1,370 @@
+{
+  "game": "gomoku/results/audit-live-0929.json",
+  "ply": 6,
+  "played": "F5",
+  "backend": "jev",
+  "info": {
+    "line": "D6 E5 F4",
+    "ends": [
+      "C7",
+      "G3"
+    ],
+    "open_four_points": [
+      "C7",
+      "G3"
+    ]
+  },
+  "perception": [
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.5,
+        "correct": false
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.66,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.38,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.43,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.08,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.4,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.34,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.52,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.67,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.63,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.36,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.43,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.07,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "G3",
+        "p": 0.38,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.34,
+        "correct": false
+      }
+    },
+    {
+      "opp_has_three": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.54,
+        "correct": true
+      },
+      "opp_line_live": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.65,
+        "correct": true
+      },
+      "opp_ends_empty": {
+        "truth": "yes",
+        "said": "yes",
+        "p": 0.66,
+        "correct": true
+      },
+      "opp_can_open_four": {
+        "truth": "yes",
+        "said": "no",
+        "p": 0.36,
+        "correct": false
+      },
+      "open_four_unstoppable": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.49,
+        "correct": true
+      },
+      "own_has_three": {
+        "truth": "no",
+        "said": "no",
+        "p": 0.08,
+        "correct": true
+      },
+      "which_end": {
+        "truth": "C7 / G3",
+        "said": "C7",
+        "p": 0.38,
+        "correct": true
+      },
+      "which_prevents": {
+        "truth": "C7 / G3",
+        "said": "F5",
+        "p": 0.32,
+        "correct": false
+      }
+    }
+  ],
+  "weighing": [
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "none",
+      "tactics_in_state": false,
+      "repeat": 0,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.27,
+      "critical_mass": 0.01,
+      "critical_ranks": {
+        "G3": 16,
+        "C7": 21
+      },
+      "top": {
+        "F5": 0.3,
+        "E4": 0.26,
+        "D4": 0.12,
+        "E7": 0.04,
+        "F6": 0.03
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "none",
+      "tactics_in_state": false,
+      "repeat": 1,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.29,
+      "critical_mass": 0.01,
+      "critical_ranks": {
+        "G3": 18,
+        "C7": 24
+      },
+      "top": {
+        "F5": 0.32,
+        "E4": 0.24000000000000002,
+        "D4": 0.14,
+        "F6": 0.04,
+        "E7": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "none",
+      "tactics_in_state": false,
+      "repeat": 2,
+      "chose": "F5",
+      "correct": false,
+      "confidence": 0.26,
+      "critical_mass": 0.01,
+      "critical_ranks": {
+        "G3": 14,
+        "C7": 25
+      },
+      "top": {
+        "F5": 0.28,
+        "E4": 0.26,
+        "D4": 0.14,
+        "F3": 0.04,
+        "C4": 0.03
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "windows",
+      "tactics_in_state": false,
+      "repeat": 0,
+      "chose": "E4",
+      "correct": false,
+      "confidence": 0.27,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 14,
+        "C7": 22
+      },
+      "top": {
+        "E4": 0.31,
+        "F5": 0.23,
+        "D4": 0.12,
+        "F3": 0.05,
+        "F6": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "windows",
+      "tactics_in_state": false,
+      "repeat": 1,
+      "chose": "E4",
+      "correct": false,
+      "confidence": 0.24,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 19,
+        "C7": 18
+      },
+      "top": {
+        "E4": 0.27,
+        "F5": 0.24000000000000002,
+        "D4": 0.13,
+        "F6": 0.07,
+        "F3": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "windows",
+      "tactics_in_state": false,
+      "repeat": 2,
+      "chose": "E4",
+      "correct": false,
+      "confidence": 0.24,
+      "critical_mass": 0.02,
+      "critical_ranks": {
+        "G3": 22,
+        "C7": 20
+      },
+      "top": {
+        "E4": 0.28,
+        "F5": 0.26,
+        "D4": 0.12,
+        "F6": 0.05,
+        "F3": 0.04
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "open_four",
+      "tactics_in_state": false,
+      "repeat": 0,
+      "chose": "G3",
+      "correct": true,
+      "confidence": 0.35,
+      "critical_mass": 0.68,
+      "critical_ranks": {
+        "G3": 1,
+        "C7": 2
+      },
+      "top": {
+        "G3": 0.38,
+        "C7": 0.3,
+        "D4": 0.06999999999999999,
+        "F5": 0.06999999999999999,
+        "E4": 0.05
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "open_four",
+      "tactics_in_state": false,
+      "repeat": 1,
+      "chose": "G3",
+      "correct": true,
+      "confidence": 0.4,
+      "critical_mass": 0.7,
+      "critical_ranks": {
+        "G3": 1,
+        "C7": 2
+      },
+      "top": {
+        "G3": 0.43,
+        "C7": 0.27,
+        "E4": 0.06,
+        "F5": 0.05,
+        "D4": 0.05
+      }
+    },
+    {
+      "prompt_version": "p1-threat-ladder",
+      "facts": "none",
+      "option_facts": "open_four",
+      "tactics_in_state": false,
+      "repeat": 2,
+      "chose": "G3",
+      "correct": true,
+      "confidence": 0.43,
+      "critical_mass": 0.7,
+      "critical_ranks": {
+        "G3": 1,
+        "C7": 2
+      },
+      "top": {
+        "G3": 0.46,
+        "C7": 0.24000000000000002,
+        "D4": 0.06999999999999999,
+        "F5": 0.05,
+        "E4": 0.04
+      }
+    }
+  ],
+  "started_at": "2026-09-29T03:09:21+00:00"
+}

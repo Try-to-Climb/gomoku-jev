@@ -1,0 +1,1226 @@
+{
+  "game_id": "79111670eea3",
+  "started_at": "2026-09-28T08:28:24+00:00",
+  "duration_s": 111.003,
+  "rules": {
+    "size": 9,
+    "win_length": 5,
+    "overline": "win",
+    "overline_forbidden_for": [
+      "black"
+    ],
+    "opening": "free",
+    "max_retries": 2,
+    "illegal_move": "forfeit",
+    "max_plies": 60,
+    "move_timeout_s": 120.0
+  },
+  "players": {
+    "black": {
+      "name": "jev:jev-latest",
+      "kind": "JevPlayer",
+      "model": "jev-latest",
+      "prompt_version": "p2-defence-first",
+      "candidates": "near",
+      "max_candidates": 30,
+      "radius": 2,
+      "include_tactical": true,
+      "shuffle": true,
+      "seed": 201
+    },
+    "white": {
+      "name": "openai/gpt-oss-120b",
+      "kind": "OpenAIPlayer",
+      "model": "openai/gpt-oss-120b",
+      "mode": "choice",
+      "prompt_version": "p1-threat-ladder",
+      "temperature": 0.0,
+      "max_tokens": 16384,
+      "require_distribution": true,
+      "candidates": "near",
+      "max_candidates": 30,
+      "radius": 2,
+      "include_tactical": true,
+      "shuffle": true,
+      "seed": 202
+    }
+  },
+  "status": "white_win",
+  "winner": "white",
+  "winner_name": "openai/gpt-oss-120b",
+  "reason": "5_in_a_row",
+  "plies": 12,
+  "moves": [
+    {
+      "ply": 1,
+      "stone": "black",
+      "player": "jev:jev-latest",
+      "move": "E5",
+      "latency_s": 1.442,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 1.442,
+          "move": "E5",
+          "raw": "{\"type\": \"choice\", \"choice\": \"E5\", \"confidence\": 0.99, \"probabilities\": {\"F6\": 0.0, \"D7\": 0.0, \"E6\": 0.0, \"E5\": 1.0, \"H7\": 0.0, \"H8\": 0.0, \"H5\": 0.0, \"B7\": 0.0, \"H6\": 0.0, \"E8\": 0.0, \"C7\": 0.0, \"B6\": 0.0, \"G5\": 0.0, \"E7\": 0.0, \"B5\": 0.0, \"C5\": 0.0, \"D5\": 0.0, \"D8\": 0.0, \"F5\": 0.0, \"F7\": 0.0, \"B8\": 0.0, \"C6\": 0.0, \"G6\": 0.0, \"D6\": 0.0, \"C8\": 0.0, \"G7\": 0.0, \"G8\": 0.0, \"B4\": 0.0, \"F8\": 0.0, \"C4\": 0.0}}",
+          "meta": {
+            "candidates": 30,
+            "model": "jev-latest",
+            "menu": [
+              "F8",
+              "G7",
+              "G8",
+              "C8",
+              "H8",
+              "E6",
+              "F7",
+              "B4",
+              "G5",
+              "E8",
+              "F6",
+              "F5",
+              "B7",
+              "D5",
+              "C4",
+              "D6",
+              "H6",
+              "B6",
+              "C7",
+              "G6",
+              "C6",
+              "B5",
+              "H5",
+              "D7",
+              "E5",
+              "B8",
+              "H7",
+              "E7",
+              "C5",
+              "D8"
+            ],
+            "prompt": {
+              "state": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 1. You are black (X); your opponent is white (O).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . . . . 6\n5 . . . . . . . . . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: none\nWhite (O) stones: none\n\nMoves so far: No moves played yet.\n",
+              "question": {
+                "type": "choice",
+                "instructions": "You are black (X) and it is your turn in a game of gomoku. Pick the single best point to play from the options. Every option is a legal empty point written as column letter + row number.\n\nTACTICS\nYour first duty on every turn is defence. Look at the opponent's stones before you look at your own.\n\nNamed shapes, counting towards 5 in a row:\n- A \"four\" is 4 stones in a line plus one empty point that would complete 5. Whoever owns a four wins on their next turn unless that point is taken.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.\n- An \"open three\" is 3 stones in a line with both ends still empty. Left alone it becomes an open four next turn.\n- A line is dead when the opponent's stones leave fewer than 5 consecutive points available. A dead line can never win, for either side.\n\nPRIORITIES, highest first\n1. Take the completing point of the opponent's four. If you do not, they win next turn.\n2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.\n3. Shorten the opponent's longest live line -- an open three first, then any 3 or shorter line that still has room to reach 5.\n4. Only when the opponent threatens nothing above: complete 5 in a row and win.\n5. Then: make an open four of your own.\n6. Then: extend your own live lines, preferring a point that also shortens one of theirs.\n\nHOW TO READ THE BOARD\nFor every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach 5, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach 5 either, so there is nothing to block. Defence means acting on their live lines only.",
+                "criteria": {
+                  "F8": "Play at column F, row 8.",
+                  "G7": "Play at column G, row 7.",
+                  "G8": "Play at column G, row 8.",
+                  "C8": "Play at column C, row 8.",
+                  "H8": "Play at column H, row 8.",
+                  "E6": "Play at column E, row 6.",
+                  "F7": "Play at column F, row 7.",
+                  "B4": "Play at column B, row 4.",
+                  "G5": "Play at column G, row 5.",
+                  "E8": "Play at column E, row 8.",
+                  "F6": "Play at column F, row 6.",
+                  "F5": "Play at column F, row 5.",
+                  "B7": "Play at column B, row 7.",
+                  "D5": "Play at column D, row 5.",
+                  "C4": "Play at column C, row 4.",
+                  "D6": "Play at column D, row 6.",
+                  "H6": "Play at column H, row 6.",
+                  "B6": "Play at column B, row 6.",
+                  "C7": "Play at column C, row 7.",
+                  "G6": "Play at column G, row 6.",
+                  "C6": "Play at column C, row 6.",
+                  "B5": "Play at column B, row 5.",
+                  "H5": "Play at column H, row 5.",
+                  "D7": "Play at column D, row 7.",
+                  "E5": "Play at column E, row 5.",
+                  "B8": "Play at column B, row 8.",
+                  "H7": "Play at column H, row 7.",
+                  "E7": "Play at column E, row 7.",
+                  "C5": "Play at column C, row 5.",
+                  "D8": "Play at column D, row 8."
+                }
+              }
+            },
+            "jev_model": "jev-1.13.0",
+            "usage": {
+              "input_tokens": 1708,
+              "output_tokens": 258
+            },
+            "api_latency_s": 1.125,
+            "api_attempts": 1,
+            "top_probabilities": {
+              "E5": 1.0,
+              "F6": 0.0,
+              "D7": 0.0,
+              "E6": 0.0,
+              "H7": 0.0
+            },
+            "confidence": 0.99
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 2,
+      "stone": "white",
+      "player": "openai/gpt-oss-120b",
+      "move": "D5",
+      "latency_s": 23.434,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 23.434,
+          "move": "D5",
+          "raw": "{\"choice\":\"D5\",\"probabilities\":{\"D5\":0.19,\"E4\":0.10,\"E6\":0.10,\"D4\":0.07,\"D6\":0.07,\"F4\":0.06,\"F6\":0.06,\"G4\":0.04,\"G5\":0.04,\"C5\":0.03,\"E7\":0.03,\"D7\":0.03,\"F7\":0.03,\"C6\":0.01,\"C7\":0.01,\"C4\":0.01,\"E3\":0.02,\"F3\":0.02,\"G3\":0.02,\"G6\":0.02,\"G7\":0.01,\"C3\":0.01,\"D3\":0.01,\"F5\":0.01},\"confidence\":0.15}",
+          "meta": {
+            "model": "openai/gpt-oss-120b",
+            "mode": "choice",
+            "candidates": 24,
+            "menu": [
+              "D5",
+              "E7",
+              "G4",
+              "E4",
+              "G7",
+              "G6",
+              "F4",
+              "C5",
+              "F7",
+              "C6",
+              "F6",
+              "C7",
+              "C4",
+              "E3",
+              "E6",
+              "F3",
+              "D7",
+              "G3",
+              "C3",
+              "D6",
+              "G5",
+              "D4",
+              "D3",
+              "F5"
+            ],
+            "prompt": {
+              "system": "You are playing gomoku (five in a row) as white (O).\n\nRULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nTACTICS\nNamed shapes, counting towards the goal of 5 in a row:\n- A \"four\" is 4 of your stones in a line plus one empty point that would complete 5. If the opponent has a four you must play that completing point, or they win on their next turn.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.\n- An \"open three\" is 3 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.\n\nPRIORITIES, highest first\n1. Win now: complete 5 in a row.\n2. Block their four: if the opponent has a four, take its completing point.\n3. Win in two: make an open four. It cannot be stopped.\n4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.\n5. Build an open three of your own, ideally one that also shortens a line of theirs.\n6. Otherwise: the point that best extends your lines while limiting theirs.\n\nDEFENCE COUNTS AS MUCH AS ATTACK\nBefore you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach 5 any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.\n\nYOUR ANSWER\nYou are given a list of candidate points. Pick the single best one, using the priorities above.\n\nOutput raw JSON and nothing else -- no markdown fences, no commentary:\n{\"choice\": <one of the candidate points, exactly as written>, \"probabilities\": {<every candidate point>: <probability>}, \"confidence\": <0.0-1.0>}\n\"probabilities\" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. \"choice\" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.",
+              "user": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 2. You are white (O); your opponent is black (X).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . . . . 6\n5 . . . . x . . . . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: E5\nWhite (O) stones: none\n\nMoves so far: 1.XE5\n\n\nCANDIDATE POINTS (choose exactly one):\nD5, E7, G4, E4, G7, G6, F4, C5, F7, C6, F6, C7, C4, E3, E6, F3, D7, G3, C3, D6, G5, D4, D3, F5"
+            },
+            "api_model": "openai/gpt-oss-120b",
+            "usage": {
+              "input_tokens": 1205,
+              "output_tokens": 2789
+            },
+            "finish_reason": "stop",
+            "merged_system": false,
+            "raw_len": 291,
+            "top_probabilities": {
+              "D5": 0.19,
+              "E4": 0.1,
+              "E6": 0.1,
+              "D4": 0.07,
+              "D6": 0.07
+            },
+            "confidence": 0.15,
+            "parsed_from": "json"
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 3,
+      "stone": "black",
+      "player": "jev:jev-latest",
+      "move": "F5",
+      "latency_s": 0.532,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 0.532,
+          "move": "F5",
+          "raw": "{\"type\": \"choice\", \"choice\": \"F5\", \"confidence\": 0.32, \"probabilities\": {\"C4\": 0.0, \"G3\": 0.0, \"E4\": 0.08, \"D7\": 0.0, \"G4\": 0.0, \"E6\": 0.12, \"G6\": 0.0, \"F7\": 0.0, \"D6\": 0.03, \"E7\": 0.01, \"F4\": 0.0, \"F5\": 0.36, \"C3\": 0.0, \"C6\": 0.0, \"C5\": 0.33, \"B7\": 0.0, \"F6\": 0.0, \"B5\": 0.04, \"D4\": 0.02, \"C7\": 0.0, \"G5\": 0.01, \"B3\": 0.0, \"B6\": 0.0, \"B4\": 0.0, \"D3\": 0.0, \"F3\": 0.0, \"G7\": 0.0, \"E3\": 0.0}}",
+          "meta": {
+            "candidates": 28,
+            "model": "jev-latest",
+            "menu": [
+              "C6",
+              "F3",
+              "E4",
+              "G6",
+              "E7",
+              "C3",
+              "F5",
+              "B6",
+              "F6",
+              "G3",
+              "D6",
+              "F7",
+              "C4",
+              "B5",
+              "C7",
+              "E3",
+              "E6",
+              "B4",
+              "C5",
+              "D7",
+              "D4",
+              "B7",
+              "B3",
+              "G4",
+              "G5",
+              "D3",
+              "F4",
+              "G7"
+            ],
+            "prompt": {
+              "state": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 3. You are black (X); your opponent is white (O).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . . . . 6\n5 . . . o X . . . . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: E5\nWhite (O) stones: D5\n\nMoves so far: 1.XE5 2.OD5\n",
+              "question": {
+                "type": "choice",
+                "instructions": "You are black (X) and it is your turn in a game of gomoku. Pick the single best point to play from the options. Every option is a legal empty point written as column letter + row number.\n\nTACTICS\nYour first duty on every turn is defence. Look at the opponent's stones before you look at your own.\n\nNamed shapes, counting towards 5 in a row:\n- A \"four\" is 4 stones in a line plus one empty point that would complete 5. Whoever owns a four wins on their next turn unless that point is taken.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.\n- An \"open three\" is 3 stones in a line with both ends still empty. Left alone it becomes an open four next turn.\n- A line is dead when the opponent's stones leave fewer than 5 consecutive points available. A dead line can never win, for either side.\n\nPRIORITIES, highest first\n1. Take the completing point of the opponent's four. If you do not, they win next turn.\n2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.\n3. Shorten the opponent's longest live line -- an open three first, then any 3 or shorter line that still has room to reach 5.\n4. Only when the opponent threatens nothing above: complete 5 in a row and win.\n5. Then: make an open four of your own.\n6. Then: extend your own live lines, preferring a point that also shortens one of theirs.\n\nHOW TO READ THE BOARD\nFor every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach 5, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach 5 either, so there is nothing to block. Defence means acting on their live lines only.",
+                "criteria": {
+                  "C6": "Play at column C, row 6.",
+                  "F3": "Play at column F, row 3.",
+                  "E4": "Play at column E, row 4.",
+                  "G6": "Play at column G, row 6.",
+                  "E7": "Play at column E, row 7.",
+                  "C3": "Play at column C, row 3.",
+                  "F5": "Play at column F, row 5.",
+                  "B6": "Play at column B, row 6.",
+                  "F6": "Play at column F, row 6.",
+                  "G3": "Play at column G, row 3.",
+                  "D6": "Play at column D, row 6.",
+                  "F7": "Play at column F, row 7.",
+                  "C4": "Play at column C, row 4.",
+                  "B5": "Play at column B, row 5.",
+                  "C7": "Play at column C, row 7.",
+                  "E3": "Play at column E, row 3.",
+                  "E6": "Play at column E, row 6.",
+                  "B4": "Play at column B, row 4.",
+                  "C5": "Play at column C, row 5.",
+                  "D7": "Play at column D, row 7.",
+                  "D4": "Play at column D, row 4.",
+                  "B7": "Play at column B, row 7.",
+                  "B3": "Play at column B, row 3.",
+                  "G4": "Play at column G, row 4.",
+                  "G5": "Play at column G, row 5.",
+                  "D3": "Play at column D, row 3.",
+                  "F4": "Play at column F, row 4.",
+                  "G7": "Play at column G, row 7."
+                }
+              }
+            },
+            "jev_model": "jev-1.13.0",
+            "usage": {
+              "input_tokens": 1674,
+              "output_tokens": 242
+            },
+            "api_latency_s": 0.507,
+            "api_attempts": 1,
+            "top_probabilities": {
+              "F5": 0.36,
+              "C5": 0.33,
+              "E6": 0.12,
+              "E4": 0.08,
+              "B5": 0.04
+            },
+            "confidence": 0.32
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 4,
+      "stone": "white",
+      "player": "openai/gpt-oss-120b",
+      "move": "G5",
+      "latency_s": 12.781,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 12.781,
+          "move": "G5",
+          "raw": "{\"choice\":\"G5\",\"probabilities\":{\"B7\":0.02,\"F6\":0.03,\"H7\":0.01,\"B6\":0.02,\"F4\":0.02,\"C5\":0.03,\"C4\":0.02,\"G7\":0.02,\"G5\":0.35,\"D3\":0.02,\"B3\":0.02,\"G4\":0.02,\"D6\":0.03,\"E6\":0.03,\"E3\":0.02,\"H6\":0.02,\"F3\":0.02,\"C3\":0.02,\"G6\":0.02,\"C6\":0.02,\"F7\":0.02,\"E4\":0.03,\"B5\":0.03,\"H4\":0.02,\"H5\":0.03,\"B4\":0.02,\"D7\":0.02,\"C7\":0.02,\"D4\":0.03,\"E7\":0.02},\"confidence\":0.33}",
+          "meta": {
+            "model": "openai/gpt-oss-120b",
+            "mode": "choice",
+            "candidates": 30,
+            "menu": [
+              "B7",
+              "F6",
+              "H7",
+              "B6",
+              "F4",
+              "C5",
+              "C4",
+              "G7",
+              "G5",
+              "D3",
+              "B3",
+              "G4",
+              "D6",
+              "E6",
+              "E3",
+              "H6",
+              "F3",
+              "C3",
+              "G6",
+              "C6",
+              "F7",
+              "E4",
+              "B5",
+              "H4",
+              "H5",
+              "B4",
+              "D7",
+              "C7",
+              "D4",
+              "E7"
+            ],
+            "prompt": {
+              "system": "You are playing gomoku (five in a row) as white (O).\n\nRULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nTACTICS\nNamed shapes, counting towards the goal of 5 in a row:\n- A \"four\" is 4 of your stones in a line plus one empty point that would complete 5. If the opponent has a four you must play that completing point, or they win on their next turn.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.\n- An \"open three\" is 3 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.\n\nPRIORITIES, highest first\n1. Win now: complete 5 in a row.\n2. Block their four: if the opponent has a four, take its completing point.\n3. Win in two: make an open four. It cannot be stopped.\n4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.\n5. Build an open three of your own, ideally one that also shortens a line of theirs.\n6. Otherwise: the point that best extends your lines while limiting theirs.\n\nDEFENCE COUNTS AS MUCH AS ATTACK\nBefore you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach 5 any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.\n\nYOUR ANSWER\nYou are given a list of candidate points. Pick the single best one, using the priorities above.\n\nOutput raw JSON and nothing else -- no markdown fences, no commentary:\n{\"choice\": <one of the candidate points, exactly as written>, \"probabilities\": {<every candidate point>: <probability>}, \"confidence\": <0.0-1.0>}\n\"probabilities\" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. \"choice\" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.",
+              "user": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 4. You are white (O); your opponent is black (X).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . . . . 6\n5 . . . O X x . . . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: E5, F5\nWhite (O) stones: D5\n\nMoves so far: 1.XE5 2.OD5 3.XF5\n\n\nCANDIDATE POINTS (choose exactly one):\nB7, F6, H7, B6, F4, C5, C4, G7, G5, D3, B3, G4, D6, E6, E3, H6, F3, C3, G6, C6, F7, E4, B5, H4, H5, B4, D7, C7, D4, E7"
+            },
+            "api_model": "openai/gpt-oss-120b",
+            "usage": {
+              "input_tokens": 1237,
+              "output_tokens": 3408
+            },
+            "finish_reason": "stop",
+            "merged_system": false,
+            "raw_len": 351,
+            "top_probabilities": {
+              "G5": 0.35,
+              "F6": 0.03,
+              "C5": 0.03,
+              "D6": 0.03,
+              "E6": 0.03
+            },
+            "confidence": 0.33,
+            "parsed_from": "json"
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 5,
+      "stone": "black",
+      "player": "jev:jev-latest",
+      "move": "H5",
+      "latency_s": 0.567,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 0.567,
+          "move": "H5",
+          "raw": "{\"type\": \"choice\", \"choice\": \"H5\", \"confidence\": 0.57, \"probabilities\": {\"B3\": 0.0, \"D3\": 0.0, \"C5\": 0.21000000000000002, \"D7\": 0.0, \"F4\": 0.02, \"D4\": 0.0, \"E4\": 0.02, \"F6\": 0.02, \"H6\": 0.0, \"F3\": 0.0, \"H5\": 0.59, \"C6\": 0.0, \"G3\": 0.0, \"G6\": 0.02, \"C7\": 0.0, \"H7\": 0.0, \"H4\": 0.0, \"E6\": 0.05, \"E7\": 0.0, \"C3\": 0.0, \"G4\": 0.01, \"E3\": 0.0, \"D6\": 0.01, \"C4\": 0.0, \"B6\": 0.0, \"G7\": 0.0, \"B7\": 0.0, \"B4\": 0.0, \"B5\": 0.04, \"F7\": 0.01}}",
+          "meta": {
+            "candidates": 30,
+            "model": "jev-latest",
+            "menu": [
+              "B7",
+              "F6",
+              "B3",
+              "E7",
+              "C7",
+              "H4",
+              "C5",
+              "C3",
+              "B6",
+              "E4",
+              "G7",
+              "H6",
+              "B4",
+              "H7",
+              "G6",
+              "F7",
+              "F4",
+              "C4",
+              "E3",
+              "D3",
+              "D7",
+              "G4",
+              "B5",
+              "D6",
+              "G3",
+              "D4",
+              "E6",
+              "C6",
+              "F3",
+              "H5"
+            ],
+            "prompt": {
+              "state": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 5. You are black (X); your opponent is white (O).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . . . . 6\n5 . . . O X X o . . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: E5, F5\nWhite (O) stones: D5, G5\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5\n",
+              "question": {
+                "type": "choice",
+                "instructions": "You are black (X) and it is your turn in a game of gomoku. Pick the single best point to play from the options. Every option is a legal empty point written as column letter + row number.\n\nTACTICS\nYour first duty on every turn is defence. Look at the opponent's stones before you look at your own.\n\nNamed shapes, counting towards 5 in a row:\n- A \"four\" is 4 stones in a line plus one empty point that would complete 5. Whoever owns a four wins on their next turn unless that point is taken.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.\n- An \"open three\" is 3 stones in a line with both ends still empty. Left alone it becomes an open four next turn.\n- A line is dead when the opponent's stones leave fewer than 5 consecutive points available. A dead line can never win, for either side.\n\nPRIORITIES, highest first\n1. Take the completing point of the opponent's four. If you do not, they win next turn.\n2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.\n3. Shorten the opponent's longest live line -- an open three first, then any 3 or shorter line that still has room to reach 5.\n4. Only when the opponent threatens nothing above: complete 5 in a row and win.\n5. Then: make an open four of your own.\n6. Then: extend your own live lines, preferring a point that also shortens one of theirs.\n\nHOW TO READ THE BOARD\nFor every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach 5, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach 5 either, so there is nothing to block. Defence means acting on their live lines only.",
+                "criteria": {
+                  "B7": "Play at column B, row 7.",
+                  "F6": "Play at column F, row 6.",
+                  "B3": "Play at column B, row 3.",
+                  "E7": "Play at column E, row 7.",
+                  "C7": "Play at column C, row 7.",
+                  "H4": "Play at column H, row 4.",
+                  "C5": "Play at column C, row 5.",
+                  "C3": "Play at column C, row 3.",
+                  "B6": "Play at column B, row 6.",
+                  "E4": "Play at column E, row 4.",
+                  "G7": "Play at column G, row 7.",
+                  "H6": "Play at column H, row 6.",
+                  "B4": "Play at column B, row 4.",
+                  "H7": "Play at column H, row 7.",
+                  "G6": "Play at column G, row 6.",
+                  "F7": "Play at column F, row 7.",
+                  "F4": "Play at column F, row 4.",
+                  "C4": "Play at column C, row 4.",
+                  "E3": "Play at column E, row 3.",
+                  "D3": "Play at column D, row 3.",
+                  "D7": "Play at column D, row 7.",
+                  "G4": "Play at column G, row 4.",
+                  "B5": "Play at column B, row 5.",
+                  "D6": "Play at column D, row 6.",
+                  "G3": "Play at column G, row 3.",
+                  "D4": "Play at column D, row 4.",
+                  "E6": "Play at column E, row 6.",
+                  "C6": "Play at column C, row 6.",
+                  "F3": "Play at column F, row 3.",
+                  "H5": "Play at column H, row 5."
+                }
+              }
+            },
+            "jev_model": "jev-1.13.0",
+            "usage": {
+              "input_tokens": 1732,
+              "output_tokens": 258
+            },
+            "api_latency_s": 0.523,
+            "api_attempts": 1,
+            "top_probabilities": {
+              "H5": 0.59,
+              "C5": 0.21000000000000002,
+              "E6": 0.05,
+              "B5": 0.04,
+              "F4": 0.02
+            },
+            "confidence": 0.57
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 6,
+      "stone": "white",
+      "player": "openai/gpt-oss-120b",
+      "move": "G6",
+      "latency_s": 21.815,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 21.815,
+          "move": "G6",
+          "raw": "{\"choice\":\"G6\",\"probabilities\":{\"E7\":0.01,\"C7\":0.01,\"F6\":0.02,\"G6\":0.30,\"D7\":0.01,\"H3\":0.01,\"D4\":0.05,\"G7\":0.00,\"H7\":0.00,\"E6\":0.07,\"G4\":0.07,\"E4\":0.04,\"C5\":0.00,\"B5\":0.00,\"E3\":0.00,\"C6\":0.03,\"F7\":0.00,\"C3\":0.00,\"B3\":0.00,\"C4\":0.00,\"H4\":0.00,\"F3\":0.00,\"B7\":0.00,\"D6\":0.20,\"B6\":0.00,\"D3\":0.00,\"B4\":0.00,\"H6\":0.08,\"G3\":0.00,\"F4\":0.10},\"confidence\":0.28}",
+          "meta": {
+            "model": "openai/gpt-oss-120b",
+            "mode": "choice",
+            "candidates": 30,
+            "menu": [
+              "E7",
+              "C7",
+              "F6",
+              "G6",
+              "D7",
+              "H3",
+              "D4",
+              "G7",
+              "H7",
+              "E6",
+              "G4",
+              "E4",
+              "C5",
+              "B5",
+              "E3",
+              "C6",
+              "F7",
+              "C3",
+              "B3",
+              "C4",
+              "H4",
+              "F3",
+              "B7",
+              "D6",
+              "B6",
+              "D3",
+              "B4",
+              "H6",
+              "G3",
+              "F4"
+            ],
+            "prompt": {
+              "system": "You are playing gomoku (five in a row) as white (O).\n\nRULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nTACTICS\nNamed shapes, counting towards the goal of 5 in a row:\n- A \"four\" is 4 of your stones in a line plus one empty point that would complete 5. If the opponent has a four you must play that completing point, or they win on their next turn.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.\n- An \"open three\" is 3 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.\n\nPRIORITIES, highest first\n1. Win now: complete 5 in a row.\n2. Block their four: if the opponent has a four, take its completing point.\n3. Win in two: make an open four. It cannot be stopped.\n4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.\n5. Build an open three of your own, ideally one that also shortens a line of theirs.\n6. Otherwise: the point that best extends your lines while limiting theirs.\n\nDEFENCE COUNTS AS MUCH AS ATTACK\nBefore you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach 5 any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.\n\nYOUR ANSWER\nYou are given a list of candidate points. Pick the single best one, using the priorities above.\n\nOutput raw JSON and nothing else -- no markdown fences, no commentary:\n{\"choice\": <one of the candidate points, exactly as written>, \"probabilities\": {<every candidate point>: <probability>}, \"confidence\": <0.0-1.0>}\n\"probabilities\" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. \"choice\" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.",
+              "user": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 6. You are white (O); your opponent is black (X).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . . . . 6\n5 . . . O X X O x . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: E5, F5, H5\nWhite (O) stones: D5, G5\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5\n\n\nCANDIDATE POINTS (choose exactly one):\nE7, C7, F6, G6, D7, H3, D4, G7, H7, E6, G4, E4, C5, B5, E3, C6, F7, C3, B3, C4, H4, F3, B7, D6, B6, D3, B4, H6, G3, F4"
+            },
+            "api_model": "openai/gpt-oss-120b",
+            "usage": {
+              "input_tokens": 1253,
+              "output_tokens": 5273
+            },
+            "finish_reason": "stop",
+            "merged_system": false,
+            "raw_len": 351,
+            "top_probabilities": {
+              "G6": 0.3,
+              "D6": 0.2,
+              "F4": 0.1,
+              "H6": 0.08,
+              "E6": 0.07
+            },
+            "confidence": 0.28,
+            "parsed_from": "json"
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 7,
+      "stone": "black",
+      "player": "jev:jev-latest",
+      "move": "F6",
+      "latency_s": 0.675,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 0.675,
+          "move": "F6",
+          "raw": "{\"type\": \"choice\", \"choice\": \"F6\", \"confidence\": 0.32, \"probabilities\": {\"C3\": 0.0, \"B3\": 0.0, \"F4\": 0.01, \"E7\": 0.01, \"B6\": 0.0, \"B4\": 0.0, \"E8\": 0.0, \"H7\": 0.01, \"E6\": 0.16, \"E3\": 0.0, \"H4\": 0.01, \"D4\": 0.0, \"H8\": 0.0, \"C4\": 0.0, \"B7\": 0.0, \"G4\": 0.05, \"F6\": 0.35000000000000003, \"C6\": 0.02, \"B5\": 0.01, \"C7\": 0.0, \"D3\": 0.0, \"D7\": 0.01, \"E4\": 0.0, \"G8\": 0.0, \"C5\": 0.08, \"D6\": 0.05, \"F7\": 0.01, \"H6\": 0.1, \"G7\": 0.12, \"F8\": 0.0}}",
+          "meta": {
+            "candidates": 30,
+            "model": "jev-latest",
+            "menu": [
+              "B5",
+              "H6",
+              "H8",
+              "D7",
+              "D3",
+              "E6",
+              "B6",
+              "C6",
+              "B3",
+              "D4",
+              "H4",
+              "H7",
+              "F7",
+              "B7",
+              "C7",
+              "D6",
+              "E7",
+              "G4",
+              "C5",
+              "E8",
+              "C4",
+              "G8",
+              "G7",
+              "E4",
+              "F6",
+              "B4",
+              "F4",
+              "E3",
+              "C3",
+              "F8"
+            ],
+            "prompt": {
+              "state": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 7. You are black (X); your opponent is white (O).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . . o . . 6\n5 . . . O X X O X . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: E5, F5, H5\nWhite (O) stones: G6, D5, G5\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5 6.OG6\n",
+              "question": {
+                "type": "choice",
+                "instructions": "You are black (X) and it is your turn in a game of gomoku. Pick the single best point to play from the options. Every option is a legal empty point written as column letter + row number.\n\nTACTICS\nYour first duty on every turn is defence. Look at the opponent's stones before you look at your own.\n\nNamed shapes, counting towards 5 in a row:\n- A \"four\" is 4 stones in a line plus one empty point that would complete 5. Whoever owns a four wins on their next turn unless that point is taken.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.\n- An \"open three\" is 3 stones in a line with both ends still empty. Left alone it becomes an open four next turn.\n- A line is dead when the opponent's stones leave fewer than 5 consecutive points available. A dead line can never win, for either side.\n\nPRIORITIES, highest first\n1. Take the completing point of the opponent's four. If you do not, they win next turn.\n2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.\n3. Shorten the opponent's longest live line -- an open three first, then any 3 or shorter line that still has room to reach 5.\n4. Only when the opponent threatens nothing above: complete 5 in a row and win.\n5. Then: make an open four of your own.\n6. Then: extend your own live lines, preferring a point that also shortens one of theirs.\n\nHOW TO READ THE BOARD\nFor every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach 5, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach 5 either, so there is nothing to block. Defence means acting on their live lines only.",
+                "criteria": {
+                  "B5": "Play at column B, row 5.",
+                  "H6": "Play at column H, row 6.",
+                  "H8": "Play at column H, row 8.",
+                  "D7": "Play at column D, row 7.",
+                  "D3": "Play at column D, row 3.",
+                  "E6": "Play at column E, row 6.",
+                  "B6": "Play at column B, row 6.",
+                  "C6": "Play at column C, row 6.",
+                  "B3": "Play at column B, row 3.",
+                  "D4": "Play at column D, row 4.",
+                  "H4": "Play at column H, row 4.",
+                  "H7": "Play at column H, row 7.",
+                  "F7": "Play at column F, row 7.",
+                  "B7": "Play at column B, row 7.",
+                  "C7": "Play at column C, row 7.",
+                  "D6": "Play at column D, row 6.",
+                  "E7": "Play at column E, row 7.",
+                  "G4": "Play at column G, row 4.",
+                  "C5": "Play at column C, row 5.",
+                  "E8": "Play at column E, row 8.",
+                  "C4": "Play at column C, row 4.",
+                  "G8": "Play at column G, row 8.",
+                  "G7": "Play at column G, row 7.",
+                  "E4": "Play at column E, row 4.",
+                  "F6": "Play at column F, row 6.",
+                  "B4": "Play at column B, row 4.",
+                  "F4": "Play at column F, row 4.",
+                  "E3": "Play at column E, row 3.",
+                  "C3": "Play at column C, row 3.",
+                  "F8": "Play at column F, row 8."
+                }
+              }
+            },
+            "jev_model": "jev-1.13.0",
+            "usage": {
+              "input_tokens": 1748,
+              "output_tokens": 258
+            },
+            "api_latency_s": 0.628,
+            "api_attempts": 1,
+            "top_probabilities": {
+              "F6": 0.35000000000000003,
+              "E6": 0.16,
+              "G7": 0.12,
+              "H6": 0.1,
+              "C5": 0.08
+            },
+            "confidence": 0.32
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 8,
+      "stone": "white",
+      "player": "openai/gpt-oss-120b",
+      "move": "G7",
+      "latency_s": 22.672,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 22.672,
+          "move": "G7",
+          "raw": "{\"choice\":\"G7\",\"probabilities\":{\"D7\":0.02,\"E3\":0.01,\"B7\":0.01,\"D8\":0.01,\"B6\":0.01,\"F4\":0.08,\"D6\":0.05,\"C3\":0.01,\"H7\":0.01,\"D3\":0.01,\"H4\":0.01,\"C5\":0.01,\"H8\":0.01,\"B4\":0.01,\"F7\":0.01,\"B5\":0.01,\"C7\":0.01,\"E7\":0.01,\"E8\":0.01,\"G4\":0.15,\"G7\":0.30,\"C6\":0.04,\"G8\":0.01,\"H6\":0.04,\"D4\":0.10,\"B3\":0.01,\"C4\":0.01,\"F8\":0.01,\"E4\":0.01,\"E6\":0.01},\"confidence\":0.28}",
+          "meta": {
+            "model": "openai/gpt-oss-120b",
+            "mode": "choice",
+            "candidates": 30,
+            "menu": [
+              "D7",
+              "E3",
+              "B7",
+              "D8",
+              "B6",
+              "F4",
+              "D6",
+              "C3",
+              "H7",
+              "D3",
+              "H4",
+              "C5",
+              "H8",
+              "B4",
+              "F7",
+              "B5",
+              "C7",
+              "E7",
+              "E8",
+              "G4",
+              "G7",
+              "C6",
+              "G8",
+              "H6",
+              "D4",
+              "B3",
+              "C4",
+              "F8",
+              "E4",
+              "E6"
+            ],
+            "prompt": {
+              "system": "You are playing gomoku (five in a row) as white (O).\n\nRULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nTACTICS\nNamed shapes, counting towards the goal of 5 in a row:\n- A \"four\" is 4 of your stones in a line plus one empty point that would complete 5. If the opponent has a four you must play that completing point, or they win on their next turn.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.\n- An \"open three\" is 3 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.\n\nPRIORITIES, highest first\n1. Win now: complete 5 in a row.\n2. Block their four: if the opponent has a four, take its completing point.\n3. Win in two: make an open four. It cannot be stopped.\n4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.\n5. Build an open three of your own, ideally one that also shortens a line of theirs.\n6. Otherwise: the point that best extends your lines while limiting theirs.\n\nDEFENCE COUNTS AS MUCH AS ATTACK\nBefore you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach 5 any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.\n\nYOUR ANSWER\nYou are given a list of candidate points. Pick the single best one, using the priorities above.\n\nOutput raw JSON and nothing else -- no markdown fences, no commentary:\n{\"choice\": <one of the candidate points, exactly as written>, \"probabilities\": {<every candidate point>: <probability>}, \"confidence\": <0.0-1.0>}\n\"probabilities\" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. \"choice\" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.",
+              "user": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 8. You are white (O); your opponent is black (X).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . . . . 7\n6 . . . . . x O . . 6\n5 . . . O X X O X . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: F6, E5, F5, H5\nWhite (O) stones: G6, D5, G5\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5 6.OG6 7.XF6\n\n\nCANDIDATE POINTS (choose exactly one):\nD7, E3, B7, D8, B6, F4, D6, C3, H7, D3, H4, C5, H8, B4, F7, B5, C7, E7, E8, G4, G7, C6, G8, H6, D4, B3, C4, F8, E4, E6"
+            },
+            "api_model": "openai/gpt-oss-120b",
+            "usage": {
+              "input_tokens": 1269,
+              "output_tokens": 5801
+            },
+            "finish_reason": "stop",
+            "merged_system": false,
+            "raw_len": 351,
+            "top_probabilities": {
+              "G7": 0.3,
+              "G4": 0.15,
+              "D4": 0.1,
+              "F4": 0.08,
+              "D6": 0.05
+            },
+            "confidence": 0.28,
+            "parsed_from": "json"
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 9,
+      "stone": "black",
+      "player": "jev:jev-latest",
+      "move": "F7",
+      "latency_s": 0.585,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 0.585,
+          "move": "F7",
+          "raw": "{\"type\": \"choice\", \"choice\": \"F7\", \"confidence\": 0.2, \"probabilities\": {\"H8\": 0.01, \"D7\": 0.01, \"B5\": 0.0, \"E7\": 0.03, \"E8\": 0.0, \"B6\": 0.0, \"G8\": 0.2, \"F8\": 0.01, \"D4\": 0.0, \"H4\": 0.0, \"E4\": 0.01, \"H6\": 0.14, \"C7\": 0.01, \"B7\": 0.0, \"C4\": 0.0, \"D8\": 0.0, \"D6\": 0.01, \"C5\": 0.01, \"C3\": 0.0, \"F4\": 0.0, \"E3\": 0.0, \"G4\": 0.05, \"D3\": 0.0, \"E6\": 0.17, \"C6\": 0.01, \"F7\": 0.24000000000000002, \"B3\": 0.0, \"H7\": 0.08, \"B4\": 0.0, \"F3\": 0.0}}",
+          "meta": {
+            "candidates": 30,
+            "model": "jev-latest",
+            "menu": [
+              "D6",
+              "B5",
+              "C7",
+              "B6",
+              "E6",
+              "H6",
+              "E7",
+              "B7",
+              "D3",
+              "E4",
+              "H8",
+              "C6",
+              "F4",
+              "D8",
+              "E8",
+              "G8",
+              "C5",
+              "H7",
+              "F3",
+              "B3",
+              "D7",
+              "B4",
+              "C4",
+              "F8",
+              "E3",
+              "H4",
+              "D4",
+              "F7",
+              "G4",
+              "C3"
+            ],
+            "prompt": {
+              "state": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 9. You are black (X); your opponent is white (O).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . . o . . 7\n6 . . . . . X O . . 6\n5 . . . O X X O X . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: F6, E5, F5, H5\nWhite (O) stones: G7, G6, D5, G5\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5 6.OG6 7.XF6 8.OG7\n",
+              "question": {
+                "type": "choice",
+                "instructions": "You are black (X) and it is your turn in a game of gomoku. Pick the single best point to play from the options. Every option is a legal empty point written as column letter + row number.\n\nTACTICS\nYour first duty on every turn is defence. Look at the opponent's stones before you look at your own.\n\nNamed shapes, counting towards 5 in a row:\n- A \"four\" is 4 stones in a line plus one empty point that would complete 5. Whoever owns a four wins on their next turn unless that point is taken.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.\n- An \"open three\" is 3 stones in a line with both ends still empty. Left alone it becomes an open four next turn.\n- A line is dead when the opponent's stones leave fewer than 5 consecutive points available. A dead line can never win, for either side.\n\nPRIORITIES, highest first\n1. Take the completing point of the opponent's four. If you do not, they win next turn.\n2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.\n3. Shorten the opponent's longest live line -- an open three first, then any 3 or shorter line that still has room to reach 5.\n4. Only when the opponent threatens nothing above: complete 5 in a row and win.\n5. Then: make an open four of your own.\n6. Then: extend your own live lines, preferring a point that also shortens one of theirs.\n\nHOW TO READ THE BOARD\nFor every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach 5, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach 5 either, so there is nothing to block. Defence means acting on their live lines only.",
+                "criteria": {
+                  "D6": "Play at column D, row 6.",
+                  "B5": "Play at column B, row 5.",
+                  "C7": "Play at column C, row 7.",
+                  "B6": "Play at column B, row 6.",
+                  "E6": "Play at column E, row 6.",
+                  "H6": "Play at column H, row 6.",
+                  "E7": "Play at column E, row 7.",
+                  "B7": "Play at column B, row 7.",
+                  "D3": "Play at column D, row 3.",
+                  "E4": "Play at column E, row 4.",
+                  "H8": "Play at column H, row 8.",
+                  "C6": "Play at column C, row 6.",
+                  "F4": "Play at column F, row 4.",
+                  "D8": "Play at column D, row 8.",
+                  "E8": "Play at column E, row 8.",
+                  "G8": "Play at column G, row 8.",
+                  "C5": "Play at column C, row 5.",
+                  "H7": "Play at column H, row 7.",
+                  "F3": "Play at column F, row 3.",
+                  "B3": "Play at column B, row 3.",
+                  "D7": "Play at column D, row 7.",
+                  "B4": "Play at column B, row 4.",
+                  "C4": "Play at column C, row 4.",
+                  "F8": "Play at column F, row 8.",
+                  "E3": "Play at column E, row 3.",
+                  "H4": "Play at column H, row 4.",
+                  "D4": "Play at column D, row 4.",
+                  "F7": "Play at column F, row 7.",
+                  "G4": "Play at column G, row 4.",
+                  "C3": "Play at column C, row 3."
+                }
+              }
+            },
+            "jev_model": "jev-1.13.0",
+            "usage": {
+              "input_tokens": 1764,
+              "output_tokens": 258
+            },
+            "api_latency_s": 0.532,
+            "api_attempts": 1,
+            "top_probabilities": {
+              "F7": 0.24000000000000002,
+              "G8": 0.2,
+              "E6": 0.17,
+              "H6": 0.14,
+              "H7": 0.08
+            },
+            "confidence": 0.2
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 10,
+      "stone": "white",
+      "player": "openai/gpt-oss-120b",
+      "move": "G4",
+      "latency_s": 15.637,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 15.637,
+          "move": "G4",
+          "raw": "{\"choice\":\"G4\",\"probabilities\":{\"D8\":0.02,\"D3\":0.01,\"B3\":0.01,\"D6\":0.03,\"H7\":0.03,\"B6\":0.02,\"C5\":0.02,\"E4\":0.02,\"G3\":0.01,\"C3\":0.01,\"B7\":0.01,\"C6\":0.01,\"F8\":0.02,\"E7\":0.01,\"H4\":0.01,\"E6\":0.03,\"G8\":0.03,\"H8\":0.01,\"E3\":0.01,\"H6\":0.01,\"C7\":0.01,\"B5\":0.01,\"E8\":0.01,\"D7\":0.01,\"B4\":0.01,\"C4\":0.01,\"D4\":0.01,\"F4\":0.03,\"F3\":0.01,\"G4\":0.56},\"confidence\":0.54}",
+          "meta": {
+            "model": "openai/gpt-oss-120b",
+            "mode": "choice",
+            "candidates": 30,
+            "menu": [
+              "D8",
+              "D3",
+              "B3",
+              "D6",
+              "H7",
+              "B6",
+              "C5",
+              "E4",
+              "G3",
+              "C3",
+              "B7",
+              "C6",
+              "F8",
+              "E7",
+              "H4",
+              "E6",
+              "G8",
+              "H8",
+              "E3",
+              "H6",
+              "C7",
+              "B5",
+              "E8",
+              "D7",
+              "B4",
+              "C4",
+              "D4",
+              "F4",
+              "F3",
+              "G4"
+            ],
+            "prompt": {
+              "system": "You are playing gomoku (five in a row) as white (O).\n\nRULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nTACTICS\nNamed shapes, counting towards the goal of 5 in a row:\n- A \"four\" is 4 of your stones in a line plus one empty point that would complete 5. If the opponent has a four you must play that completing point, or they win on their next turn.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.\n- An \"open three\" is 3 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.\n\nPRIORITIES, highest first\n1. Win now: complete 5 in a row.\n2. Block their four: if the opponent has a four, take its completing point.\n3. Win in two: make an open four. It cannot be stopped.\n4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.\n5. Build an open three of your own, ideally one that also shortens a line of theirs.\n6. Otherwise: the point that best extends your lines while limiting theirs.\n\nDEFENCE COUNTS AS MUCH AS ATTACK\nBefore you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach 5 any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.\n\nYOUR ANSWER\nYou are given a list of candidate points. Pick the single best one, using the priorities above.\n\nOutput raw JSON and nothing else -- no markdown fences, no commentary:\n{\"choice\": <one of the candidate points, exactly as written>, \"probabilities\": {<every candidate point>: <probability>}, \"confidence\": <0.0-1.0>}\n\"probabilities\" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. \"choice\" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.",
+              "user": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 10. You are white (O); your opponent is black (X).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . x O . . 7\n6 . . . . . X O . . 6\n5 . . . O X X O X . 5\n4 . . . . . . . . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: F7, F6, E5, F5, H5\nWhite (O) stones: G7, G6, D5, G5\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5 6.OG6 7.XF6 8.OG7 9.XF7\n\n\nCANDIDATE POINTS (choose exactly one):\nD8, D3, B3, D6, H7, B6, C5, E4, G3, C3, B7, C6, F8, E7, H4, E6, G8, H8, E3, H6, C7, B5, E8, D7, B4, C4, D4, F4, F3, G4"
+            },
+            "api_model": "openai/gpt-oss-120b",
+            "usage": {
+              "input_tokens": 1285,
+              "output_tokens": 4161
+            },
+            "finish_reason": "stop",
+            "merged_system": false,
+            "raw_len": 351,
+            "top_probabilities": {
+              "G4": 0.56,
+              "D6": 0.03,
+              "H7": 0.03,
+              "E6": 0.03,
+              "G8": 0.03
+            },
+            "confidence": 0.54,
+            "parsed_from": "json"
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    },
+    {
+      "ply": 11,
+      "stone": "black",
+      "player": "jev:jev-latest",
+      "move": "G3",
+      "latency_s": 0.557,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 0.557,
+          "move": "G3",
+          "raw": "{\"type\": \"choice\", \"choice\": \"G3\", \"confidence\": 0.19, \"probabilities\": {\"F3\": 0.0, \"C3\": 0.0, \"B3\": 0.0, \"F4\": 0.05, \"E7\": 0.06, \"B6\": 0.0, \"D8\": 0.01, \"G3\": 0.22, \"B4\": 0.0, \"E8\": 0.0, \"H7\": 0.09, \"E6\": 0.08, \"E3\": 0.01, \"H4\": 0.1, \"D4\": 0.01, \"H8\": 0.01, \"H3\": 0.01, \"C4\": 0.0, \"B7\": 0.0, \"C6\": 0.0, \"B5\": 0.01, \"C7\": 0.01, \"D3\": 0.0, \"D7\": 0.0, \"E4\": 0.02, \"G8\": 0.06, \"C5\": 0.03, \"H6\": 0.16, \"D6\": 0.01, \"F8\": 0.05}}",
+          "meta": {
+            "candidates": 30,
+            "model": "jev-latest",
+            "menu": [
+              "H4",
+              "C6",
+              "H8",
+              "H3",
+              "D7",
+              "E8",
+              "E4",
+              "F8",
+              "D3",
+              "H7",
+              "D6",
+              "C3",
+              "G8",
+              "B7",
+              "B3",
+              "C7",
+              "C4",
+              "E6",
+              "D4",
+              "E7",
+              "B6",
+              "B4",
+              "H6",
+              "E3",
+              "F4",
+              "F3",
+              "B5",
+              "C5",
+              "G3",
+              "D8"
+            ],
+            "prompt": {
+              "state": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 11. You are black (X); your opponent is white (O).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . X O . . 7\n6 . . . . . X O . . 6\n5 . . . O X X O X . 5\n4 . . . . . . o . . 4\n3 . . . . . . . . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: F7, F6, E5, F5, H5\nWhite (O) stones: G7, G6, D5, G5, G4\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5 6.OG6 7.XF6 8.OG7 9.XF7 10.OG4\n",
+              "question": {
+                "type": "choice",
+                "instructions": "You are black (X) and it is your turn in a game of gomoku. Pick the single best point to play from the options. Every option is a legal empty point written as column letter + row number.\n\nTACTICS\nYour first duty on every turn is defence. Look at the opponent's stones before you look at your own.\n\nNamed shapes, counting towards 5 in a row:\n- A \"four\" is 4 stones in a line plus one empty point that would complete 5. Whoever owns a four wins on their next turn unless that point is taken.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because only one of them can be covered.\n- An \"open three\" is 3 stones in a line with both ends still empty. Left alone it becomes an open four next turn.\n- A line is dead when the opponent's stones leave fewer than 5 consecutive points available. A dead line can never win, for either side.\n\nPRIORITIES, highest first\n1. Take the completing point of the opponent's four. If you do not, they win next turn.\n2. Break the line the opponent would turn into an open four next turn: play one of its open ends, or a point inside it.\n3. Shorten the opponent's longest live line -- an open three first, then any 3 or shorter line that still has room to reach 5.\n4. Only when the opponent threatens nothing above: complete 5 in a row and win.\n5. Then: make an open four of your own.\n6. Then: extend your own live lines, preferring a point that also shortens one of theirs.\n\nHOW TO READ THE BOARD\nFor every line of two or more stones on the board, count the empty points at both ends before judging it. Never add a stone to a dead line of your own: it cannot reach 5, so the move does nothing. Equally, never spend a move blocking a dead line of the opponent's: it cannot reach 5 either, so there is nothing to block. Defence means acting on their live lines only.",
+                "criteria": {
+                  "H4": "Play at column H, row 4.",
+                  "C6": "Play at column C, row 6.",
+                  "H8": "Play at column H, row 8.",
+                  "H3": "Play at column H, row 3.",
+                  "D7": "Play at column D, row 7.",
+                  "E8": "Play at column E, row 8.",
+                  "E4": "Play at column E, row 4.",
+                  "F8": "Play at column F, row 8.",
+                  "D3": "Play at column D, row 3.",
+                  "H7": "Play at column H, row 7.",
+                  "D6": "Play at column D, row 6.",
+                  "C3": "Play at column C, row 3.",
+                  "G8": "Play at column G, row 8.",
+                  "B7": "Play at column B, row 7.",
+                  "B3": "Play at column B, row 3.",
+                  "C7": "Play at column C, row 7.",
+                  "C4": "Play at column C, row 4.",
+                  "E6": "Play at column E, row 6.",
+                  "D4": "Play at column D, row 4.",
+                  "E7": "Play at column E, row 7.",
+                  "B6": "Play at column B, row 6.",
+                  "B4": "Play at column B, row 4.",
+                  "H6": "Play at column H, row 6.",
+                  "E3": "Play at column E, row 3.",
+                  "F4": "Play at column F, row 4.",
+                  "F3": "Play at column F, row 3.",
+                  "B5": "Play at column B, row 5.",
+                  "C5": "Play at column C, row 5.",
+                  "G3": "Play at column G, row 3.",
+                  "D8": "Play at column D, row 8."
+                }
+              }
+            },
+            "jev_model": "jev-1.13.0",
+            "usage": {
+              "input_tokens": 1782,
+              "output_tokens": 258
+            },
+            "api_latency_s": 0.526,
+            "api_attempts": 1,
+            "top_probabilities": {
+              "G3": 0.22,
+              "H6": 0.16,
+              "H4": 0.1,
+              "H7": 0.09,
+              "E6": 0.08
+            },
+            "confidence": 0.19
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [],
+        "opponent_wins": [
+          "G8",
+          "G3"
+        ],
+        "took_win": false,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": true
+      }
+    },
+    {
+      "ply": 12,
+      "stone": "white",
+      "player": "openai/gpt-oss-120b",
+      "move": "G8",
+      "latency_s": 8.588,
+      "attempts": [
+        {
+          "verdict": "accepted",
+          "latency_s": 8.588,
+          "move": "G8",
+          "raw": "{\"choice\":\"G8\",\"probabilities\":{\"H4\":0.00,\"H3\":0.00,\"B6\":0.00,\"H7\":0.00,\"C3\":0.00,\"C4\":0.00,\"C7\":0.00,\"G8\":1.00,\"C6\":0.00,\"D7\":0.00,\"B5\":0.00,\"H6\":0.00,\"F3\":0.00,\"B4\":0.00,\"H8\":0.00,\"C5\":0.00,\"F8\":0.00,\"D4\":0.00,\"B7\":0.00,\"D8\":0.00,\"G2\":0.00,\"D6\":0.00,\"E7\":0.00,\"B3\":0.00,\"E6\":0.00,\"E8\":0.00,\"F4\":0.00,\"H2\":0.00,\"F2\":0.00,\"E4\":0.00},\"confidence\":1.00}",
+          "meta": {
+            "model": "openai/gpt-oss-120b",
+            "mode": "choice",
+            "candidates": 30,
+            "menu": [
+              "H4",
+              "H3",
+              "B6",
+              "H7",
+              "C3",
+              "C4",
+              "C7",
+              "G8",
+              "C6",
+              "D7",
+              "B5",
+              "H6",
+              "F3",
+              "B4",
+              "H8",
+              "C5",
+              "F8",
+              "D4",
+              "B7",
+              "D8",
+              "G2",
+              "D6",
+              "E7",
+              "B3",
+              "E6",
+              "E8",
+              "F4",
+              "H2",
+              "F2",
+              "E4"
+            ],
+            "prompt": {
+              "system": "You are playing gomoku (five in a row) as white (O).\n\nRULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nTACTICS\nNamed shapes, counting towards the goal of 5 in a row:\n- A \"four\" is 4 of your stones in a line plus one empty point that would complete 5. If the opponent has a four you must play that completing point, or they win on their next turn.\n- An \"open four\" is a four with TWO different completing points. It cannot be blocked, because the opponent can only cover one of them. Making one wins the game.\n- An \"open three\" is 3 of your stones in a line with both ends still empty. If it is left alone it becomes an open four next turn, so it has to be answered.\n\nPRIORITIES, highest first\n1. Win now: complete 5 in a row.\n2. Block their four: if the opponent has a four, take its completing point.\n3. Win in two: make an open four. It cannot be stopped.\n4. Stop their open four: if the opponent could make an open four on their next turn, break that line now -- play one of its open ends, or a point inside it.\n5. Build an open three of your own, ideally one that also shortens a line of theirs.\n6. Otherwise: the point that best extends your lines while limiting theirs.\n\nDEFENCE COUNTS AS MUCH AS ATTACK\nBefore you choose, look at the opponent's stones first: find their longest line and check whether its ends are open. Extending your own line is worthless if it lets them finish first, and a point that is already dead for you (its line cannot reach 5 any more because the opponent blocks it) is worth nothing at all. The best move usually builds your line and blocks theirs at the same time.\n\nYOUR ANSWER\nYou are given a list of candidate points. Pick the single best one, using the priorities above.\n\nOutput raw JSON and nothing else -- no markdown fences, no commentary:\n{\"choice\": <one of the candidate points, exactly as written>, \"probabilities\": {<every candidate point>: <probability>}, \"confidence\": <0.0-1.0>}\n\"probabilities\" must contain exactly the candidate points as keys, as calibrated floats rounded to 2 decimals that sum to 1.0. \"choice\" must be the key with the highest probability. confidence = max(0, min(1, (n * peak - 1) / (n - 1))) where n is the number of candidates and peak is the largest probability, rounded to 2 decimals.",
+              "user": "RULES\nBoard: 9x9. Black (X) moves first, then players alternate. Goal: be the first to get 5 of your own stones in an unbroken row, horizontally, vertically or diagonally. A run longer than 5 also wins. Stones are never moved or captured. A full board with no line is a draw.\n\nCOORDINATES\nColumns are letters A-I from left to right. Rows are numbers 1-9 from bottom to top. A point is written as column letter followed by row number, for example H8. The centre point is E5.\n\nBOARD FORMAT\n\".\" is an empty point, \"X\" is a black stone, \"O\" is a white stone. The stone played on the previous turn is shown in lowercase.\n\nPOSITION\nIt is move 12. You are white (O); your opponent is black (X).\n\n  A B C D E F G H I\n9 . . . . . . . . . 9\n8 . . . . . . . . . 8\n7 . . . . . X O . . 7\n6 . . . . . X O . . 6\n5 . . . O X X O X . 5\n4 . . . . . . O . . 4\n3 . . . . . . x . . 3\n2 . . . . . . . . . 2\n1 . . . . . . . . . 1\n  A B C D E F G H I\n\nBlack (X) stones: F7, F6, E5, F5, H5, G3\nWhite (O) stones: G7, G6, D5, G5, G4\n\nMoves so far: 1.XE5 2.OD5 3.XF5 4.OG5 5.XH5 6.OG6 7.XF6 8.OG7 9.XF7 10.OG4 11.XG3\n\n\nCANDIDATE POINTS (choose exactly one):\nH4, H3, B6, H7, C3, C4, C7, G8, C6, D7, B5, H6, F3, B4, H8, C5, F8, D4, B7, D8, G2, D6, E7, B3, E6, E8, F4, H2, F2, E4"
+            },
+            "api_model": "openai/gpt-oss-120b",
+            "usage": {
+              "input_tokens": 1301,
+              "output_tokens": 1995
+            },
+            "finish_reason": "stop",
+            "merged_system": false,
+            "raw_len": 351,
+            "top_probabilities": {
+              "G8": 1.0,
+              "H4": 0.0,
+              "H3": 0.0,
+              "B6": 0.0,
+              "H7": 0.0
+            },
+            "confidence": 1.0,
+            "parsed_from": "json"
+          }
+        }
+      ],
+      "analysis": {
+        "own_wins": [
+          "G8"
+        ],
+        "opponent_wins": [],
+        "took_win": true,
+        "missed_win": false,
+        "blocked_threat": false,
+        "missed_block": false,
+        "unavoidable_loss": false
+      }
+    }
+  ]
+}

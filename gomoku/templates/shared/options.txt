@@ -1,0 +1,18 @@
+[plain]
+Play at column $col, row $row.
+[opponent_open_four_yes]
+Play at column $col, row $row. After this move the opponent can still create an unstoppable open four on their next turn.
+[opponent_open_four_no]
+Play at column $col, row $row. After this move the opponent cannot create an unstoppable open four on their next turn.
+[windows]
+Play at column $col, row $row. After this move the opponent's best still-winnable line holds $best of the $n points it needs, and $ways line(s) on the board are that far along.
+[ways]
+Play at column $col, row $row. After this move the opponent has $ways different ways left to reach $n in a row.
+[threat_five]
+Play at column $col, row $row. After this move the opponent completes $n at $points.
+[threat_open_four]
+Play at column $col, row $row. After this move the opponent can create an unstoppable open four on their next turn.
+[threat_none]
+Play at column $col, row $row. After this move the opponent cannot win within their next two turns.
+[full_win]
+Play at column $col, row $row. This move completes $n in a row and wins immediately.
