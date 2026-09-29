@@ -24,6 +24,18 @@ pip install "gomoku-jev[openai]"    # 加上聊天模型这一席
 
 从源码：`pip install -e ".[openai]"`。
 
+每一席各需要什么：
+
+| 想做什么 | 装什么 | 配什么 |
+| --- | --- | --- |
+| 本地机器人对战、自己下、看或回放仓库里已有的对局 | 什么都不用装 | 无 |
+| 让 jev 下棋 | `pip install -e .` | `TYPESAFE_API_KEY` —— 需要**你自己的** TypeSafe 账号或试用额度；jev 是商业产品，本仓库不附带访问权 |
+| 让聊天模型下棋 | `pip install -e ".[openai]"` | `OPENAI_API_KEY`，或只给 `OPENAI_BASE_URL`（免 key 的本地端点） |
+
+第一行是字面意思：裸 clone 直接跑 `python -m gomoku.cli --black heuristic --white random`
+和 `python -m gomoku.replay`，不会 import 任何第三方包。缺 key 时给的是一行可操作的说明，
+不是 traceback。
+
 ## 不需要任何 API key 就能跑
 
 引擎、裁判、记分和网页视图是纯标准库，所以这些命令装完立刻可用：
@@ -70,6 +82,9 @@ gomoku --black openai:openai/gpt-oss-120b --white jev --size 9 --live
 # 本地端点完全不需要 key
 OPENAI_BASE_URL=http://localhost:11434/v1 gomoku --black openai:qwen3:32b --white heuristic
 ```
+
+model id 取决于你的端点怎么叫它：`openai/gpt-oss-120b` 是 OpenRouter 的命名，官方 API 要
+`gpt-4o-mini`，Ollama 要 `qwen3:32b`。这个字符串是直接透传的，所以写错会拿回端点自己的报错。
 
 两种模式。`choice`（默认）给模型**和 jev 完全相同**的候选菜单，并要求 jev 的答案形状，所以数字可比。
 `free`（`openai:<model>|free`）只给棋盘、要一个坐标，这更贴近真实用法，也是唯一可能走出非法点的模式。

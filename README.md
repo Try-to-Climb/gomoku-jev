@@ -28,6 +28,19 @@ pip install "gomoku-jev[openai]"    # adds the chat-model seat
 
 Or from a checkout: `pip install -e ".[openai]"`.
 
+What each seat needs:
+
+| to do this | install | configure |
+| --- | --- | --- |
+| local bots, play yourself, view or replay any of the recorded games | nothing at all | nothing |
+| let jev play | `pip install -e .` | `TYPESAFE_API_KEY` -- **your own** TypeSafe account or trial; jev is a commercial product and this repository does not come with access |
+| let a chat model play | `pip install -e ".[openai]"` | `OPENAI_API_KEY`, or just `OPENAI_BASE_URL` for a local server that needs no key |
+
+The first row is literal: a bare clone runs `python -m gomoku.cli --black heuristic
+--white random` and `python -m gomoku.replay` without importing a single
+third-party package. A missing key is reported as one actionable line, not a
+traceback.
+
 ## Try it without any API key
 
 The engine, the referee, the scoring and the web view are pure standard library,
@@ -80,6 +93,11 @@ gomoku --black openai:openai/gpt-oss-120b --white jev --size 9 --live
 # a local server needs no key at all
 OPENAI_BASE_URL=http://localhost:11434/v1 gomoku --black openai:qwen3:32b --white heuristic
 ```
+
+The model id is whatever your endpoint calls it: `openai/gpt-oss-120b` is
+OpenRouter's naming, the official API wants `gpt-4o-mini`, Ollama wants
+`qwen3:32b`. `gomoku` passes the string straight through, so an unknown id comes
+back as the endpoint's own error.
 
 Two modes. `choice` (default) gives the model the *same* option menu jev gets and
 asks for jev's answer shape, so the numbers are comparable. `free`
