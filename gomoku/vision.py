@@ -38,7 +38,9 @@ from .perceive import ORIENTATION, describe_run
 from .prompts import rules_and_state
 from .rules import RuleSet
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 SIZE = 9
 RULES = RuleSet(size=SIZE)
 

@@ -38,7 +38,9 @@ from .prompts import PromptStyle, rules_and_state, rules_block
 from .rules import RuleSet
 from .vision import SIZE, RULES, Case, cases, longest_window
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 
 ROOM_OPTIONS = {
     "0": "No further stone of that colour can ever be added to that line.",

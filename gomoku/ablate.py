@@ -23,7 +23,9 @@ from .notation import to_notation
 from .probe import scenarios
 from .prompts import PROMPT_VERSION, tactics_versions
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 
 
 def build_player(backend: str, version: str, args, facts: str = "none"):

@@ -16,7 +16,7 @@ exact position in three ways, all in as few requests as possible:
    critical points get isolates "did not consider the threat" from "considered it
    and preferred something else".
 
-    python3 -m gomoku.postmortem --game gomoku/results/audit-live-0929.json --ply 6
+    python3 -m gomoku.postmortem --game results/audit-live-0929.json --ply 6
 """
 
 from __future__ import annotations
@@ -41,7 +41,9 @@ from .prompts import PromptStyle, rules_and_state
 from .render import render_board
 from .rules import RuleSet
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 ORIENTATION = {(0, 1): "row", (1, 0): "column", (1, 1): "diagonal", (1, -1): "diagonal"}
 
 
@@ -278,6 +280,7 @@ def main(argv: list[str] | None = None) -> int:
                       f"conf {answer.get('confidence')}")
 
     out = args.out or RESULTS / f"postmortem_{args.game.stem}_ply{args.ply}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, ensure_ascii=False))
     print(f"\nwrote {out}")
     client.close()

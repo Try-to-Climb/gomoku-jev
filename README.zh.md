@@ -112,7 +112,7 @@ python3 -m gomoku.probe --game 9 --max-plies 60
 python3 -m gomoku.cli --black jev --white heuristic --games 2 --size 9 --out results/jev_vs_bot.json
 ```
 
-已跑通的结果（`gomoku/results/jev_probe.json`，jev-1.13.0）：
+已跑通的结果（`results/jev_probe.json`，jev-1.13.0）：
 
 | 探针 | 结果 |
 | --- | --- |
@@ -236,10 +236,10 @@ python3 -m gomoku.audit --black jev@p2-defence-first --white openai --size 9 --l
 
 ```bash
 python3 -m gomoku.audit --black jev --white openai --size 9 --seed 101
-# → gomoku/results/audit-<时间戳>.md 和同名 .json（.json 里每手都带完整提示词）
+# → results/audit-<时间戳>.md 和同名 .json（.json 里每手都带完整提示词）
 ```
 
-样例：`gomoku/results/audit-jev-vs-gptoss.md`（14 手，gpt-oss-120b 执白胜）。
+样例：`results/audit-jev-vs-gptoss.md`（14 手，gpt-oss-120b 执白胜）。
 
 ## 提示词版本与消融
 

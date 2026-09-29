@@ -6,7 +6,7 @@
 
 The three positions have an objectively correct answer (except the first), so a
 probe run tells you whether the wiring works *and* whether the model can see one
-move ahead. Full payloads land in ``gomoku/results/<backend>_probe.json``.
+move ahead. Full payloads land in ``results/<backend>_probe.json``.
 """
 
 from __future__ import annotations
@@ -28,7 +28,9 @@ from .notation import from_notation, to_notation
 from .players import HeuristicPlayer, Player
 from .rules import RuleSet
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 
 
 def coords(*texts, size=15):

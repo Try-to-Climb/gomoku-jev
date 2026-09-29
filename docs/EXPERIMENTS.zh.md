@@ -1,6 +1,6 @@
 # 实验过程报告：用五子棋测 jev
 
-被测对象 **jev-1.13.0**（TypeSafe System One）。原始数据在 `gomoku/results/`，提示词在
+被测对象 **jev-1.13.0**（TypeSafe System One）。原始数据在 `results/`，提示词在
 `gomoku/templates/`，复现命令见文末。
 
 > 这是**过程报告**：方法、证据、教训。结论性的能力画像见 **[FINDINGS.zh.md](FINDINGS.zh.md)**。
@@ -459,7 +459,7 @@ ways:    "the opponent has 1 different ways left to reach 5 in a row."
 
 ## 附录：关键原始证据
 
-以下均从 `gomoku/results/` 原样摘出，未作改写。
+以下均从 `results/` 原样摘出，未作改写。
 
 ### A. 裸条件下的败着（E11，第 6 手）
 
@@ -540,13 +540,13 @@ python3 -m gomoku.vision --repeats 2        # 递推链拆解（含正反问法�
 python3 -m gomoku.infer  --repeats 2        # 抽象规则 / 三色辨别 / 计数结论
 
 # 定点复盘某一手（问诊 + 各注入档 A/B）
-python3 -m gomoku.postmortem --game gomoku/results/audit-live-0929.json --ply 6 \
+python3 -m gomoku.postmortem --game results/audit-live-0929.json --ply 6 \
   --option-facts none,ways,open_four,threat --repeats 3
 
 # 实战 + 逐手审计 + 实时网页（文件模式无需网络）
 python3 -m gomoku.audit --black jev --white openai --size 9 \
   --option-facts black=threat \
-  --live --live-file gomoku/results/live.html --live-hold 3600 --no-open
+  --live --live-file results/live.html --live-hold 3600 --no-open
 ```
 
 ## 数据文件

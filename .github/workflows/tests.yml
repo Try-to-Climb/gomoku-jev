@@ -1,0 +1,117 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    # The suite is offline by construction (gomoku/tests/__init__.py turns any
+    # outbound HTTP call into a failure), so it needs no credentials and no
+    # network, and runs in seconds.
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install (core only, deliberately without the openai extra)
+        run: python -m pip install --upgrade pip && python -m pip install .
+      - name: Unit tests
+        run: python -m unittest discover -s gomoku/tests -t . -v
+      - name: The optional backend must not be needed to run the suite
+        run: |
+          python - <<'PY'
+          import importlib.util, sys
+          if importlib.util.find_spec("openai") is not None:
+              sys.exit("openai got installed; the core install must not pull it in")
+          import gomoku.openai_player  # must import with the SDK absent
+          print("openai_player imports without the SDK present")
+          PY
+
+  offline-guard:
+    # A benchmark run costs real tokens. Asserts the test-suite network ban is
+    # actually armed, so a live call can never sneak into CI.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install .
+      - name: Importing the test package must disarm the network
+        run: |
+          python - <<'PY'
+          import gomoku.tests  # installs the guard
+          import requests
+          try:
+              requests.post("https://example.invalid", timeout=1)
+          except AssertionError as exc:
+              print("guard armed:", exc)
+          else:
+              raise SystemExit("the network guard did NOT fire")
+          PY
+
+  packaging:
+    # Catches the classic packaging bug for this project: prompts.py and live.py
+    # read templates/ and live.html from beside the module, so if package-data is
+    # wrong every model call fails only after install, never in the checkout.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip build
+      - run: python -m build
+      - name: Install the built wheel into a clean environment
+        run: |
+          python -m venv /tmp/venv
+          /tmp/venv/bin/python -m pip install dist/*.whl
+      - name: Prompt text and the live page must be present in the installed package
+        run: |
+          cd /tmp
+          /tmp/venv/bin/python - <<'PY'
+          import pathlib
+          from gomoku.prompts import rules_block, tactics_block, tactics_versions
+          from gomoku.rules import RuleSet
+          import gomoku.live
+
+          rules = RuleSet(size=9)
+          assert "Columns are letters" in rules_block(rules), "shared/rules.txt missing"
+          assert "open four" in tactics_block(rules), "shared/tactics/ missing"
+          versions = tactics_versions()
+          assert "p0-one-move" in versions and "p1-threat-ladder" in versions, versions
+          assert pathlib.Path(gomoku.live.PAGE).is_file(), "live.html missing"
+          print("packaged templates ok:", versions)
+          PY
+      - name: The console script and a keyless match must work from anywhere
+        run: |
+          cd /tmp
+          /tmp/venv/bin/gomoku --list-backends
+          /tmp/venv/bin/gomoku --list-prompts
+          /tmp/venv/bin/gomoku --black heuristic --white random --games 2 --size 9 --seed 1
+
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No credential files and no vendor-internal references
+        run: |
+          set -e
+          if git ls-files | grep -Ei 'apikei|authrecord|\.env$|\.pem$|\.key$'; then
+            echo "::error::a credential-looking file is tracked"; exit 1
+          fi
+          if git grep -nIiE 'ericai|ericsson|\bsso\b|BEGIN [A-Z ]*PRIVATE KEY' -- . ':!.github/workflows'; then
+            echo "::error::vendor-internal reference or private key material found"; exit 1
+          fi
+          echo "clean"

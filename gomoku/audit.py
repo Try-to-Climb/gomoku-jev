@@ -30,7 +30,9 @@ from .notation import to_notation
 from .render import render_board
 from .rules import IllegalMovePolicy, Opening, OverlineRule, RuleSet, describe
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 
 STONE_CN = {Stone.BLACK: "黑 ✕ (X)", Stone.WHITE: "白 ○ (O)"}
 STATUS_CN = {

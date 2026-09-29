@@ -1,6 +1,6 @@
 # Experiment report: probing jev with gomoku
 
-Subject: **jev-1.13.0** (TypeSafe System One). Raw data in `gomoku/results/`, prompts in
+Subject: **jev-1.13.0** (TypeSafe System One). Raw data in `results/`, prompts in
 `gomoku/templates/`, reproduction commands at the end.
 
 > This is the **process** report: method, evidence, lessons. For the conclusions see
@@ -542,7 +542,7 @@ every loss was a loss on play.
 
 ## Appendix: key raw evidence
 
-All taken verbatim from `gomoku/results/`.
+All taken verbatim from `results/`.
 
 ### A. The losing move with no injection (E11, move 6)
 
@@ -625,13 +625,13 @@ python3 -m gomoku.vision --repeats 2        # the decomposed chain (with negated
 python3 -m gomoku.infer  --repeats 2        # abstract rules / colours / the count form
 
 # post-mortem of one recorded move (perception + A/B across injection levels)
-python3 -m gomoku.postmortem --game gomoku/results/audit-live-0929.json --ply 6 \
+python3 -m gomoku.postmortem --game results/audit-live-0929.json --ply 6 \
   --option-facts none,ways,open_four,threat --repeats 3
 
 # a live game with a move-by-move audit and a browser view (file mode needs no network)
 python3 -m gomoku.audit --black jev --white openai --size 9 \
   --option-facts black=threat \
-  --live --live-file gomoku/results/live.html --live-hold 3600 --no-open
+  --live --live-file results/live.html --live-hold 3600 --no-open
 ```
 
 ## Data files

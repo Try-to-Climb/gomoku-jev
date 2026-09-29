@@ -41,7 +41,9 @@ from .notation import from_notation, to_notation
 from .prompts import rules_and_state
 from .rules import RuleSet
 
-RESULTS = pathlib.Path(__file__).resolve().parent / "results"
+#: default output directory, relative to the working directory (never inside the
+#: installed package, which may be read-only)
+RESULTS = pathlib.Path("results")
 
 ORIENTATION = {
     (0, 1): "horizontal line along a row",

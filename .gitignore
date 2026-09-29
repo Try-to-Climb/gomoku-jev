@@ -1,6 +1,7 @@
 # --- secrets: never commit ---------------------------------------------------
-# The jev API key is read from the TYPESAFE_API_KEY environment variable only.
-# These patterns exist so that a stray local key file can never be staged.
+# The jev key comes from $TYPESAFE_API_KEY, or a file named by
+# $TYPESAFE_API_KEY_FILE that lives outside the repository. These patterns exist
+# so that a stray local key file can never be staged.
 apikei.txt
 *api*key*.txt
 .env
@@ -28,7 +29,7 @@ venv/
 # --- generated artefacts -----------------------------------------------------
 # `--live-file` writes a self-contained HTML snapshot plus a .tmp during the swap
 *.tmp
-gomoku/results/live.html
+results/live.html
 
 # --- editors / OS ------------------------------------------------------------
 .vscode/
