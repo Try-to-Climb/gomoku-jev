@@ -116,13 +116,13 @@ def main(argv: list[str] | None = None) -> int:
                 mark = "✓" if ok else "✗"
                 print(
                     f"  {case['id']:18} rep{rep} {mark} {chosen or response.error} "
-                    f"(期望 {'/'.join(case['expect'])}, conf {response.meta.get('confidence')})",
+                    f"(expected {'/'.join(case['expect'])}, conf {response.meta.get('confidence')})",
                     flush=True,
                 )
         player.close()
 
     width = max(len(c["id"]) for c in cases) + 2
-    print(f"\n命中率 ({args.backend}, 每格 {args.repeats} 次)")
+    print(f"\nhit rate ({args.backend}, {args.repeats} samples per cell)")
     arm_names = [f"{v}+facts={f}" for v, f in arms]
     header = f"{'position':{width}}" + "".join(f"{a[-22:]:>24}" for a in arm_names)
     print(header)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>gomoku live</title>
@@ -29,6 +29,16 @@
   .cell.white::after { background: var(--white); }
   .cell.last { outline: 2px solid var(--accent); outline-offset: -2px; z-index: 1; }
   .coords { color: var(--dim); font-size: 11px; display: grid; place-items: center; }
+  /* replay controls */
+  .controls { display: flex; gap: 6px; align-items: center; margin: 10px 0 0; }
+  .controls button { background: #232830; color: var(--ink); border: 1px solid var(--line);
+                     border-radius: 4px; padding: 3px 9px; cursor: pointer;
+                     font: inherit; font-size: 13px; }
+  .controls button:hover:not(:disabled) { background: #2b3139; }
+  .controls button:disabled { opacity: .4; cursor: default; }
+  .controls .spacer { flex: 1; }
+  .controls .live { border-color: var(--accent); color: var(--accent); }
+  input[type=range] { width: 100%; margin: 8px 0 0; accent-color: var(--accent); }
   /* right panel */
   .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
            overflow: hidden; }
@@ -73,40 +83,84 @@
 <div class="wrap">
   <div>
     <div id="board" class="board"></div>
+    <input type="range" id="scrub" min="0" max="0" value="0" step="1"
+           aria-label="move number">
+    <div class="controls">
+      <button id="first" title="first move">&laquo;</button>
+      <button id="prev" title="previous move (left arrow)">&lsaquo;</button>
+      <button id="next" title="next move (right arrow)">&rsaquo;</button>
+      <button id="last" title="latest move">&raquo;</button>
+      <span class="spacer"></span>
+      <button id="golive" class="live" title="follow the game as it is played">Live</button>
+    </div>
     <p class="muted" id="boardnote" style="margin:8px 0 0"></p>
   </div>
 
   <div class="stack">
     <div class="panel">
-      <h2>着法 · 点一行看原始回复</h2>
+      <h2>Moves &middot; click a row for the raw reply</h2>
       <div id="moves" class="moves"></div>
     </div>
     <div class="panel">
-      <h2 id="detailhead">原始回复</h2>
-      <div id="detail" class="detail muted">等待第一手…</div>
+      <h2 id="detailhead">Raw reply</h2>
+      <div id="detail" class="detail muted">Waiting for the first move&hellip;</div>
     </div>
     <div class="panel">
-      <h2>指标</h2>
-      <div id="summary" class="detail muted">对局结束后统计</div>
+      <h2>Metrics</h2>
+      <div id="summary" class="detail muted">Available when the game ends</div>
     </div>
   </div>
 </div>
 
 <script>
+// The engine's own verdict for a move. Keys are the labels gomoku/live.py emits;
+// a test asserts every one of them appears in this file.
 const LABEL = {
-  took_win: ["ok", "成五获胜"],
-  missed_win: ["bad", "有一步杀没走"],
-  blocked_five: ["ok", "堵住冲四"],
-  missed_five_block: ["bad", "该堵没堵"],
-  took_open_four: ["ok", "造出活四"],
-  missed_open_four: ["bad", "错过活四"],
-  prevented_open_four: ["ok", "拦住活四"],
-  allowed_open_four: ["bad", "放过活四"],
-  unavoidable_loss: ["warn", "已无解"],
+  took_win: ["ok", "won with five"],
+  missed_win: ["bad", "missed a win"],
+  blocked_five: ["ok", "blocked the four"],
+  missed_five_block: ["bad", "failed to block"],
+  took_open_four: ["ok", "made an open four"],
+  missed_open_four: ["bad", "missed an open four"],
+  prevented_open_four: ["ok", "stopped an open four"],
+  allowed_open_four: ["bad", "allowed an open four"],
+  unavoidable_loss: ["warn", "already lost"],
 };
+const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const EMBEDDED = null; // __EMBEDDED__
-let version = -1, selected = null, state = null;
+let version = -1, state = null;
+//: which ply is on screen; null means "follow the live game"
+let selected = null;
 
+const at = s => selected === null ? s.moves.length - 1 : selected;
+
+/* ------------------------------------------------------------------ geometry */
+function fromNotation(text, size) {
+  const col = LETTERS.indexOf(text[0]);
+  const row = size - parseInt(text.slice(1), 10);
+  return [row, col];
+}
+
+// Replay the move list rather than trusting state.board, which is always the
+// latest position. Moves with no coordinate (a player that never answered) are
+// skipped, so the reconstruction stays aligned with what the referee recorded.
+function positionAt(s, upto) {
+  const n = s.board.length;
+  if (selected === null || upto >= s.moves.length - 1) {
+    return { grid: s.board, last: s.last_move };
+  }
+  const grid = Array.from({ length: n }, () => Array(n).fill(""));
+  let last = null;
+  for (let i = 0; i <= upto; i++) {
+    const m = s.moves[i];
+    if (!m.move) continue;
+    const [r, c] = fromNotation(m.move, n);
+    if (r >= 0 && r < n && c >= 0 && c < n) { grid[r][c] = m.symbol; last = m.move; }
+  }
+  return { grid, last };
+}
+
+/* --------------------------------------------------------------------- board */
 function cell(sym, isLast) {
   const d = document.createElement("div");
   d.className = "cell" + (sym === "X" ? " black" : sym === "O" ? " white" : "") +
@@ -115,110 +169,138 @@ function cell(sym, isLast) {
 }
 
 function drawBoard(s) {
+  const { grid, last } = positionAt(s, at(s));
   const n = s.board.length, host = document.getElementById("board");
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   host.style.gridTemplateColumns = `repeat(${n + 1}, auto)`;
   host.innerHTML = "";
   const corner = document.createElement("div"); corner.className = "coords";
   host.appendChild(corner);
   for (let c = 0; c < n; c++) {
     const d = document.createElement("div"); d.className = "coords";
-    d.textContent = letters[c]; host.appendChild(d);
+    d.textContent = LETTERS[c]; host.appendChild(d);
   }
   for (let r = 0; r < n; r++) {
     const lab = document.createElement("div"); lab.className = "coords";
     lab.textContent = n - r; host.appendChild(lab);
     for (let c = 0; c < n; c++) {
-      const coord = letters[c] + (n - r);
-      host.appendChild(cell(s.board[r][c], coord === s.last_move));
+      const coord = LETTERS[c] + (n - r);
+      host.appendChild(cell(grid[r][c], coord === last));
     }
   }
-  document.getElementById("boardnote").textContent =
-    s.last_move ? `上一手 ${s.last_move}` : "";
+  drawControls(s, last);
 }
 
+function drawControls(s, last) {
+  const total = s.moves.length, i = at(s);
+  const scrub = document.getElementById("scrub");
+  scrub.max = Math.max(total - 1, 0);
+  scrub.value = Math.max(i, 0);
+  scrub.disabled = total === 0;
+  document.getElementById("first").disabled = total === 0 || i <= 0;
+  document.getElementById("prev").disabled = total === 0 || i <= 0;
+  document.getElementById("next").disabled = total === 0 || i >= total - 1;
+  document.getElementById("last").disabled = total === 0 || i >= total - 1;
+  const live = document.getElementById("golive");
+  live.disabled = selected === null;
+  const note = document.getElementById("boardnote");
+  if (!total) { note.textContent = ""; return; }
+  note.textContent = selected === null
+    ? (last ? `Move ${total} of ${total} (live) \u00b7 last played ${last}` : "")
+    : `Move ${i + 1} of ${total} \u00b7 ${last ? "last played " + last : "empty board"}` +
+      " \u00b7 arrow keys to step, Live to follow again";
+}
+
+/* --------------------------------------------------------------------- moves */
 function drawMoves(s) {
   const host = document.getElementById("moves");
+  const i = at(s);
   host.innerHTML = "";
-  s.moves.forEach((m, i) => {
+  s.moves.forEach((m, k) => {
     const row = document.createElement("div");
-    row.className = "move" + (i === selected ? " sel" : "");
+    row.className = "move" + (k === i ? " sel" : "");
     const rejected = m.attempts.filter(a => a.verdict !== "accepted").length;
     const tag = LABEL[m.verdict];
     row.innerHTML =
       `<span class="no">${m.ply}.</span>` +
-      `<span class="pt">${m.symbol} ${m.move ?? "—"}</span>` +
-      `<span class="who muted">${m.player}</span>` +
+      `<span class="pt">${m.symbol} ${m.move ?? "\u2014"}</span>` +
+      `<span class="who muted">${escapeHtml(m.player)}</span>` +
       `<span class="muted">${m.latency_s}s</span>` +
-      (rejected ? `<span class="tag bad">${rejected} 次被拒</span>` : "") +
+      (rejected ? `<span class="tag bad">${rejected} rejected</span>` : "") +
       (tag ? `<span class="tag ${tag[0]}">${tag[1]}</span>` : "");
-    row.onclick = () => { selected = i; drawDetail(s); drawMoves(s); };
+    row.onclick = () => select(k);
     host.appendChild(row);
   });
   if (s.thinking) {
     const row = document.createElement("div");
     row.className = "move think";
-    row.innerHTML = `<span class="no">…</span><span>${s.thinking.player} 正在思考</span>`;
+    row.innerHTML = `<span class="no">\u2026</span>` +
+                    `<span>${escapeHtml(s.thinking.player)} is thinking</span>`;
     host.appendChild(row);
   }
-  host.scrollTop = host.scrollHeight;
+  if (selected === null) host.scrollTop = host.scrollHeight;
 }
 
+/* -------------------------------------------------------------------- detail */
 function drawDetail(s) {
   const host = document.getElementById("detail");
-  const i = selected ?? s.moves.length - 1;
-  const m = s.moves[i];
-  if (!m) { host.textContent = "等待第一手…"; return; }
+  const m = s.moves[at(s)];
+  if (!m) { host.className = "detail muted";
+            host.textContent = "Waiting for the first move\u2026"; return; }
   document.getElementById("detailhead").textContent =
-    `第 ${m.ply} 手 · ${m.player} · ${m.move ?? "未落子"}`;
+    `Move ${m.ply} \u00b7 ${m.player} \u00b7 ${m.move ?? "no move"}`;
   const parts = [];
-  m.attempts.forEach((a, k) => {
+  m.attempts.forEach(a => {
     const meta = a.meta || {};
     const kv = [];
     const push = (label, value) => {
       if (value !== undefined && value !== null && value !== "")
         kv.push(`<div>${label}</div><div>${value}</div>`);
     };
-    push("结果", a.verdict === "accepted" ? "采纳" : `拒绝 (${a.error})`);
-    push("落子", a.move);
-    push("耗时", a.latency_s + " s");
+    push("verdict", a.verdict === "accepted" ? "accepted" : `rejected (${a.error})`);
+    push("played", a.move);
+    push("latency", a.latency_s + " s");
     if (meta.usage) push("tokens", `in ${meta.usage.input_tokens} / out ${meta.usage.output_tokens}`);
     push("confidence", meta.confidence);
-    push("候选数", meta.candidates);
-    push("模型", meta.jev_model || meta.api_model);
+    push("candidates", meta.candidates);
+    push("model", meta.jev_model || meta.api_model);
     push("finish_reason", meta.finish_reason);
-    if (meta.truncated) push("截断", "是");
+    if (meta.truncated) push("truncated", "yes");
+    if (meta.truncation_retry) push("retried after truncation", "yes");
+    if (meta.forced) push("forced", "only one legal point, no API call");
     if (meta.top_probabilities)
-      push("概率最高", Object.entries(meta.top_probabilities)
-        .map(([k2, v]) => `${k2} ${v}`).join("，"));
-    if (meta.menu) push("菜单", meta.menu.join(" "));
+      push("top probabilities", Object.entries(meta.top_probabilities)
+        .map(([k, v]) => `${k} ${v}`).join(", "));
+    if (meta.menu) push("menu", meta.menu.join(" "));
     parts.push(
       `<div class="kv">${kv.join("")}</div>` +
-      (a.raw ? `<pre>${escapeHtml(a.raw)}</pre>` : `<p class="muted">（无原始文本）</p>`)
+      (a.raw ? `<pre>${escapeHtml(a.raw)}</pre>` : `<p class="muted">(no raw text)</p>`)
     );
   });
   if (m.analysis) {
     const a = m.analysis;
     const facts = [
-      ["我方一步杀", a.own_wins], ["对手一步杀", a.opponent_wins],
-      ["我方可造活四", a.own_open_fours], ["对手可造活四", a.opponent_open_fours],
+      ["my winning points", a.own_wins], ["their winning points", a.opponent_wins],
+      ["open fours I could make", a.own_open_fours],
+      ["open fours they could make", a.opponent_open_fours],
     ].filter(([, v]) => v && v.length)
      .map(([k, v]) => `<div>${k}</div><div>${v.join(" ")}</div>`).join("");
-    if (facts) parts.push(`<h2 style="padding:0;border:0">引擎事实（提问前算好）</h2>
+    if (facts) parts.push(`<h2 style="padding:0;border:0">Engine facts (computed before asking)</h2>
                            <div class="kv">${facts}</div>`);
   }
   host.className = "detail";
   host.innerHTML = parts.join("<hr style='border:0;border-top:1px solid var(--line);margin:10px 0'>");
 }
 
+/* ------------------------------------------------------------------- metrics */
 function drawSummary(s) {
   const host = document.getElementById("summary");
-  if (!s.summary) { host.className = "detail muted"; host.textContent = "对局结束后统计"; return; }
+  if (!s.summary) { host.className = "detail muted";
+                    host.textContent = "Available when the game ends"; return; }
   const cols = [
-    ["player", p => p.name], ["W", p => p.wins], ["L", p => p.losses],
+    ["player", p => escapeHtml(p.name)], ["W", p => p.wins], ["L", p => p.losses],
     ["moves", p => p.moves], ["winconv", p => pct(p.win_conversion)],
     ["block%", p => pct(p.block_rate)], ["of.make", p => pct(p.open_four_conversion)],
-    ["of.stop", p => pct(p.open_four_prevention)], ["lat s", p => p.avg_latency_s ?? "—"],
+    ["of.stop", p => pct(p.open_four_prevention)], ["lat s", p => p.avg_latency_s ?? "\u2014"],
   ];
   const rows = Object.values(s.summary.players).map(p =>
     `<tr>${cols.map(([, f]) => `<td>${f(p)}</td>`).join("")}</tr>`).join("");
@@ -227,21 +309,69 @@ function drawSummary(s) {
                     <tbody>${rows}</tbody></table>`;
 }
 
-const pct = v => (v === null || v === undefined) ? "—" : (100 * v).toFixed(0) + "%";
-const escapeHtml = t => t.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+const pct = v => (v === null || v === undefined) ? "\u2014" : (100 * v).toFixed(0) + "%";
+const escapeHtml = t => String(t).replace(/[&<>]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 
+/* ------------------------------------------------------------- interaction */
+// The selected ply lives in the URL hash so that the snapshot mode's periodic
+// full-page reload does not throw away where you were looking.
+function select(index) {
+  if (!state) return;
+  const total = state.moves.length;
+  if (index === null || index >= total - 1) {
+    selected = null;
+    location.hash = "";
+  } else {
+    selected = Math.max(0, Math.min(index, total - 1));
+    location.hash = "ply" + (selected + 1);
+  }
+  paint();
+}
+
+function restoreFromHash(s) {
+  const m = /^#ply(\d+)$/.exec(location.hash);
+  if (!m) return;
+  const index = parseInt(m[1], 10) - 1;
+  if (index >= 0 && index < s.moves.length - 1) selected = index;
+}
+
+function paint() {
+  if (!state) return;
+  drawBoard(state); drawMoves(state); drawDetail(state); drawSummary(state);
+}
+
+document.getElementById("first").onclick = () => select(0);
+document.getElementById("prev").onclick = () => select(at(state) - 1);
+document.getElementById("next").onclick = () => select(at(state) + 1);
+document.getElementById("last").onclick = () => select(null);
+document.getElementById("golive").onclick = () => select(null);
+document.getElementById("scrub").oninput = e => select(parseInt(e.target.value, 10));
+document.addEventListener("keydown", e => {
+  if (!state || !state.moves.length) return;
+  if (e.key === "ArrowLeft") { select(at(state) - 1); e.preventDefault(); }
+  else if (e.key === "ArrowRight") { select(at(state) + 1); e.preventDefault(); }
+  else if (e.key === "Home") { select(0); e.preventDefault(); }
+  else if (e.key === "End" || e.key === "Escape") { select(null); e.preventDefault(); }
+});
+
+/* ---------------------------------------------------------------- top level */
 function render(s) {
+  const first = state === null;
   state = s;
+  if (first) restoreFromHash(s);
   const p = s.players || {};
   document.getElementById("players").textContent = p.black
-    ? `第 ${s.game_no} 局 · 黑 ✕ ${p.black.name}  vs  白 ○ ${p.white.name}` : "";
+    ? `Game ${s.game_no} \u00b7 black \u2715 ${p.black.name}  vs  white \u25cb ${p.white.name}`
+    : "";
   const st = document.getElementById("status");
   const done = s.status !== "in_progress" && s.status !== "waiting";
   st.textContent = done
-    ? `${s.status}${s.reason ? " (" + s.reason + ")" : ""}${s.winner ? " · 胜者 " + s.winner : ""}`
-    : (s.thinking ? `${s.thinking.player} 思考中…` : "进行中");
+    ? `${s.status}${s.reason ? " (" + s.reason + ")" : ""}` +
+      `${s.winner ? " \u00b7 winner " + s.winner : ""}`
+    : (s.thinking ? `${s.thinking.player} is thinking\u2026` : "in progress");
   st.className = done ? "tag ok" : "think";
-  drawBoard(s); drawMoves(s); drawDetail(s); drawSummary(s);
+  paint();
 }
 
 async function poll() {
@@ -251,12 +381,12 @@ async function poll() {
     document.getElementById("conn").textContent = "";
     if (s.version !== version) { version = s.version; render(s); }
   } catch (e) {
-    document.getElementById("conn").textContent = "· 已断开（对局可能已结束）";
+    document.getElementById("conn").textContent = "\u00b7 disconnected (the game may have ended)";
   }
 }
 if (EMBEDDED) {
   render(EMBEDDED);
-  document.getElementById("conn").textContent = "· 文件快照模式（自动刷新）";
+  document.getElementById("conn").textContent = "\u00b7 file snapshot (reloads itself)";
 } else {
   poll();
   setInterval(poll, 600);

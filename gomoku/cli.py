@@ -12,12 +12,12 @@ import argparse
 import json
 import pathlib
 import random
-import time
 import sys
 
 from .board import Stone
 from . import backends
 from .backends import build_player, describe as describe_backends, spec_help
+from .live import hold_open
 from .match import play_series
 from .metrics import format_summary, summarize
 from .players import ConsolePlayer, Player
@@ -40,23 +40,6 @@ def _per_seat(value: str) -> dict[str, str]:
             raise SystemExit(f"unknown seat {seat!r} (black | white)")
         out[seat] = level.strip()
     return out
-
-
-def _hold_live(seconds: float) -> None:
-    """Keep the live view up after the game: for a fixed time, or until Enter."""
-    if seconds > 0:
-        print(f"\nlive view 保持 {seconds:.0f} 秒后关闭…", flush=True)
-        try:
-            time.sleep(seconds)
-        except KeyboardInterrupt:
-            pass
-        return
-    if not sys.stdin or not sys.stdin.isatty():
-        return
-    try:
-        input("\nlive view 仍在运行，按回车关闭…")
-    except (EOFError, KeyboardInterrupt):
-        pass
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -253,7 +236,7 @@ def main(argv: list[str] | None = None) -> int:
     for player in (black, white):
         player.close()
     if live is not None:
-        _hold_live(args.live_hold)
+        hold_open(args.live_hold)
         live.close()
     return 0
 

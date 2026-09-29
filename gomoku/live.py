@@ -246,6 +246,30 @@ class LiveBoard:
             self._server = None
 
 
+def hold_open(seconds: float) -> None:
+    """Keep a finished game on screen: for a fixed time, or until Enter.
+
+    The server thread is a daemon, so without this the page goes blank the moment
+    the last move is scored.
+    """
+    import sys
+    import time
+
+    if seconds > 0:
+        print(f"\nkeeping the live view up for {seconds:.0f}s...", flush=True)
+        try:
+            time.sleep(seconds)
+        except KeyboardInterrupt:
+            pass
+        return
+    if not sys.stdin or not sys.stdin.isatty():
+        return
+    try:
+        input("\nthe live view is still serving; press Enter to stop...")
+    except (EOFError, KeyboardInterrupt):
+        pass
+
+
 def _verdict(analysis) -> str | None:
     """One short label per move, the same taxonomy the audit document uses."""
     if analysis.took_win:

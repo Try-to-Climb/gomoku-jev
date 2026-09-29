@@ -178,7 +178,7 @@ def show(scored: dict) -> None:
         shown = ("y" if said else "n") if isinstance(row["truth"], bool) else said
         truth = ("y" if row["truth"] else "n") if isinstance(row["truth"], bool) else row["truth"]
         p = f"{row['p']:.2f}" if isinstance(row["p"], float) else str(row["p"])
-        print(f"      {qid:22} 真值={truth:<11} 答={str(shown):<11} p={p:<6} {mark}")
+        print(f"      {qid:22} truth={truth:<11} said={str(shown):<11} p={p:<6} {mark}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -195,7 +195,7 @@ def main(argv: list[str] | None = None) -> int:
 
     runs: list[dict] = []
 
-    print("\n########## 1) 纯规则算术，完全不看棋盘 ##########")
+    print("\n########## 1) rule arithmetic, with no board at all ##########")
     state, questions, truths = abstract_request()
     for rep in range(args.repeats):
         try:
@@ -208,10 +208,10 @@ def main(argv: list[str] | None = None) -> int:
         show(scored)
         runs.append({"group": "abstract", "repeat": rep, "answers": scored})
 
-    print("\n########## 2) 空/白/黑 辨别 + 还能加几个子 ##########")
+    print("\n########## 2) empty / white / black, and how much room is left ##########")
     for case in cases():
         state, questions, truths, room = colour_request(case)
-        print(f"\n--- {case.id} ---  引擎: 这条线还能再加 {room} 个黑子")
+        print(f"\n--- {case.id} ---  engine: {room} more black stone(s) fit on that line")
         for rep in range(args.repeats):
             try:
                 response = client.ask(state, questions)
@@ -223,7 +223,7 @@ def main(argv: list[str] | None = None) -> int:
             show(scored)
             runs.append({"group": case.id, "repeat": rep, "answers": scored})
 
-    print("\n########## 汇总 ##########")
+    print("\n########## summary ##########")
     per_question: dict[str, list[bool]] = {}
     for row in runs:
         for qid, cell in row["answers"].items():

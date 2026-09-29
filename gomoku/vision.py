@@ -60,35 +60,35 @@ def cases() -> list[Case]:
     return [
         Case(
             "blocked_both_ends_4",
-            "黑 E5 F5 G5 H5，两端 D5/I5 都是白子 → 死",
+            "black E5 F5 G5 H5, white on both ends D5/I5 -> dead",
             ["E5", "D5", "F5", "I5", "G5", "A1", "H5", "C1"],
             cell="D5",
             cell_is_white=True,
         ),
         Case(
             "blocked_one_end_4",
-            "黑 E5 F5 G5 H5，只有左端 D5 是白子，I5 空 → 活（I5 即成五）",
+            "black E5 F5 G5 H5, white only on the left end D5, I5 empty -> live (I5 makes five)",
             ["E5", "D5", "F5", "A1", "G5", "C1", "H5", "A9"],
             cell="I5",
             cell_is_white=False,
         ),
         Case(
             "open_both_ends_3",
-            "黑 E5 F5 G5，两端全空 → 活",
+            "black E5 F5 G5, both ends empty -> live",
             ["E5", "A1", "F5", "C1", "G5", "A9"],
             cell="D5",
             cell_is_white=False,
         ),
         Case(
             "blocked_both_ends_2",
-            "黑 E5 F5，两端 D5/G5 都是白子 → 死",
+            "black E5 F5, white on both ends D5/G5 -> dead",
             ["E5", "D5", "F5", "G5"],
             cell="G5",
             cell_is_white=True,
         ),
         Case(
             "edge_and_stone_4",
-            "黑 F5 G5 H5 I5 靠右边线，左端 E5 是白子 → 死（右边没格子了）",
+            "black F5 G5 H5 I5 against the right edge, white on the left end E5 -> dead (no room right)",
             ["F5", "E5", "G5", "A1", "H5", "C1", "I5", "A9"],
             cell="E5",
             cell_is_white=True,
@@ -292,7 +292,7 @@ def main(argv: list[str] | None = None) -> int:
         view = game.view()
         state = rules_and_state(view, config.style, None, BACKEND)
         print(f"--- {case.id} ---\n{case.why}")
-        print(f"引擎判定: 这条线 {'活' if run.live else '死'}（长度 {run.length}）")
+        print(f"engine verdict: this line is {'LIVE' if run.live else 'DEAD'} (length {run.length})")
         for rep in range(args.repeats):
             try:
                 response = client.ask(state, questions)
@@ -328,10 +328,10 @@ def main(argv: list[str] | None = None) -> int:
                 else:
                     parts.append(f"{qid}={a['said']}{mark}")
             print(f"  rep{rep}:\n      " + "\n      ".join(parts)
-                  + ("\n      ⚠ 正反问法同时答是" if both_yes else ""))
+                  + ("\n      ! answered yes to both the positive and the negative form" if both_yes else ""))
         print()
 
-    print("汇总（每格 = 正确次数/总次数）")
+    print("summary (each cell = correct / asked)")
     header = f"{'case':22}" + "".join(f"{q[:17]:>18}" for q in ORDER)
     print(header)
     print("-" * len(header))
@@ -348,7 +348,7 @@ def main(argv: list[str] | None = None) -> int:
         totals += f"{sum(1 for x in got if x)}/{len(got)}".rjust(18)
     print(totals)
     contradictions = sum(r["contradiction"] for r in runs)
-    print(f"\n正反问法同时答「是」的次数（纯附和的证据）: {contradictions}/{len(runs)}")
+    print(f"\nyes to both polarities (evidence of mere acquiescence): {contradictions}/{len(runs)}")
 
     out = args.out or RESULTS / f"vision_{client.name}.json"
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -29,27 +29,34 @@ class TestAuditDocument(unittest.TestCase):
         self.assertEqual(run_audit(self.out), 0)
         text = self.out.read_text(encoding="utf-8")
         for fragment in (
-            "# 五子棋对局审计记录",
-            "## 逐手记录",
-            "### 第 1 手",
-            "**该手之前的局面**",
-            "**引擎算出的客观事实**",
-            "**落子之后**",
-            "## 结果",
-            "## 指标汇总",
+            "# Gomoku match audit",
+            "## Move by move",
+            "### Move 1 ",
+            "**Position before this move**",
+            "**Objective facts from the engine**",
+            "**Position after the move**",
+            "## Result",
+            "## Metrics",
         ):
             self.assertIn(fragment, text)
         # one section per ply, and the board is rendered twice per ply
-        plies = text.count("### 第 ")
+        plies = text.count("### Move ")
         self.assertGreater(plies, 4)
-        self.assertEqual(text.count("**落子之后**"), plies)
+        self.assertEqual(text.count("**Position after the move**"), plies)
         self.assertTrue(self.out.with_suffix(".json").exists())
+
+    def test_the_document_is_english_only(self):
+        """The published artefact must not mix languages."""
+        run_audit(self.out)
+        text = self.out.read_text(encoding="utf-8")
+        cjk = [c for c in text if "\u4e00" <= c <= "\u9fff"]
+        self.assertEqual(cjk, [], f"unexpected CJK in the audit document: {set(cjk)}")
 
     def test_tactical_flags_are_surfaced(self):
         run_audit(self.out)
         text = self.out.read_text(encoding="utf-8")
         # the heuristic bot always converts a win, so the last move must be tagged
-        self.assertIn("抓住了一步杀", text)
+        self.assertIn("took the win", text)
 
 
 if __name__ == "__main__":

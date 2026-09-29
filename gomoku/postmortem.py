@@ -192,20 +192,20 @@ def main(argv: list[str] | None = None) -> int:
         menu = [to_notation(m, view.size) for m in
                 candidate_points(view, config, random.Random(config.seed))]
 
-    print(f"复盘 {args.game.name} 第 {args.ply} 手 · 实际走了 {record['move']} "
-          f"（{record['player']}）")
-    print(f"轮到 {view.stone.label} ({view.stone.symbol})\n")
+    print(f"post-mortem of {args.game.name} ply {args.ply} - actually played "
+          f"{record['move']} ({record['player']})")
+    print(f"{view.stone.label} ({view.stone.symbol}) to move\n")
     print(render_board(game.board, game.last_move))
     facts = record.get("analysis") or {}
-    print(f"\n引擎事实: 对手可造活四点 = {facts.get('opponent_open_fours')}  "
-          f"我方一步杀 = {facts.get('own_wins') or '无'}")
+    print(f"\nengine facts: their open-four points = {facts.get('opponent_open_fours')}  "
+          f"my immediate wins = {facts.get('own_wins') or 'none'}")
 
     client = battery_for(args.backend, args.model)
     print(f"backend: {client.describe()}")
     state = rules_and_state(view, PromptStyle(), None, BACKEND)
     questions, truths, info = perception_battery(game, menu)
-    print(f"被问的那条线: {info['line']}  活口 {info['ends']}  "
-          f"造活四点 {info['open_four_points']}  对手成五点 {info['opponent_wins']}")
+    print(f"the line under discussion: {info['line']}  open ends {info['ends']}  "
+          f"open-four points {info['open_four_points']}  their fives {info['opponent_wins']}")
 
     report: dict = {
         "game": str(args.game), "ply": args.ply, "played": record["move"],
@@ -213,7 +213,7 @@ def main(argv: list[str] | None = None) -> int:
         "started_at": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
     }
 
-    print("\n########## 1) 感知与定位 ##########")
+    print("\n########## 1) perception and localisation ##########")
     for rep in range(args.repeats):
         response = client.ask(state, questions)
         scored = score(response, truths)
@@ -222,13 +222,13 @@ def main(argv: list[str] | None = None) -> int:
         for qid, cell in scored.items():
             mark = "✓" if cell["correct"] else "✗"
             p = f"{cell['p']:.2f}" if isinstance(cell["p"], float) else str(cell["p"])
-            print(f"      {qid:22} 真值={str(cell['truth']):<12} 答={str(cell['said']):<12} "
+            print(f"      {qid:22} truth={str(cell['truth']):<12} said={str(cell['said']):<12} "
                   f"p={p:<6} {mark}")
 
-    print("\n########## 2) 同一手在各条件下的落子 ##########")
+    print("\n########## 2) the same move under each condition ##########")
     # what counts as correct here: block the five if there is one, else stop the open four
     critical = set(info["opponent_wins"]) or set(info["open_four_points"])
-    print(f"判分目标: {'堵五连 ' + str(sorted(critical)) if info['opponent_wins'] else '防活四 ' + str(sorted(critical))}")
+    print(f"scored against: {'block the five ' + str(sorted(critical)) if info['opponent_wins'] else 'stop the open four ' + str(sorted(critical))}")
     levels = [x.strip() for x in args.facts_levels.split(",") if x.strip()]
     versions = ([x.strip() for x in args.prompt_versions.split(",") if x.strip()]
                 if args.prompt_versions else [config.prompt_version])
@@ -276,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
                 })
                 where = "state" if in_state else "instr"
                 print(f"  facts={level:8} opt={opt:10} rep{rep} → {chosen:4} "
-                      f"{'✓' if ok else '✗'}  正解总概率 {mass:.2f}  排名 {ranks}  "
+                      f"{'OK' if ok else 'NO'}  mass on the answer {mass:.2f}  rank {ranks}  "
                       f"conf {answer.get('confidence')}")
 
     out = args.out or RESULTS / f"postmortem_{args.game.stem}_ply{args.ply}.json"

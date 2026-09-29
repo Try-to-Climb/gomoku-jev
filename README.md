@@ -151,8 +151,19 @@ directory outside the repository.
 | `python -m gomoku.vision` | decompose one judgement into its atomic steps |
 | `python -m gomoku.infer` | board-free rule arithmetic, as a control |
 | `python -m gomoku.postmortem` | re-interrogate one recorded move under several conditions |
+| `python -m gomoku.replay` | turn a saved game into a standalone HTML page you can step through |
 
-Recorded runs from the experiments are in [`results/`](results/).
+Recorded runs from the experiments are in [`results/`](results/), indexed by
+experiment number in [`results/README.md`](results/README.md). To look at any of
+them:
+
+```bash
+python3 -m gomoku.replay results/audit-optionfacts-threat.json --open
+```
+
+That writes a self-contained page: the board with a move slider, and for every
+ply the model's raw reply, its confidence, its token cost, the option menu it was
+given, and the facts the engine had already computed. No server, no network.
 
 ## Layout
 
@@ -165,7 +176,8 @@ gomoku/backends.py                   the registry: name -> player
 gomoku/jev_client.py llm_player.py   jev transport, and jev as a player
 gomoku/openai_player.py              any OpenAI-compatible chat model as a player
 gomoku/templates/                    every prompt, as text
-gomoku/live.py live.html             the browser view
+gomoku/live.py live.html             the browser view, live or from a saved game
+gomoku/replay.py                     a recorded game -> a standalone page
 docs/                                findings and the experiment report (EN + 中文)
 ```
 

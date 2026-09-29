@@ -1,118 +1,147 @@
-# 提示词模板
+# Prompt templates
 
-发给模型的每一个字都在这里，Python 代码不硬编码任何提示词文本。改提示词 = 改文件。
+Every word sent to a model lives here. No prompt text is hard-coded in Python, so
+changing a prompt means changing a file.
 
-提示词分四段：
+A prompt has four parts:
 
-| 段 | 是什么 | 在哪 | 共享性 |
+| part | what it is | where | sharing |
 | --- | --- | --- | --- |
-| 1 规则 | 五子棋怎么下、坐标怎么写 | `shared/rules.txt` | 共享 |
-| 2 战术 | 威胁术语和优先级 —— **实验轴** | `shared/tactics/<版本>.txt` | 默认共享，可按模型覆盖 |
-| 3 战场状态 | 轮到谁、棋盘图、双方棋子列表、棋谱 | `shared/state.txt` | 内容必须一致，**格式**可按模型覆盖 |
-| 4 后端粘合 | 各家 API 特有的东西：怎么摆放、答案格式 | `<backend>/*.txt` | 天然独立，尽量少 |
+| 1 rules | how gomoku works, how coordinates are written | `shared/rules.txt` | shared |
+| 2 tactics | threat vocabulary and priorities -- **the experimental axis** | `shared/tactics/<version>.txt` | shared by default, overridable per backend |
+| 3 board state | whose turn, the grid, both stone lists, the move list | `shared/state.txt` | content must be identical; the **format** may be overridden per backend |
+| 4 backend glue | the genuinely API-specific bits: layout and answer format | `<backend>/*.txt` | separate by nature, kept as small as possible |
 
-## 查找规则
+## Lookup
 
-`<backend>/<文件名>` 存在就用它，否则回落到 `shared/<文件名>`。
+`<backend>/<filename>` if it exists, otherwise `shared/<filename>`.
 
-所以想给某个模型单独换第 2 或第 3 段，**不用改代码**——把同名文件丢进那个模型的目录即可：
+So giving one model its own part 2 or part 3 needs **no code change** -- drop a
+file with the same name into that backend's directory:
 
 ```bash
-# 只给 jev 换一套战场状态格式（比如行号自上而下）
+# a different state format for jev only (say, rows numbered top-down)
 cp shared/state.txt jev/state.txt && $EDITOR jev/state.txt
 
-# 只给 jev 换战术
+# a tactical wording only jev sees
 mkdir -p jev/tactics && cp shared/tactics/p1-threat-ladder.txt jev/tactics/p1-jev-only.txt
 ```
 
-默认没有任何覆盖。有一条单测（`test_no_backend_silently_shadows_a_shared_part`）会在
-任何后端目录里出现与 `shared/` 同名的文件时**直接失败**——因为那一刻 jev 和聊天模型的对比就
-不再是同一把尺子了。真要这么做，把它加进测试里的 `ALLOWED_OVERRIDES`，并在结论里说明。
+Nothing is overridden by default. A test
+(`test_no_backend_silently_shadows_a_shared_part`) **fails** as soon as any
+backend directory contains a file with the same name as one in `shared/`, because
+at that moment the backends stop being measured with the same ruler. If you mean
+to do it, add the pair to `ALLOWED_OVERRIDES` in that test and say so wherever you
+report the numbers.
 
-## 文件清单
+## Files
 
 ```
-shared/rules.txt                第 1 段
-shared/tactics/p0-one-move.txt   第 2 段：对照组（只看一步）
-shared/tactics/p1-threat-ladder.txt  第 2 段：当前默认（活三/活四 + 防守）
-shared/state.txt                第 3 段
-shared/facts.txt                第 3 段的可选附加：引擎算好的线段事实（none/span/status/geometry/threats）
-shared/options.txt              候选点文案，可附加「此手之后对手能否造活四」（--option-facts open_four）
-jev/instructions.txt            第 4 段：jev choice 问题的 instructions
-openai/system.txt               第 4 段：gpt-oss choice 模式 system 的骨架
-openai/answer_full.txt          第 4 段：填进 system —— 要 choice + 概率分布 + 置信度
-openai/answer_terse.txt         第 4 段：填进 system —— 只要 choice、禁止逐步推理（截断重试）
-openai/user.txt                 第 4 段：gpt-oss 的 user（状态 + 候选清单）
-openai/system_free.txt          第 4 段：free 模式（无候选菜单，只要裸坐标）的 system
+shared/rules.txt                     part 1
+shared/tactics/p0-one-move.txt       part 2: the control (one move of lookahead)
+shared/tactics/p1-threat-ladder.txt  part 2: the current default (open three/four + defence)
+shared/tactics/p3-open-three-alarm.txt  part 2: trigger on a visible shape, not an inference
+shared/state.txt                     part 3
+shared/facts.txt                     optional addition to part 3: engine-computed line facts
+                                     (none / span / status / geometry / threats)
+shared/options.txt                   candidate-point wording, optionally carrying the
+                                     consequence of each option (--option-facts)
+jev/instructions.txt                 part 4: the instructions of jev's choice question
+jev/tactics/p2-defence-first.txt     part 2, jev only: defence-first ladder
+openai/system.txt                    part 4: the system prompt skeleton for choice mode
+openai/answer_full.txt               part 4: goes into system -- choice + distribution + confidence
+openai/answer_terse.txt              part 4: goes into system -- choice only, no step-by-step
+                                     thinking (used for the retry after a truncated reply)
+openai/user.txt                      part 4: the user turn (state + the option list)
+openai/system_free.txt               part 4: free mode (no menu, a bare coordinate)
 ```
 
-jev 的 `state` 字段 = 第 1 段 + 第 3 段，在代码里拼；free 模式的 user 直接就是第 3 段。
-这两处不需要单独的文件。
+jev's `state` field is part 1 + part 3, assembled in code; free mode's user turn
+*is* part 3. Neither needs a file of its own.
 
-## 占位符
+## Placeholders
 
-| 文件 | 可用占位符 |
+| file | available placeholders |
 | --- | --- |
 | `shared/rules.txt` | `$rules` `$size` `$first_col` `$last_col` `$example` `$centre` |
-| `shared/tactics/*.txt` | `$n` 成几个算赢 · `$n1` = n-1 · `$n2` = n-2 |
+| `shared/tactics/*.txt` | `$n` how many in a row wins, `$n1` = n-1, `$n2` = n-2 |
 | `shared/state.txt` | `$move_no` `$colour` `$symbol` `$opponent` `$opponent_symbol` `$board` `$stones` `$history` `$facts` `$extra` |
-| `shared/facts.txt` | 事实注入块的措辞，`[section]` 分段（见下） |
-| `shared/options.txt` | 候选点文案，`[section]` 分段，占位符 `$col` `$row`（部分段另有 `$n` `$points` `$ways` `$best`） |
+| `shared/facts.txt` | the wording of the fact block, split into `[section]`s (below) |
+| `shared/options.txt` | candidate wording, split into `[section]`s; `$col` `$row` everywhere, some sections also `$n` `$points` `$ways` `$best` |
 | `jev/instructions.txt` | `$colour` `$symbol` `$tactics` |
 | `openai/system.txt` | `$colour` `$symbol` `$rules_block` `$tactics_block` `$answer` |
 | `openai/user.txt` | `$state` `$options` |
 | `openai/system_free.txt` | `$colour` `$symbol` `$rules_block` `$tactics_block` |
-| `openai/answer_full.txt`、`openai/answer_terse.txt` | 无 |
+| `openai/answer_full.txt`, `openai/answer_terse.txt` | none |
 
-语法是 `string.Template` 的 `$name`（**不是** `{name}`），这样提示词里的 JSON 示例不用转义
-大括号。写错名字会直接报错并指出文件名。`$name` 后紧跟字母数字时写 `${name}`；字面量 `$`
-写成 `$$`；文件末尾最后一个换行会被去掉。
+The syntax is `string.Template`'s `$name`, **not** `{name}`, so the JSON examples
+inside these prompts need no brace escaping. An unknown name raises and names the
+file. Write `${name}` when a letter or digit follows immediately, `$$` for a
+literal `$`. The file's final newline is dropped, so a template that must end in a
+blank line ends with two.
 
-## 常用命令
+## Common commands
 
 ```bash
-# 换一套战术并做对照
+# add a tactical wording and compare it against the current one
 cp shared/tactics/p1-threat-ladder.txt shared/tactics/p2-my-idea.txt
 python3 -m gomoku.ablate --backend openai --versions p1-threat-ladder,p2-my-idea --repeats 3
 python3 -m gomoku.cli --black jev --white openai --prompt-version p2-my-idea --size 9
 
-# 整套模板放到仓库外
+# keep a whole template set outside the repository
 cp -r gomoku/templates ~/my_prompts
-python3 -m gomoku.probe --backend openai --templates ~/my_prompts   # 也认 GOMOKU_TEMPLATES
+python3 -m gomoku.probe --backend openai --templates ~/my_prompts   # or $GOMOKU_TEMPLATES
 ```
 
-## 事实注入（`shared/facts.txt`）
+The tactics file name *is* the version, and it is recorded as `prompt_version` in
+every match log, so runs made under different wordings never get averaged
+together.
 
-第 3 段可以附加一块由引擎算好的事实，用 `--facts geometry|status|threats` 打开（默认 `none`）。
-这个文件按 `[段名]` 分段，每段是一个可独立编辑的措辞模板：
+## Fact injection (`shared/facts.txt`)
 
-| 段 | 用途 | 占位符 |
+Part 3 can carry a block of facts the engine worked out, switched on with
+`--facts span|geometry|status|threats` (default `none`). The file is split into
+`[section]`s, each an independently editable wording:
+
+| section | purpose | placeholders |
 | --- | --- | --- |
-| `block` | 整块的抬头 | `$lines` |
-| `threats` | 威胁小节的抬头 | `$threats` |
-| `row_geometry` | geometry 档的每行 | `$colour` `$coords` `$orientation` `$span` `$ends` |
-| `row_status` | status/threats 档的每行 | `$colour` `$coords` `$orientation` `$status` `$reason` |
-| `status_live` / `status_dead` | 死活标签 | 无 |
-| `reason_live` / `reason_dead` | 死活理由 | `$span` `$n` `$ends` |
-| `threat_five` / `threat_open_four` | 威胁行 | `$colour` `$points` `$n` |
-| `threat_none` / `no_lines` | 兜底行 | 无 |
+| `block` | heading for the whole block | `$lines` |
+| `threats` | heading for the threat section | `$threats` |
+| `row_span` | one line per run, `span` level | `$colour` `$coords` `$orientation` `$span` `$n_ends` |
+| `row_geometry` | one line per run, `geometry` level | `$colour` `$coords` `$orientation` `$span` `$ends` |
+| `row_status` | one line per run, `status`/`threats` levels | `$colour` `$coords` `$orientation` `$status` `$reason` |
+| `status_live` / `status_dead` | the live/dead label | none |
+| `reason_live` / `reason_dead` | why it is live or dead | `$span` `$n` `$ends` `$n_ends` |
+| `threat_five` / `threat_open_four` | threat lines | `$colour` `$points` `$n` |
+| `threat_none` / `no_lines` | fallback lines | none |
 
-**硬规则：只写事实，不排序候选、不推荐落点、不出现「最佳/应该」。** 一旦文案里出现指向某一点的
-建议，测的就不再是模型而是这个文件。注入档位会记进对局记录的 `facts` 字段，注入与未注入的数据
-不能合并统计。
+**Hard rule: facts only.** No ranking of candidate points, no recommendation, no
+"best" or "should". The moment the text points at a particular move, the
+experiment stops measuring the model and starts measuring this file. The level is
+recorded in each match record's `facts` field, and injected runs are never pooled
+with uninjected ones.
 
-## 候选点标注（`shared/options.txt`）
+## Per-option annotations (`shared/options.txt`)
 
-`--option-facts` 把每个候选点的**后果**写进 jev 的 `criteria`，由引擎逐点模拟得出，是关于该选项的
-事实、不是推荐——可能有多个点都安全，文案里不出现任何排序。可选档位：
+`--option-facts` writes the *consequence* of each candidate point into jev's
+`criteria`, simulated point by point by the engine. It is a fact about the option,
+not a recommendation -- several options may be safe, and the wording never ranks
+them.
 
-| 档位 | 段名 | 每个选项说什么 |
+| level | sections | what each option says |
 | --- | --- | --- |
-| `threat`（**推荐**） | `threat_five` / `threat_open_four` / `threat_none` | 最紧急的那层威胁：对手能否立刻成五 → 能否造活四 → 都不能 |
-| `open_four` | `opponent_open_four_yes` / `_no` | 只看活四层。**对手已有冲四时会整体失声**（每个选项都答「造不出活四」），见 EXPERIMENTS.md E15 |
-| `ways` | `ways` | 对手还剩几条可成五的线（连续量，一句话一个数字） |
-| `windows` | `windows` | 同上，但句子更复杂——实测被忽略，保留作反面对照 |
+| `threat` (**recommended**) | `threat_five` / `threat_open_four` / `threat_none` | the most urgent layer: can the opponent complete five at once, else make an unstoppable open four, else neither |
+| `full` | adds `full_win` | as `threat`, plus "this move wins now" on top, so a move that finishes the game does not read like a quiet one |
+| `open_four` | `opponent_open_four_yes` / `_no` | the open-four layer only. **Goes silent as a whole once the opponent already has a four** (every option then says "cannot make an open four"), see EXPERIMENTS.md E15 |
+| `ways` | `ways` | how many ways to five the opponent has left: a continuous quantity, one sentence, one number |
+| `windows` | `windows` | the same number in a more complex sentence -- measurably ignored, kept as the negative control |
+| `none` | `plain` | the coordinate restated, nothing more |
 
-注意这在防守局面里是**很强的提示**（往往只有堵点是安全的，等于把答案标出来）。它的实验价值在于
-验证 `criteria` 文字到底会不会被读——在此之前所有注入都放在 `state` 里。结论见 EXPERIMENTS.md 的
-E13：会被读，而且有效。
+Note that in a defensive position this is a **strong** hint: often only the
+blocking points are safe, which is close to writing down the answer. Its
+experimental value was in testing whether the `criteria` text is read at all --
+every earlier injection went into `state`. It is (EXPERIMENTS.md E13).
+
+A self-check worth keeping: count the *distinct* annotation strings for a move. If
+there is only one, that move was effectively not annotated -- and that degenerate
+case happens exactly when the threat is highest.

@@ -235,8 +235,8 @@ def run_position(client: JevClient, position: Position, config: JevConfig, rng) 
 
     print(f"\n--- {position.id} ---")
     print(position.why)
-    print(f"轮到 {view.stone.label} ({view.stone.symbol})，候选 {len(candidates)} 个，"
-          f"客观最佳 {[to_notation(m, view.size) for m in best] or '无明确最佳'}")
+    print(f"{view.stone.label} ({view.stone.symbol}) to move, {len(candidates)} candidates, "
+          f"objectively best {[to_notation(m, view.size) for m in best] or 'no single best move'}")
 
     try:
         response = client.ask(state, questions)
@@ -253,7 +253,7 @@ def run_position(client: JevClient, position: Position, config: JevConfig, rng) 
         value = answer.get("noul")
         fact.answer = float(value) if isinstance(value, (int, float)) else None
 
-    print(f"{'question':28} {'引擎':>6} {'jev':>6} {'p':>6}  判定")
+    print(f"{'question':28} {'truth':>6} {'said':>6} {'p':>6}  verdict")
     for fact in facts:
         mark = "—" if fact.correct is None else ("✓" if fact.correct else "✗")
         said = "—" if fact.said is None else ("yes" if fact.said else "no")
@@ -331,12 +331,12 @@ def main(argv: list[str] | None = None) -> int:
         for fact in record.get("perception", []):
             if fact["correct"] is not None:
                 per_question.setdefault(fact["question"], []).append(fact["correct"])
-    print("\n感知准确率（全部局面合计）")
+    print("\nperception accuracy (all positions pooled)")
     for qid, results in per_question.items():
         print(f"  {qid:28} {sum(results)}/{len(results)}")
     scored = [r for r in runs if r.get("move_correct") is not None]
     if scored:
-        print(f"  {'move (客观最佳)':28} {sum(r['move_correct'] for r in scored)}/{len(scored)}")
+        print(f"  {'move (objectively best)':28} {sum(r['move_correct'] for r in scored)}/{len(scored)}")
 
     out = args.out or RESULTS / "perception_jev.json"
     out.parent.mkdir(parents=True, exist_ok=True)
