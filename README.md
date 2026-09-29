@@ -64,6 +64,9 @@ legal points, and the answer carries a probability distribution and a confidence
 alongside the pick. That distribution is most of why this project exists: it can
 be compared against what the engine knows to be true.
 
+What the API guarantees, what it only appears to guarantee, and which of its three
+published formulas are actually documented: [docs/jev-api-notes.md](docs/jev-api-notes.md).
+
 ## Play any other LLM
 
 Any OpenAI-compatible endpoint works -- the hosted API, OpenRouter, vLLM,
@@ -117,7 +120,9 @@ Per player, across a series:
 | `illegal_move_rate`, `parse_failure_rate` | format and rule compliance, over attempts rather than moves |
 | `forfeits`, `referee_fallbacks` | gave no usable answer at all |
 
-Colours alternate between games, so first-move advantage cancels out.
+Colours alternate between games, so first-move advantage cancels out. Exact
+definitions, and the reasoning behind the candidate menu and the threat levels, are
+in [docs/DESIGN.md](docs/DESIGN.md).
 
 ## Prompt versions
 
@@ -178,7 +183,7 @@ gomoku/openai_player.py              any OpenAI-compatible chat model as a playe
 gomoku/templates/                    every prompt, as text
 gomoku/live.py live.html             the browser view, live or from a saved game
 gomoku/replay.py                     a recorded game -> a standalone page
-docs/                                findings and the experiment report (EN + 中文)
+docs/                                findings, experiment report, design, jev API notes
 ```
 
 ## Tests

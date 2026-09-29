@@ -9,7 +9,7 @@ description = "A gomoku referee that benchmarks decision engines and LLMs, with 
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
-authors = [{ name = "Try-to-Climb" }]
+authors = [{ name = "Kexin Li" }]
 keywords = ["gomoku", "five-in-a-row", "llm", "benchmark", "evaluation", "jev", "typesafe"]
 classifiers = [
     "Development Status :: 4 - Beta",
